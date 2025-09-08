@@ -1,0 +1,58 @@
+# GitHub Pages 설정
+title: "First-Penguins"
+description: "새로운 영역을 개척하는 혁신 기업"
+author: "First-Penguins"
+email: "goalillaoffice@gmail.com"
+
+# GitHub Pages 설정
+baseurl: "/first-penguins-website"
+url: "https://minhyukpo.github.io"
+
+# 빌드 설정
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# 플러그인
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO 설정
+seo:
+  type: "Organization"
+  name: "First-Penguins"
+  description: "새로운 영역을 개척하는 혁신 기업"
+  url: "https://minhyukpo.github.io/first-penguins-website"
+  logo: "/images/goalilla-profile.jpg"
+  sameAs:
+    - "https://instagram.com/goal_illa.office"
+
+# 소셜 미디어
+social:
+  instagram: "goal_illa.office"
+  email: "goalillaoffice@gmail.com"
+
+# 네비게이션
+navigation:
+  - title: "홈"
+    url: "/"
+  - title: "Goal-Illa"
+    url: "/apps/goal-illa.html"
+  - title: "문의하기"
+    url: "/support/contact.html"
+  - title: "FAQ"
+    url: "/support/faq.html"
+
+# 제외할 파일들
+exclude:
+  - README.md
+  - DEPLOYMENT.md
+  - dev-backend/
+  - test-*.html
+  - goalilla-integration-test.html
+  - .gitignore
+  - vercel.json
+  - package.json
+  - package-lock.json
