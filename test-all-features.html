@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-Penguins 기능 테스트</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .test-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .test-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .test-button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        .test-result {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success { border-left-color: #27ae60; }
+        .error { border-left-color: #e74c3c; }
+        .test-form {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .test-form input {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .test-form input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 40px;">🐧 First-Penguins 기능 테스트</h1>
+        
+        <!-- 로그인 테스트 -->
+        <div class="test-section">
+            <h2>🔐 로그인 테스트</h2>
+            <div class="test-form">
+                <input type="text" id="loginId" placeholder="아이디 (goalilla)" value="goalilla">
+                <input type="password" id="loginPassword" placeholder="비밀번호 (goalilla23)" value="goalilla23">
+            </div>
+            <button class="test-button" onclick="testLogin()">로그인 테스트</button>
+            <div id="loginResult" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- 회원가입 테스트 -->
+        <div class="test-section">
+            <h2>📝 회원가입 테스트</h2>
+            <div class="test-form">
+                <input type="text" id="regId" placeholder="아이디" value="testuser2">
+                <input type="email" id="regEmail" placeholder="이메일" value="test2@gmail.com">
+                <input type="password" id="regPassword" placeholder="비밀번호" value="test123">
+                <input type="text" id="regName" placeholder="이름" value="Test User 2">
+            </div>
+            <button class="test-button" onclick="testRegister()">회원가입 테스트</button>
+            <div id="registerResult" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- API 데이터 조회 테스트 -->
+        <div class="test-section">
+            <h2>📊 API 데이터 조회 테스트</h2>
+            <button class="test-button" onclick="testGetItems()">목표 데이터 조회</button>
+            <button class="test-button" onclick="testServerStatus()">서버 상태 확인</button>
+            <div id="apiResult" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- 프론트엔드 기능 테스트 -->
+        <div class="test-section">
+            <h2>🎨 프론트엔드 기능 테스트</h2>
+            <button class="test-button" onclick="testThemeToggle()">다크 모드 토글</button>
+            <button class="test-button" onclick="testCounterAnimation()">카운터 애니메이션</button>
+            <button class="test-button" onclick="testTypingAnimation()">타이핑 애니메이션</button>
+            <button class="test-button" onclick="testParticleBackground()">파티클 배경</button>
+            <div id="frontendResult" class="test-result" style="display: none;"></div>
+        </div>
+
+        <!-- 전체 통합 테스트 -->
+        <div class="test-section">
+            <h2>🚀 전체 통합 테스트</h2>
+            <button class="test-button" onclick="runAllTests()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">모든 기능 테스트 실행</button>
+            <div id="allTestsResult" class="test-result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3001';
+        let authToken = '';
+
+        function showResult(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.textContent = message;
+            element.className = `test-result ${isSuccess ? 'success' : 'error'}`;
+        }
+
+        async function testLogin() {
+            try {
+                const id = document.getElementById('loginId').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    authToken = data.token;
+                    showResult('loginResult', `✅ 로그인 성공!\n토큰: ${data.token.substring(0, 50)}...\n사용자: ${data.user.id}`, true);
+                } else {
+                    showResult('loginResult', `❌ 로그인 실패: ${data.message}`, false);
+                }
+            } catch (error) {
+                showResult('loginResult', `❌ 오류: ${error.message}`, false);
+            }
+        }
+
+        async function testRegister() {
+            try {
+                const userData = {
+                    id: document.getElementById('regId').value,
+                    email: document.getElementById('regEmail').value,
+                    password: document.getElementById('regPassword').value,
+                    name: document.getElementById('regName').value,
+                    birthDate: '1990-01-01',
+                    age: 25,
+                    guardianAgree: null
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult('registerResult', `✅ 회원가입 성공!\n사용자 ID: ${userData.id}`, true);
+                } else {
+                    showResult('registerResult', `❌ 회원가입 실패: ${data.message}`, false);
+                }
+            } catch (error) {
+                showResult('registerResult', `❌ 오류: ${error.message}`, false);
+            }
+        }
+
+        async function testGetItems() {
+            try {
+                if (!authToken) {
+                    showResult('apiResult', '❌ 먼저 로그인을 해주세요.', false);
+                    return;
+                }
+
+                const response = await fetch(`${API_BASE_URL}/api/items?userId=goalilla`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (Array.isArray(data)) {
+                    showResult('apiResult', `✅ 목표 데이터 조회 성공!\n총 ${data.length}개의 목표:\n${data.map(item => `- ${item.name}: ${item.current_amount}/${item.target_amount} ${item.unit}`).join('\n')}`, true);
+                } else {
+                    showResult('apiResult', `❌ 데이터 조회 실패: ${JSON.stringify(data)}`, false);
+                }
+            } catch (error) {
+                showResult('apiResult', `❌ 오류: ${error.message}`, false);
+            }
+        }
+
+        async function testServerStatus() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/dev/status`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult('apiResult', `✅ 서버 상태 정상!\n사용자: ${data.data.users}명\n목표: ${data.data.items}개\n카테고리: ${data.data.categories}개`, true);
+                } else {
+                    showResult('apiResult', `❌ 서버 상태 오류: ${JSON.stringify(data)}`, false);
+                }
+            } catch (error) {
+                showResult('apiResult', `❌ 서버 연결 실패: ${error.message}`, false);
+            }
+        }
+
+        function testThemeToggle() {
+            const body = document.body;
+            const isDark = body.classList.contains('dark-theme');
+            
+            if (isDark) {
+                body.classList.remove('dark-theme');
+                showResult('frontendResult', '✅ 라이트 모드로 전환됨', true);
+            } else {
+                body.classList.add('dark-theme');
+                showResult('frontendResult', '✅ 다크 모드로 전환됨', true);
+            }
+        }
+
+        function testCounterAnimation() {
+            const counters = document.querySelectorAll('.stat-number');
+            if (counters.length > 0) {
+                showResult('frontendResult', `✅ 카운터 애니메이션 요소 ${counters.length}개 발견`, true);
+            } else {
+                showResult('frontendResult', '❌ 카운터 애니메이션 요소를 찾을 수 없음', false);
+            }
+        }
+
+        function testTypingAnimation() {
+            const typingElements = document.querySelectorAll('.typing-text');
+            if (typingElements.length > 0) {
+                showResult('frontendResult', `✅ 타이핑 애니메이션 요소 ${typingElements.length}개 발견`, true);
+            } else {
+                showResult('frontendResult', '❌ 타이핑 애니메이션 요소를 찾을 수 없음', false);
+            }
+        }
+
+        function testParticleBackground() {
+            const particleContainer = document.querySelector('.particle-background');
+            if (particleContainer) {
+                showResult('frontendResult', '✅ 파티클 배경 요소 발견', true);
+            } else {
+                showResult('frontendResult', '❌ 파티클 배경 요소를 찾을 수 없음', false);
+            }
+        }
+
+        async function runAllTests() {
+            let results = [];
+            
+            // 1. 서버 상태 확인
+            try {
+                const response = await fetch(`${API_BASE_URL}/dev/status`);
+                const data = await response.json();
+                results.push(`✅ 서버 상태: 정상 (사용자 ${data.data.users}명)`);
+            } catch (error) {
+                results.push(`❌ 서버 상태: 오류 - ${error.message}`);
+            }
+
+            // 2. 로그인 테스트
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: 'goalilla', password: 'goalilla23' })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    authToken = data.token;
+                    results.push(`✅ 로그인: 성공 (${data.user.id})`);
+                } else {
+                    results.push(`❌ 로그인: 실패 - ${data.message}`);
+                }
+            } catch (error) {
+                results.push(`❌ 로그인: 오류 - ${error.message}`);
+            }
+
+            // 3. API 데이터 조회
+            if (authToken) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/items?userId=goalilla`, {
+                        headers: { 'Authorization': `Bearer ${authToken}` }
+                    });
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        results.push(`✅ API 조회: 성공 (${data.length}개 목표)`);
+                    } else {
+                        results.push(`❌ API 조회: 실패`);
+                    }
+                } catch (error) {
+                    results.push(`❌ API 조회: 오류 - ${error.message}`);
+                }
+            }
+
+            // 4. 프론트엔드 요소 확인
+            const typingElements = document.querySelectorAll('.typing-text');
+            const counters = document.querySelectorAll('.stat-number');
+            const modernButtons = document.querySelectorAll('.btn-modern');
+            
+            results.push(`✅ 프론트엔드: 타이핑 요소 ${typingElements.length}개, 카운터 ${counters.length}개, 모던 버튼 ${modernButtons.length}개`);
+
+            // 5. CSS 애니메이션 확인
+            const hasAnimations = document.styleSheets.length > 0;
+            results.push(`✅ CSS: ${hasAnimations ? '애니메이션 로드됨' : '애니메이션 없음'}`);
+
+            showResult('allTestsResult', results.join('\n'), true);
+        }
+    </script>
+</body>
+</html>

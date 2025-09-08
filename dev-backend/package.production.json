@@ -1,0 +1,29 @@
+{
+  "name": "firstpenguins-web-backend",
+  "version": "1.0.0",
+  "description": "First-Penguins 웹 전용 백엔드 서버",
+  "main": "server.production.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.production.js",
+    "dev": "node server.js",
+    "production": "NODE_ENV=production node server.production.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcrypt": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "firstpenguins",
+    "web",
+    "backend",
+    "api"
+  ],
+  "author": "First-Penguins",
+  "license": "MIT"
+}

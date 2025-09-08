@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First-Penguins - 혁신적인 모바일 앱 개발</title>
+    <title>🐧 First-Penguins - 새로운 영역을 개척하는 혁신 기업</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -14,23 +14,26 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>🎯 Goal-Illa</h2>
+                <h2>🐧 First-Penguins</h2>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#home" class="nav-link">홈</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#apps" class="nav-link">앱 소개</a>
+                    <a href="#business" class="nav-link">사업 영역</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">회사 소개</a>
+                    <a href="#philosophy" class="nav-link">기업 철학</a>
                 </li>
                 <li class="nav-item">
                     <a href="support/contact.html" class="nav-link">문의하기</a>
                 </li>
                 <li class="nav-item">
                     <a href="support/announcements.html" class="nav-link">공지사항</a>
+                </li>
+                <li class="nav-item" id="authNavItem">
+                    <a href="auth/login.html" class="nav-link" id="authLink">로그인</a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -45,18 +48,75 @@
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">혁신적인 모바일 앱으로<br>사용자의 목표를 달성하세요</h1>
-                <p class="hero-description">First-Penguins는 사용자 중심의 모바일 앱을 개발하여 더 나은 디지털 경험을 제공합니다.</p>
+                <h1 class="hero-title typing-text gradient-text">새로운 영역을 개척하는 혁신 기업</h1>
+                <p class="hero-description">First-Penguins는 개척자 정신으로 새로운 분야를 탐험하고, Redefinition(재정의), Rebound(재도약), Redistribution(재분배)의 3R 철학으로 세상을 변화시키는 혁신 기업입니다.</p>
+                
+                <!-- 사용자 가이드 -->
+                <div class="user-guide">
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>회원가입</h3>
+                            <p>First-Penguins 계정을 만들어보세요</p>
+                        </div>
+                    </div>
+                    <div class="guide-arrow">→</div>
+                    <div class="guide-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Goal-Illa 체험</h3>
+                            <p>목표 관리 앱을 웹에서 체험해보세요</p>
+                        </div>
+                    </div>
+                    <div class="guide-arrow">→</div>
+                    <div class="guide-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>앱 출시 대기</h3>
+                            <p>모바일 앱 출시 시 계정 연동됩니다</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="hero-buttons">
-                    <a href="#apps" class="btn btn-primary">앱 둘러보기</a>
-                    <a href="support/contact.html" class="btn btn-secondary">문의하기</a>
+                    <a href="auth/register.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i>
+                        지금 시작하기
+                    </a>
+                    <a href="auth/login.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-sign-in-alt"></i>
+                        로그인
+                    </a>
+                    <a href="#business" class="btn btn-outline btn-large">
+                        <i class="fas fa-info-circle"></i>
+                        더 알아보기
+                    </a>
+                </div>
+                
+                <!-- 빠른 액션 -->
+                <div class="quick-actions">
+                    <a href="dashboard/goal-illa.html" class="quick-action">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Goal-Illa 체험</span>
+                    </a>
+                    <a href="support/contact.html" class="quick-action">
+                        <i class="fas fa-envelope"></i>
+                        <span>문의하기</span>
+                    </a>
+                    <a href="https://instagram.com/goal_illa.office" target="_blank" class="quick-action">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="phone-mockup">
                     <div class="phone-screen">
                         <div class="app-preview">
-                            <div class="app-header">Goal-Illa</div>
+                            <div class="app-header">
+                                <img src="images/goalilla-profile.jpg" alt="Goal-Illa Profile" class="profile-image">
+                                <span>Goal-Illa</span>
+                            </div>
                             <div class="app-content">
                                 <div class="goal-item">📚 공부하기</div>
                                 <div class="goal-item">🏃‍♂️ 운동하기</div>
@@ -69,35 +129,111 @@
         </div>
     </section>
 
-    <!-- Apps Section -->
-    <section id="apps" class="apps-section">
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="philosophy-section">
         <div class="container">
-            <h2 class="section-title">우리의 앱들</h2>
-            <div class="apps-grid">
-                <div class="app-card">
-                    <div class="app-icon">🎯</div>
-                    <h3>Goal-Illa</h3>
-                    <p>목표 설정과 달성을 도와주는 혁신적인 앱입니다. 개인의 목표를 체계적으로 관리하고 성취감을 느낄 수 있습니다.</p>
-                    <div class="app-features">
-                        <span class="feature-tag">목표 관리</span>
-                        <span class="feature-tag">진행률 추적</span>
-                        <span class="feature-tag">통계 분석</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="apps/goal-illa.html" class="btn btn-outline">자세히 보기</a>
-                        <a href="support/faq.html" class="btn btn-text">FAQ</a>
+            <div class="section-header">
+                <h2 class="section-title">기업 철학</h2>
+                <p class="section-description">First-Penguins의 3R 철학으로 세상을 변화시킵니다</p>
+            </div>
+            
+            <div class="philosophy-intro">
+                <p>개척자 정신을 바탕으로 새로운 가치를 창조하고, 세상을 더 나은 곳으로 만들어가는 것이 우리의 사명입니다.</p>
+            </div>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card redefinition">
+                    <div class="philosophy-icon">🔬</div>
+                    <h3>Redefinition<br><span class="korean">재정의</span></h3>
+                    <p>기존의 관점을 뒤집고 새로운 정의를 만들어갑니다. 상식을 재정의하여 혁신의 기반을 마련합니다.</p>
+                    <div class="philosophy-examples">
+                        <span class="example-tag">교육 혁신</span>
+                        <span class="example-tag">기술 재해석</span>
+                        <span class="example-tag">시장 재구성</span>
                     </div>
                 </div>
                 
-                <div class="app-card coming-soon">
-                    <div class="app-icon">🚀</div>
-                    <h3>Coming Soon</h3>
-                    <p>더 많은 혁신적인 앱들이 준비 중입니다. 곧 만나보실 수 있습니다!</p>
-                    <div class="app-features">
-                        <span class="feature-tag">준비 중</span>
+                <div class="philosophy-card rebound">
+                    <div class="philosophy-icon">🌊</div>
+                    <h3>Rebound<br><span class="korean">재도약</span></h3>
+                    <p>어려움을 기회로 전환하고, 실패를 성장의 동력으로 만듭니다. 매번 더 높이 도약합니다.</p>
+                    <div class="philosophy-examples">
+                        <span class="example-tag">실패 학습</span>
+                        <span class="example-tag">지속 성장</span>
+                        <span class="example-tag">탄력적 대응</span>
                     </div>
-                    <div class="app-links">
-                        <button class="btn btn-disabled" disabled>준비 중</button>
+                </div>
+                
+                <div class="philosophy-card redistribution">
+                    <div class="philosophy-icon">🔮</div>
+                    <h3>Redistribution<br><span class="korean">재분배</span></h3>
+                    <p>지식과 기회를 공정하게 분배하여 모든 사람이 성장할 수 있는 세상을 만들어갑니다.</p>
+                    <div class="philosophy-examples">
+                        <span class="example-tag">지식 공유</span>
+                        <span class="example-tag">기회 평등</span>
+                        <span class="example-tag">사회적 가치</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section id="business" class="business-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">사업 영역</h2>
+                <p class="section-description">First-Penguins는 다양한 분야에서 새로운 가치를 창조합니다</p>
+            </div>
+            
+            <div class="business-intro">
+                <p>앱 개발을 넘어서 교육, 기술, 사회적 가치 창출까지 다양한 영역에서 혁신을 추구합니다.</p>
+            </div>
+            
+            <div class="business-grid">
+                <div class="business-card current">
+                    <div class="business-icon">🧭</div>
+                    <h3>교육 기술</h3>
+                    <p class="business-description">Goal-Illa를 통해 교육의 새로운 패러다임을 제시합니다. 개인화된 학습과 목표 달성을 지원하는 혁신적인 교육 플랫폼을 구축합니다.</p>
+                    <div class="business-status">
+                        <span class="status-badge current">진행 중</span>
+                    </div>
+                    <div class="business-features">
+                        <span class="feature-tag">목표 관리</span>
+                        <span class="feature-tag">학습 추적</span>
+                        <span class="feature-tag">개인화 교육</span>
+                    </div>
+                    <div class="business-links">
+                        <a href="apps/goal-illa.html" class="btn btn-primary">Goal-Illa 둘러보기</a>
+                        <a href="dashboard/goal-illa.html" class="btn btn-outline" id="goalIllaDashboardLink" style="display: none;">대시보드</a>
+                    </div>
+                </div>
+                
+                <div class="business-card future">
+                    <div class="business-icon">⚡</div>
+                    <h3>혁신 기술</h3>
+                    <p class="business-description">AI, 블록체인, IoT 등 최신 기술을 활용하여 새로운 비즈니스 모델과 서비스를 개발합니다. 기술의 경계를 넘나드는 혁신을 추구합니다.</p>
+                    <div class="business-status">
+                        <span class="status-badge future">준비 중</span>
+                    </div>
+                    <div class="business-features">
+                        <span class="feature-tag">AI 솔루션</span>
+                        <span class="feature-tag">블록체인</span>
+                        <span class="feature-tag">IoT 플랫폼</span>
+                    </div>
+                </div>
+                
+                <div class="business-card future">
+                    <div class="business-icon">🎭</div>
+                    <h3>사회적 가치</h3>
+                    <p class="business-description">기술을 통해 사회 문제를 해결하고, 지속 가능한 발전을 추구합니다. 모든 사람이 성장할 수 있는 포용적 사회를 만들어갑니다.</p>
+                    <div class="business-status">
+                        <span class="status-badge future">기획 중</span>
+                    </div>
+                    <div class="business-features">
+                        <span class="feature-tag">사회적 기업</span>
+                        <span class="feature-tag">지속가능성</span>
+                        <span class="feature-tag">포용적 성장</span>
                     </div>
                 </div>
             </div>
@@ -110,38 +246,39 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>First-Penguins 소개</h2>
-                    <p>우리는 사용자의 목표 달성을 돕는 혁신적인 모바일 앱을 개발하는 회사입니다. 기술과 사용자 경험의 완벽한 조화를 통해 더 나은 디지털 세상을 만들어갑니다.</p>
+                    <p>First-Penguins는 개척자 정신을 바탕으로 새로운 영역을 탐험하는 혁신 기업입니다. 우리는 기존의 틀을 깨고 새로운 가치를 창조하여 세상을 더 나은 곳으로 만들어가는 것을 사명으로 합니다.</p>
+                    <p>Goal-Illa는 우리가 개척하는 첫 번째 영역이며, 앞으로 교육, 기술, 사회적 가치 창출 등 다양한 분야에서 혁신을 이어갈 것입니다.</p>
                     
                     <div class="values">
                         <div class="value-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <h4>혁신</h4>
-                            <p>창의적인 아이디어로 새로운 가치를 창조합니다.</p>
+                            <i class="fas fa-compass"></i>
+                            <h4>개척자 정신</h4>
+                            <p>새로운 분야를 탐험하고 미지의 영역을 개척합니다.</p>
                         </div>
                         <div class="value-item">
-                            <i class="fas fa-users"></i>
-                            <h4>사용자 중심</h4>
-                            <p>사용자의 니즈를 최우선으로 생각합니다.</p>
+                            <i class="fas fa-sync-alt"></i>
+                            <h4>지속적 혁신</h4>
+                            <p>3R 철학을 바탕으로 끊임없이 새로운 가치를 창조합니다.</p>
                         </div>
                         <div class="value-item">
-                            <i class="fas fa-rocket"></i>
-                            <h4>성장</h4>
-                            <p>지속적인 개선과 발전을 추구합니다.</p>
+                            <i class="fas fa-globe"></i>
+                            <h4>사회적 영향</h4>
+                            <p>기술을 통해 사회 문제를 해결하고 긍정적 변화를 만들어갑니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="about-stats">
                     <div class="stat-item">
-                        <div class="stat-number">1+</div>
-                        <div class="stat-label">출시된 앱</div>
+                        <div class="stat-number" data-target="3">0</div>
+                        <div class="stat-label">핵심 철학</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">다운로드</div>
+                        <div class="stat-number" data-target="1">0</div>
+                        <div class="stat-label">진행 중인 사업</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">4.5+</div>
-                        <div class="stat-label">평균 평점</div>
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">목표 달성률(%)</div>
                     </div>
                 </div>
             </div>
@@ -175,6 +312,68 @@
         </div>
     </section>
 
+    <!-- Instagram Feed Section -->
+    <section class="instagram-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📸 Follow Us on Instagram</h2>
+            </div>
+            
+            <div class="instagram-feed">
+                <div class="instagram-card">
+                    <div class="instagram-header">
+                        <img src="images/goalilla-profile.jpg" alt="Goal-Illa Profile" class="instagram-profile">
+                        <div class="instagram-info">
+                            <h4>@goal_illa.office</h4>
+                            <p>First-Penguins 공식 계정</p>
+                            <div class="instagram-stats">
+                                <span><i class="fas fa-users"></i> 팔로워</span>
+                                <span><i class="fas fa-heart"></i> 좋아요</span>
+                            </div>
+                        </div>
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="follow-btn">
+                            <i class="fab fa-instagram"></i> 팔로우하기
+                        </a>
+                    </div>
+                    
+                    <div class="instagram-posts">
+                        <div class="instagram-post">
+                            <div class="post-placeholder">
+                                <i class="fas fa-image"></i>
+                                <p>앱 스크린샷</p>
+                            </div>
+                        </div>
+                        <div class="instagram-post">
+                            <div class="post-placeholder">
+                                <i class="fas fa-heart"></i>
+                                <p>사용자 후기</p>
+                            </div>
+                        </div>
+                        <div class="instagram-post">
+                            <div class="post-placeholder">
+                                <i class="fas fa-trophy"></i>
+                                <p>성공 스토리</p>
+                            </div>
+                        </div>
+                        <div class="instagram-post">
+                            <div class="post-placeholder">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>팁 & 트릭</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="instagram-cta">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="btn btn-instagram">
+                            <i class="fab fa-instagram"></i> Instagram에서 팔로우하기
+                        </a>
+                        <p class="instagram-note">최신 소식과 업데이트를 놓치지 마세요!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -199,9 +398,30 @@
                     </ul>
                 </div>
                 <div class="footer-section">
+                    <h4>법적 고지</h4>
+                    <ul>
+                        <li><a href="support/privacy-policy.html">개인정보처리방침</a></li>
+                        <li><a href="support/terms-of-service.html">이용약관</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
                     <h4>연락처</h4>
-                    <p>📧 support@goalilla.com</p>
+                    <p>📧 goalillaoffice@gmail.com</p>
                     <p>🌐 www.goalilla.com</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" class="social-link facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" class="social-link twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -210,6 +430,8 @@
         </div>
     </footer>
 
+    <script src="js/apps-config.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
+

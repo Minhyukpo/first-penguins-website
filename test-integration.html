@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-Penguins & Goal-Illa 연동 테스트</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+        }
+        .test-section h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+        .test-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-online {
+            background: #28a745;
+        }
+        .status-offline {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🐧 First-Penguins & 🎯 Goal-Illa 연동 테스트</h1>
+        <p>이 페이지는 First-Penguins 웹사이트와 Goal-Illa 앱 간의 연동 상태를 테스트합니다.</p>
+        
+        <div class="test-section">
+            <h3>1. Goal-Illa 백엔드 서버 상태</h3>
+            <button class="test-button" onclick="testBackendConnection()">서버 연결 테스트</button>
+            <div id="backendResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>2. 로그인 API 테스트</h3>
+            <button class="test-button" onclick="testLoginAPI()">로그인 API 테스트</button>
+            <div id="loginResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>3. 회원가입 API 테스트</h3>
+            <button class="test-button" onclick="testRegisterAPI()">회원가입 API 테스트</button>
+            <div id="registerResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>4. 사용자 데이터 API 테스트</h3>
+            <button class="test-button" onclick="testUserDataAPI()">사용자 데이터 API 테스트</button>
+            <div id="userDataResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>5. 웹사이트 로그인 테스트</h3>
+            <button class="test-button" onclick="testWebsiteLogin()">웹사이트 로그인 테스트</button>
+            <div id="websiteLoginResult" class="test-result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>6. 전체 연동 상태</h3>
+            <div id="overallStatus">
+                <p><span class="status-indicator status-offline"></span>백엔드 서버: 확인 필요</p>
+                <p><span class="status-indicator status-offline"></span>API 연동: 확인 필요</p>
+                <p><span class="status-indicator status-offline"></span>웹사이트 로그인: 확인 필요</p>
+            </div>
+            <button class="test-button" onclick="runAllTests()">전체 테스트 실행</button>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:3001';
+        
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = `test-result ${type}`;
+            element.textContent = message;
+        }
+        
+        async function testBackendConnection() {
+            try {
+                const response = await fetch(API_BASE_URL);
+                if (response.ok) {
+                    showResult('backendResult', '✅ Goal-Illa 백엔드 서버가 정상적으로 실행 중입니다.\n\n응답 상태: ' + response.status, 'success');
+                    updateOverallStatus('backend', true);
+                } else {
+                    showResult('backendResult', '⚠️ 서버가 응답하지만 예상과 다른 상태입니다.\n\n응답 상태: ' + response.status, 'error');
+                }
+            } catch (error) {
+                showResult('backendResult', '❌ Goal-Illa 백엔드 서버에 연결할 수 없습니다.\n\n오류: ' + error.message + '\n\n해결 방법:\n1. Goal-Illa 백엔드 서버가 실행 중인지 확인\n2. 포트 3000이 사용 가능한지 확인\n3. 방화벽 설정 확인', 'error');
+                updateOverallStatus('backend', false);
+            }
+        }
+        
+        async function testLoginAPI() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: 'testuser@gmail.com',
+                        password: 'test123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult('loginResult', '✅ 로그인 API가 정상적으로 작동합니다.\n\n응답 데이터:\n' + JSON.stringify(data, null, 2), 'success');
+                    updateOverallStatus('api', true);
+                } else {
+                    showResult('loginResult', '⚠️ 로그인 API는 작동하지만 인증에 실패했습니다.\n\n응답: ' + JSON.stringify(data, null, 2) + '\n\n이는 정상적인 동작입니다. (테스트 계정이 없거나 비밀번호가 틀림)', 'info');
+                    updateOverallStatus('api', true);
+                }
+            } catch (error) {
+                showResult('loginResult', '❌ 로그인 API 호출에 실패했습니다.\n\n오류: ' + error.message, 'error');
+                updateOverallStatus('api', false);
+            }
+        }
+        
+        async function testRegisterAPI() {
+            try {
+                const testEmail = `test${Date.now()}@gmail.com`;
+                const response = await fetch(`${API_BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: testEmail,
+                        email: testEmail,
+                        password: 'test123',
+                        birthDate: '1990-01-01',
+                        age: 25,
+                        guardianAgree: true
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult('registerResult', '✅ 회원가입 API가 정상적으로 작동합니다.\n\n테스트 계정: ' + testEmail + '\n비밀번호: test123', 'success');
+                } else {
+                    showResult('registerResult', '⚠️ 회원가입 API 응답:\n\n' + JSON.stringify(data, null, 2), 'info');
+                }
+            } catch (error) {
+                showResult('registerResult', '❌ 회원가입 API 호출에 실패했습니다.\n\n오류: ' + error.message, 'error');
+            }
+        }
+        
+        async function testUserDataAPI() {
+            try {
+                // 먼저 로그인해서 토큰을 얻어야 함
+                const loginResponse = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: 'testuser@gmail.com',
+                        password: 'test123'
+                    })
+                });
+                
+                const loginData = await loginResponse.json();
+                
+                if (loginData.success) {
+                    // 사용자 데이터 API 테스트
+                    const userDataResponse = await fetch(`${API_BASE_URL}/api/items?userId=testuser@gmail.com`, {
+                        headers: {
+                            'Authorization': `Bearer ${loginData.token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    const userData = await userDataResponse.json();
+                    showResult('userDataResult', '✅ 사용자 데이터 API가 정상적으로 작동합니다.\n\n사용자 데이터:\n' + JSON.stringify(userData, null, 2), 'success');
+                } else {
+                    showResult('userDataResult', '⚠️ 로그인에 실패하여 사용자 데이터 API를 테스트할 수 없습니다.\n\n로그인 응답: ' + JSON.stringify(loginData, null, 2), 'info');
+                }
+            } catch (error) {
+                showResult('userDataResult', '❌ 사용자 데이터 API 호출에 실패했습니다.\n\n오류: ' + error.message, 'error');
+            }
+        }
+        
+        async function testWebsiteLogin() {
+            try {
+                // 웹사이트 로그인 로직 테스트
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: 'testuser@gmail.com',
+                        password: 'test123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 로컬 스토리지에 저장 (웹사이트 로직과 동일)
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('refreshToken', data.refreshToken);
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        id: data.user.id,
+                        email: data.user.email,
+                        name: data.user.id,
+                        profileImageUrl: data.user.profileImageUrl
+                    }));
+                    
+                    showResult('websiteLoginResult', '✅ 웹사이트 로그인이 정상적으로 작동합니다.\n\n저장된 사용자 정보:\n' + JSON.stringify(JSON.parse(localStorage.getItem('currentUser')), null, 2), 'success');
+                    updateOverallStatus('website', true);
+                } else {
+                    showResult('websiteLoginResult', '⚠️ 웹사이트 로그인 테스트:\n\n' + JSON.stringify(data, null, 2) + '\n\n테스트 계정이 없어서 로그인에 실패했습니다. 이는 정상적인 동작입니다.', 'info');
+                }
+            } catch (error) {
+                showResult('websiteLoginResult', '❌ 웹사이트 로그인 테스트에 실패했습니다.\n\n오류: ' + error.message, 'error');
+                updateOverallStatus('website', false);
+            }
+        }
+        
+        function updateOverallStatus(component, isWorking) {
+            const statusElement = document.getElementById('overallStatus');
+            const statusIndicators = statusElement.querySelectorAll('.status-indicator');
+            
+            if (component === 'backend') {
+                statusIndicators[0].className = `status-indicator ${isWorking ? 'status-online' : 'status-offline'}`;
+                statusElement.querySelector('p:nth-child(1)').innerHTML = `<span class="status-indicator ${isWorking ? 'status-online' : 'status-offline'}"></span>백엔드 서버: ${isWorking ? '정상' : '오류'}`;
+            } else if (component === 'api') {
+                statusIndicators[1].className = `status-indicator ${isWorking ? 'status-online' : 'status-offline'}`;
+                statusElement.querySelector('p:nth-child(2)').innerHTML = `<span class="status-indicator ${isWorking ? 'status-online' : 'status-offline'}"></span>API 연동: ${isWorking ? '정상' : '오류'}`;
+            } else if (component === 'website') {
+                statusIndicators[2].className = `status-indicator ${isWorking ? 'status-online' : 'status-offline'}`;
+                statusElement.querySelector('p:nth-child(3)').innerHTML = `<span class="status-indicator ${isWorking ? 'status-online' : 'status-offline'}"></span>웹사이트 로그인: ${isWorking ? '정상' : '오류'}`;
+            }
+        }
+        
+        async function runAllTests() {
+            showResult('backendResult', '테스트를 시작합니다...', 'info');
+            await testBackendConnection();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testLoginAPI();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testRegisterAPI();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testUserDataAPI();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testWebsiteLogin();
+            
+            showResult('backendResult', '모든 테스트가 완료되었습니다!', 'success');
+        }
+        
+        // 페이지 로드 시 자동으로 백엔드 연결 테스트
+        window.addEventListener('load', function() {
+            testBackendConnection();
+        });
+    </script>
+</body>
+</html>

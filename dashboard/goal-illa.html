@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal-Illa 대시보드 - First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .dashboard-title h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        .app-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .goals-list {
+            margin-top: 20px;
+        }
+        
+        .goal-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .goal-item:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .goal-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .goal-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .goal-details h4 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+        
+        .goal-details p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .goal-progress {
+            text-align: right;
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            color: #667eea;
+        }
+        
+        .action-icon {
+            font-size: 2rem;
+        }
+        
+        .action-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .recent-activity {
+            margin-top: 20px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+        
+        .activity-text {
+            flex: 1;
+        }
+        
+        .activity-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-app-link {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .mobile-app-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-title h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        First-Penguins 홈
+    </a>
+    
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>🎯 Goal-Illa</h1>
+                <span class="app-badge">목표 관리 앱</span>
+            </div>
+            <p style="color: #6c757d; margin: 0;">목표 설정과 달성을 도와주는 혁신적인 앱입니다. 웹에서도 앱의 데이터를 확인하고 관리할 수 있습니다.</p>
+        </div>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalGoals">0</div>
+                <div class="stat-label">총 목표</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedGoals">0</div>
+                <div class="stat-label">완료된 목표</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeGoals">0</div>
+                <div class="stat-label">진행 중인 목표</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completionRate">0%</div>
+                <div class="stat-label">달성률</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="main-content">
+                <h3>나의 목표</h3>
+                <div class="goals-list" id="goalsList">
+                    <!-- 목표 목록이 여기에 동적으로 로드됩니다 -->
+                </div>
+                
+                <div class="quick-actions">
+                    <a href="#" class="action-btn" onclick="addNewGoal()">
+                        <i class="fas fa-plus action-icon"></i>
+                        <span class="action-text">새 목표 추가</span>
+                    </a>
+                    <a href="#" class="action-btn" onclick="viewStatistics()">
+                        <i class="fas fa-chart-bar action-icon"></i>
+                        <span class="action-text">통계 보기</span>
+                    </a>
+                    <a href="#" class="action-btn" onclick="manageCategories()">
+                        <i class="fas fa-tags action-icon"></i>
+                        <span class="action-text">카테고리 관리</span>
+                    </a>
+                    <a href="#" class="action-btn" onclick="exportData()">
+                        <i class="fas fa-download action-icon"></i>
+                        <span class="action-text">데이터 내보내기</span>
+                    </a>
+                </div>
+                
+                <a href="#" class="mobile-app-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    모바일 앱에서 더 많은 기능 사용하기
+                </a>
+            </div>
+            
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h4>최근 활동</h4>
+                    <div class="recent-activity" id="recentActivity">
+                        <!-- 최근 활동이 여기에 동적으로 로드됩니다 -->
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h4>빠른 통계</h4>
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(#667eea 0deg 252deg, #e9ecef 252deg 360deg); display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <span style="background: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem;">70%</span>
+                        </div>
+                        <p style="margin: 0; color: #6c757d;">이번 달 목표 달성률</p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h4>앱 정보</h4>
+                    <p style="color: #6c757d; font-size: 0.9rem; line-height: 1.5;">
+                        Goal-Illa는 목표 설정과 달성을 도와주는 혁신적인 모바일 앱입니다. 
+                        웹에서도 기본적인 기능을 사용할 수 있습니다.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <a href="../apps/goal-illa.html" style="color: #667eea; text-decoration: none; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> 앱 자세히 보기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 로그인 상태 확인
+        window.addEventListener('load', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = '../auth/login.html';
+                return;
+            }
+            
+            // 사용자 데이터 로드
+            loadUserData();
+        });
+        
+        // 사용자 데이터 로드 (Goal-Illa API 연동)
+        async function loadUserData() {
+            const token = localStorage.getItem('authToken');
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!token || !user) {
+                console.error('인증 정보가 없습니다.');
+                window.location.href = '../auth/login.html';
+                return;
+            }
+            
+            try {
+                // Goal-Illa API에서 사용자 목표 데이터 가져오기
+                const response = await fetch(`http://localhost:3001/api/items?userId=${user.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const goals = await response.json();
+                    console.log('Goal-Illa API에서 받은 데이터:', goals);
+                    displayGoals(goals);
+                    updateStats(goals);
+                } else if (response.status === 401) {
+                    // 토큰 만료 시 로그인 페이지로 리다이렉트
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('currentUser');
+                    window.location.href = '../auth/login.html';
+                } else {
+                    console.error('목표 데이터 로드 실패:', response.status);
+                    showMockData(); // 개발용 목 데이터
+                }
+            } catch (error) {
+                console.error('API 연결 실패:', error);
+                showMockData(); // 개발용 목 데이터
+            }
+        }
+        
+        // 목 데이터 표시 (개발용)
+        function showMockData() {
+            const mockGoals = [
+                { id: 1, name: '📚 공부하기', category: '학습', progress: 75, target: 100 },
+                { id: 2, name: '🏃‍♂️ 운동하기', category: '건강', progress: 60, target: 100 },
+                { id: 3, name: '📖 독서하기', category: '학습', progress: 90, target: 100 },
+                { id: 4, name: '💼 업무 완료', category: '업무', progress: 45, target: 100 }
+            ];
+            
+            displayGoals(mockGoals);
+            updateStats(mockGoals);
+            loadRecentActivity();
+        }
+        
+        // 목표 표시
+        function displayGoals(goals) {
+            const goalsList = document.getElementById('goalsList');
+            goalsList.innerHTML = '';
+            
+            if (!goals || goals.length === 0) {
+                goalsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6c757d;">
+                        <i class="fas fa-plus-circle" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                        <h4>아직 설정된 목표가 없습니다</h4>
+                        <p>모바일 앱에서 첫 번째 목표를 설정해보세요!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            goals.forEach(goal => {
+                // Goal-Illa API 데이터 구조에 맞게 수정
+                const goalName = goal.name || goal.item_name || '목표';
+                const categoryName = goal.category_name || goal.category || '기본';
+                const targetAmount = goal.target_amount || goal.target || 100;
+                const currentAmount = goal.current_amount || goal.progress || 0;
+                const progressPercent = targetAmount > 0 ? Math.round((currentAmount / targetAmount) * 100) : 0;
+                
+                const goalItem = document.createElement('div');
+                goalItem.className = 'goal-item';
+                goalItem.innerHTML = `
+                    <div class="goal-info">
+                        <div class="goal-icon">${goalName.charAt(0)}</div>
+                        <div class="goal-details">
+                            <h4>${goalName}</h4>
+                            <p>${categoryName} • ${currentAmount}/${targetAmount}</p>
+                        </div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                        </div>
+                        <div class="progress-text">${progressPercent}%</div>
+                    </div>
+                `;
+                goalsList.appendChild(goalItem);
+            });
+        }
+        
+        // 통계 업데이트
+        function updateStats(goals) {
+            if (!goals || goals.length === 0) {
+                document.getElementById('totalGoals').textContent = '0';
+                document.getElementById('completedGoals').textContent = '0';
+                document.getElementById('activeGoals').textContent = '0';
+                document.getElementById('completionRate').textContent = '0%';
+                return;
+            }
+            
+            const totalGoals = goals.length;
+            const completedGoals = goals.filter(g => {
+                const targetAmount = g.target_amount || g.target || 100;
+                const currentAmount = g.current_amount || g.progress || 0;
+                return currentAmount >= targetAmount;
+            }).length;
+            const activeGoals = totalGoals - completedGoals;
+            const completionRate = totalGoals > 0 ? Math.round((completedGoals / totalGoals) * 100) : 0;
+            
+            document.getElementById('totalGoals').textContent = totalGoals;
+            document.getElementById('completedGoals').textContent = completedGoals;
+            document.getElementById('activeGoals').textContent = activeGoals;
+            document.getElementById('completionRate').textContent = completionRate + '%';
+        }
+        
+        // 최근 활동 로드
+        function loadRecentActivity() {
+            const recentActivity = document.getElementById('recentActivity');
+            const mockActivities = [
+                { icon: 'fas fa-check', text: '공부하기 목표 75% 달성', time: '2시간 전' },
+                { icon: 'fas fa-plus', text: '새로운 목표 추가: 독서하기', time: '1일 전' },
+                { icon: 'fas fa-trophy', text: '운동하기 목표 완료!', time: '2일 전' },
+                { icon: 'fas fa-edit', text: '업무 완료 목표 수정', time: '3일 전' }
+            ];
+            
+            recentActivity.innerHTML = '';
+            mockActivities.forEach(activity => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <div class="activity-icon">
+                        <i class="${activity.icon}"></i>
+                    </div>
+                    <div class="activity-text">
+                        <p>${activity.text}</p>
+                    </div>
+                    <div class="activity-time">${activity.time}</div>
+                `;
+                recentActivity.appendChild(activityItem);
+            });
+        }
+        
+        // 액션 함수들
+        function addNewGoal() {
+            alert('새 목표 추가 기능은 모바일 앱에서 사용하세요!');
+        }
+        
+        function viewStatistics() {
+            alert('상세 통계는 모바일 앱에서 확인하세요!');
+        }
+        
+        function manageCategories() {
+            alert('카테고리 관리 기능은 모바일 앱에서 사용하세요!');
+        }
+        
+        function exportData() {
+            alert('데이터 내보내기 기능은 준비 중입니다.');
+        }
+    </script>
+</body>
+</html>

@@ -45,6 +45,89 @@
         box-shadow: 0 10px 27px rgba(0,0,0,0.05);
         padding: 2rem 0;
     }
+    
+    /* User Guide Tablet */
+    .user-guide {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .guide-step {
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .guide-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+    
+    /* Hero Buttons Tablet */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Quick Actions Tablet */
+    .quick-actions {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .quick-action {
+        min-width: 150px;
+    }
+    
+    /* Instagram Mobile */
+    .instagram-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .instagram-info {
+        margin-left: 0;
+        text-align: center;
+        min-width: auto;
+    }
+    
+    .instagram-info h4,
+    .instagram-info p {
+        word-break: break-word;
+        hyphens: auto; /* 하이픈으로 자연스러운 줄바꿈 */
+    }
+    
+    .instagram-posts {
+        grid-template-columns: 1fr;
+        gap: 1px;
+    }
+    
+    .post-placeholder {
+        padding: 15px;
+    }
+    
+    .post-placeholder i {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .post-placeholder h4 {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .post-placeholder p {
+        font-size: 10px;
+    }
 
     .nav-menu.active {
         left: 0;
@@ -270,6 +353,78 @@
 
     .support-card i {
         font-size: 2rem;
+    }
+    
+    /* Instagram Very Small Mobile */
+    .instagram-header {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .instagram-profile {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .instagram-info h4 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+    
+    .instagram-info p {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .instagram-stats {
+        gap: 10px;
+        justify-content: center; /* 모바일에서 중앙 정렬 */
+    }
+    
+    .instagram-stats span {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    
+    .follow-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .instagram-posts {
+        grid-template-columns: 1fr;
+    }
+    
+    .post-placeholder {
+        padding: 12px;
+    }
+    
+    .post-placeholder i {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .post-placeholder h4 {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .post-placeholder p {
+        font-size: 9px;
+    }
+    
+    .instagram-cta {
+        padding: 20px 15px;
+    }
+    
+    .btn-instagram {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .instagram-note {
+        font-size: 12px;
+        margin-top: 10px;
     }
 
     .stat-number {
