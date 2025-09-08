@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자주 묻는 질문 | Goal-Illa Company</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .faq-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .faq-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+        }
+        
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .faq-search i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .faq-item.active {
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.2);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .faq-question i {
+            color: #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .faq-answer-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-cta h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h2>🎯 Goal-Illa</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#apps" class="nav-link">앱 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#about" class="nav-link">회사 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="announcements.html" class="nav-link">공지사항</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>자주 묻는 질문</h1>
+            <p>Goal-Illa 앱에 대한 궁금한 점들을 확인해보세요.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-search">
+                <input type="text" id="search-input" placeholder="궁금한 내용을 검색해보세요...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="faq-categories">
+                <a href="#" class="category-btn active" data-category="all">전체</a>
+                <a href="#" class="category-btn" data-category="download">다운로드</a>
+                <a href="#" class="category-btn" data-category="account">계정</a>
+                <a href="#" class="category-btn" data-category="features">기능</a>
+                <a href="#" class="category-btn" data-category="troubleshooting">문제해결</a>
+            </div>
+            
+            <div class="faq-list">
+                <!-- 다운로드 관련 FAQ -->
+                <div class="faq-item searchable-item" data-category="download">
+                    <div class="faq-question" id="download">
+                        <span>Goal-Illa 앱을 어떻게 다운로드하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Goal-Illa 앱은 App Store와 Google Play Store에서 다운로드할 수 있습니다.</p>
+                            <ul>
+                                <li><strong>iOS:</strong> App Store에서 "Goal-Illa"를 검색하여 다운로드</li>
+                                <li><strong>Android:</strong> Google Play Store에서 "Goal-Illa"를 검색하여 다운로드</li>
+                            </ul>
+                            <p>앱은 무료로 다운로드할 수 있으며, 일부 프리미엄 기능은 인앱 구매를 통해 이용할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="download">
+                    <div class="faq-question">
+                        <span>앱이 내 기기와 호환되나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Goal-Illa는 다음과 같은 요구사항을 만족하는 기기에서 사용할 수 있습니다:</p>
+                            <ul>
+                                <li><strong>iOS:</strong> iOS 12.0 이상</li>
+                                <li><strong>Android:</strong> Android 6.0 (API level 23) 이상</li>
+                            </ul>
+                            <p>앱이 정상적으로 작동하지 않는다면 기기 사양을 확인해주세요.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 계정 관련 FAQ -->
+                <div class="faq-item searchable-item" data-category="account">
+                    <div class="faq-question" id="account">
+                        <span>계정을 잊어버렸어요. 어떻게 찾나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>계정을 찾는 방법은 다음과 같습니다:</p>
+                            <ol>
+                                <li>앱 로그인 화면에서 "계정 찾기" 버튼을 클릭</li>
+                                <li>가입 시 사용한 이메일 주소를 입력</li>
+                                <li>이메일로 전송된 링크를 클릭하여 비밀번호 재설정</li>
+                            </ol>
+                            <p>이메일을 받지 못했다면 스팸 폴더를 확인해보세요.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="account">
+                    <div class="faq-question">
+                        <span>계정을 삭제하고 싶어요</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>계정 삭제는 다음 단계를 따라 진행하세요:</p>
+                            <ol>
+                                <li>앱 설정 > 계정 관리로 이동</li>
+                                <li>"계정 삭제" 옵션 선택</li>
+                                <li>삭제 확인 절차 완료</li>
+                            </ol>
+                            <p><strong>주의:</strong> 계정 삭제 시 모든 데이터가 영구적으로 삭제되며 복구할 수 없습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 기능 관련 FAQ -->
+                <div class="faq-item searchable-item" data-category="features">
+                    <div class="faq-question" id="data">
+                        <span>내 데이터는 안전한가요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>네, 사용자의 데이터 보안을 최우선으로 생각합니다:</p>
+                            <ul>
+                                <li><strong>암호화:</strong> 모든 데이터는 AES-256 암호화로 보호됩니다</li>
+                                <li><strong>백업:</strong> 정기적인 자동 백업으로 데이터 손실을 방지합니다</li>
+                                <li><strong>개인정보:</strong> 개인정보보호법을 준수하여 데이터를 처리합니다</li>
+                                <li><strong>서버 보안:</strong> 최신 보안 기술로 서버를 보호합니다</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="features">
+                    <div class="faq-question">
+                        <span>목표를 어떻게 설정하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>목표 설정은 매우 간단합니다:</p>
+                            <ol>
+                                <li>앱 메인 화면에서 "+" 버튼 클릭</li>
+                                <li>목표 제목과 설명 입력</li>
+                                <li>목표 유형 선택 (습관, 프로젝트, 일회성 등)</li>
+                                <li>목표 기간과 마일스톤 설정</li>
+                                <li>알림 설정 (선택사항)</li>
+                            </ol>
+                            <p>SMART 원칙에 따라 구체적이고 측정 가능한 목표를 설정하는 것을 권장합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="features">
+                    <div class="faq-question">
+                        <span>진행률은 어떻게 확인하나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>진행률 확인 방법:</p>
+                            <ul>
+                                <li><strong>대시보드:</strong> 메인 화면에서 전체 목표 진행률 확인</li>
+                                <li><strong>개별 목표:</strong> 각 목표를 클릭하여 상세 진행률 확인</li>
+                                <li><strong>통계:</strong> 주간/월간 통계로 성과 분석</li>
+                                <li><strong>차트:</strong> 시각적 그래프로 진행 상황 파악</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 문제해결 관련 FAQ -->
+                <div class="faq-item searchable-item" data-category="troubleshooting">
+                    <div class="faq-question" id="update">
+                        <span>앱이 자주 업데이트되나요?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Goal-Illa는 지속적인 개선을 위해 정기적으로 업데이트됩니다:</p>
+                            <ul>
+                                <li><strong>주요 업데이트:</strong> 월 1-2회 새로운 기능 추가</li>
+                                <li><strong>버그 수정:</strong> 발견 즉시 수정 업데이트</li>
+                                <li><strong>보안 업데이트:</strong> 보안 강화를 위한 업데이트</li>
+                            </ul>
+                            <p>자동 업데이트를 활성화하면 최신 버전을 자동으로 받을 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="troubleshooting">
+                    <div class="faq-question">
+                        <span>앱이 느리거나 멈춰요</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>앱 성능 문제 해결 방법:</p>
+                            <ol>
+                                <li><strong>앱 재시작:</strong> 앱을 완전히 종료 후 다시 실행</li>
+                                <li><strong>기기 재시작:</strong> 기기를 재부팅</li>
+                                <li><strong>캐시 정리:</strong> 앱 설정에서 캐시 삭제</li>
+                                <li><strong>업데이트 확인:</strong> 최신 버전으로 업데이트</li>
+                                <li><strong>저장공간 확인:</strong> 기기 저장공간이 충분한지 확인</li>
+                            </ol>
+                            <p>문제가 지속되면 고객지원팀에 문의해주세요.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item searchable-item" data-category="troubleshooting">
+                    <div class="faq-question">
+                        <span>알림이 오지 않아요</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>알림 문제 해결 방법:</p>
+                            <ul>
+                                <li><strong>앱 알림 설정:</strong> 기기 설정 > 앱 > Goal-Illa > 알림 허용</li>
+                                <li><strong>방해금지 모드:</strong> 방해금지 모드가 활성화되어 있는지 확인</li>
+                                <li><strong>앱 내 설정:</strong> Goal-Illa 앱 설정에서 알림 옵션 확인</li>
+                                <li><strong>배터리 최적화:</strong> 배터리 최적화에서 앱 제외</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <h3>원하는 답변을 찾지 못하셨나요?</h3>
+            <p>고객지원팀에 직접 문의해주세요. 빠르고 정확한 답변을 드리겠습니다.</p>
+            <a href="contact.html" class="btn btn-secondary">문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎯 Goal-Illa Company</h3>
+                    <p>혁신적인 모바일 앱으로 사용자의 목표를 달성하세요.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>앱</h4>
+                    <ul>
+                        <li><a href="../apps/goal-illa.html">Goal-Illa</a></li>
+                        <li><a href="../index.html#apps">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="announcements.html">공지사항</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 support@goalilla.com</p>
+                    <p>🌐 www.goalilla.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Goal-Illa Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // FAQ 카테고리 필터링
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 활성 버튼 변경
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
