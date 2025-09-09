@@ -521,7 +521,7 @@ function showUserMenu(e) {
 }
 
 function showProfile() {
-    alert('프로필 페이지는 준비 중입니다.');
+    window.location.href = 'auth/profile.html';
     document.getElementById('userMenu').style.display = 'none';
 }
 

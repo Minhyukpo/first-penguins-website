@@ -11,7 +11,7 @@ const CONFIG = {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:3001'; // 개발 환경
             } else {
-                return 'https://first-penguins-backend-m0wqjsejb-minhyuk-jeongs-projects.vercel.app'; // 프로덕션 환경
+                return 'https://first-penguins-backend-2fkffwum5-minhyuk-jeongs-projects.vercel.app'; // 프로덕션 환경
             }
         })(),
         
