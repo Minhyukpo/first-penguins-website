@@ -1,6 +1,9 @@
 // Main JavaScript functionality for Goal-Illa Company website
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication status on page load
+    checkAuthStatus();
+    
     // Mobile navigation toggle
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -361,6 +364,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 로그인 상태 관리 함수들
+function checkAuthStatus() {
+    updateAuthNavigation();
+    updateMainPageAuthButtons();
+}
+
+function updateMainPageAuthButtons() {
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (currentUser) {
+        const user = JSON.parse(currentUser);
+        
+        // 메인 페이지의 "지금 시작하기" 버튼을 "대시보드"로 변경
+        const startButton = document.querySelector('.btn-primary');
+        if (startButton && startButton.textContent.includes('지금 시작하기')) {
+            startButton.innerHTML = '<i class="fas fa-tachometer-alt"></i> 대시보드';
+            startButton.href = 'dashboard/goal-illa.html';
+        }
+        
+        // 메인 페이지의 "로그인" 버튼을 "프로필"로 변경
+        const loginButton = document.querySelector('.btn-secondary');
+        if (loginButton && loginButton.textContent.includes('로그인')) {
+            loginButton.innerHTML = `<i class="fas fa-user"></i> ${user.name}님`;
+            loginButton.href = '#';
+            loginButton.onclick = showUserMenu;
+        }
+        
+        // Goal-Illa 대시보드 링크 표시
+        const goalIllaDashboardLink = document.getElementById('goalIllaDashboardLink');
+        if (goalIllaDashboardLink) {
+            goalIllaDashboardLink.style.display = 'inline-block';
+        }
+    } else {
+        // 로그인하지 않은 상태로 복원
+        const startButton = document.querySelector('.btn-primary');
+        if (startButton && startButton.textContent.includes('대시보드')) {
+            startButton.innerHTML = '<i class="fas fa-user-plus"></i> 지금 시작하기';
+            startButton.href = 'auth/register.html';
+        }
+        
+        const loginButton = document.querySelector('.btn-secondary');
+        if (loginButton && !loginButton.textContent.includes('로그인')) {
+            loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> 로그인';
+            loginButton.href = 'auth/login.html';
+            loginButton.onclick = null;
+        }
+        
+        const goalIllaDashboardLink = document.getElementById('goalIllaDashboardLink');
+        if (goalIllaDashboardLink) {
+            goalIllaDashboardLink.style.display = 'none';
+        }
+    }
+}
+
 function updateAuthNavigation() {
     const currentUser = localStorage.getItem('currentUser');
     const authLink = document.getElementById('authLink');
