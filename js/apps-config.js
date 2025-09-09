@@ -12,7 +12,7 @@ const APPS_CONFIG = {
         features: ['목표 관리', '진행률 추적', '통계 분석'],
         dashboardUrl: 'dashboard/goal-illa.html',
         appUrl: 'apps/goal-illa.html',
-        apiEndpoint: window.CONFIG ? window.CONFIG.api.baseUrl : 'https://first-penguins-backend-2fkffwum5-minhyuk-jeongs-projects.vercel.app', // Goal-Illa API 서버
+        apiEndpoint: window.CONFIG ? window.CONFIG.api.baseUrl : 'https://first-penguins-backend-dhci14g1t-minhyuk-jeongs-projects.vercel.app', // Goal-Illa API 서버
         hasWebDashboard: true,
         hasMobileApp: true,
         releaseDate: '2024-01-01',
