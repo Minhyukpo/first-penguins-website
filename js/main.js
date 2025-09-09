@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check authentication status on page load
     checkAuthStatus();
     
+    // Check authentication status when page becomes visible (after logout from other tab)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            checkAuthStatus();
+        }
+    });
+    
+    // Check authentication status when window gains focus
+    window.addEventListener('focus', function() {
+        checkAuthStatus();
+    });
+    
     // Mobile navigation toggle
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -398,13 +410,14 @@ function updateMainPageAuthButtons() {
     } else {
         // 로그인하지 않은 상태로 복원
         const startButton = document.querySelector('.btn-primary');
-        if (startButton && startButton.textContent.includes('대시보드')) {
+        if (startButton) {
             startButton.innerHTML = '<i class="fas fa-user-plus"></i> 지금 시작하기';
             startButton.href = 'auth/register.html';
+            startButton.onclick = null;
         }
         
         const loginButton = document.querySelector('.btn-secondary');
-        if (loginButton && !loginButton.textContent.includes('로그인')) {
+        if (loginButton) {
             loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> 로그인';
             loginButton.href = 'auth/login.html';
             loginButton.onclick = null;
@@ -413,6 +426,12 @@ function updateMainPageAuthButtons() {
         const goalIllaDashboardLink = document.getElementById('goalIllaDashboardLink');
         if (goalIllaDashboardLink) {
             goalIllaDashboardLink.style.display = 'none';
+        }
+        
+        // 사용자 메뉴 제거
+        const userMenu = document.getElementById('userMenu');
+        if (userMenu) {
+            userMenu.remove();
         }
     }
 }
@@ -533,7 +552,7 @@ function showSettings() {
 function logout() {
     if (confirm('정말 로그아웃하시겠습니까?')) {
         localStorage.removeItem('currentUser');
-        updateAuthNavigation();
+        checkAuthStatus(); // 메인 페이지 버튼들도 업데이트
         showNotification('로그아웃되었습니다.', 'success');
     }
     document.getElementById('userMenu').style.display = 'none';
