@@ -1,15 +1,23 @@
+# Backend and sensitive files (NEVER COMMIT)
+dev-backend/
+backend/
+server/
+*.env
+.env*
+config/
+database/
+db/
+
+# Test files
+test-*.html
+*-test.html
+*integration*.html
+
 # Dependencies
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
 # Build outputs
 dist/
@@ -42,3 +50,4 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+.vercel

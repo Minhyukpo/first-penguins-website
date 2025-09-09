@@ -1,0 +1,26 @@
+{
+  "name": "first-penguins-website",
+  "version": "1.0.0",
+  "description": "First-Penguins 공식 웹사이트 - 새로운 영역을 개척하는 혁신 기업",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Static site - no start needed'"
+  },
+  "keywords": [
+    "first-penguins",
+    "goal-illa",
+    "혁신",
+    "기업",
+    "웹사이트"
+  ],
+  "author": "First-Penguins",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/company-website"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

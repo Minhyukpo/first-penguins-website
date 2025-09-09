@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal-Illa - 목표 달성 앱 | Goal-Illa Company</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .app-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .app-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .app-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .app-screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .screenshot {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .screenshot img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 15px;
+        }
+        
+        .features-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .download-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 15px 30px;
+            background: white;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <h2>🎯 Goal-Illa</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#apps" class="nav-link">앱 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#about" class="nav-link">회사 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../support/contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../support/announcements.html" class="nav-link">공지사항</a>
+                </li>
+                <li class="nav-item" id="authNavItem">
+                    <a href="../auth/login.html" class="nav-link" id="authLink">로그인</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Hero Section -->
+    <section class="app-hero">
+        <div class="container">
+            <h1>🎯 Goal-Illa</h1>
+            <p>목표 설정과 달성을 도와주는 혁신적인 앱</p>
+            <div class="app-screenshots">
+                <div class="screenshot">
+                    <div style="width: 200px; height: 400px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2c3e50;">
+                        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Goal-Illa</div>
+                        <div style="font-size: 0.9rem; text-align: center; line-height: 1.5;">
+                            📚 공부하기<br>
+                            🏃‍♂️ 운동하기<br>
+                            📖 독서하기<br>
+                            💼 업무 완료
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div style="width: 200px; height: 400px; background: linear-gradient(135deg, #e8f4fd, #d1ecf1); border-radius: 15px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2c3e50;">
+                        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;">진행률</div>
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(#3498db 0deg 252deg, #e9ecef 252deg 360deg); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <span style="background: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">70%</span>
+                        </div>
+                        <div style="font-size: 0.8rem; text-align: center;">목표 달성률</div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div style="width: 200px; height: 400px; background: linear-gradient(135deg, #f0f8ff, #e6f3ff); border-radius: 15px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2c3e50;">
+                        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;">통계</div>
+                        <div style="font-size: 0.9rem; text-align: center; line-height: 2;">
+                            📊 완료된 목표: 15개<br>
+                            🔥 연속 달성: 7일<br>
+                            ⭐ 평균 점수: 4.5<br>
+                            🏆 이번 달: 3개 완료
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">주요 기능</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>스마트 목표 설정</h3>
+                    <p>SMART 원칙에 따라 구체적이고 측정 가능한 목표를 설정할 수 있습니다. 목표를 단계별로 나누어 관리하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>진행률 추적</h3>
+                    <p>실시간으로 목표 달성률을 확인하고, 시각적인 차트와 그래프로 진행 상황을 한눈에 파악하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>알림 및 리마인더</h3>
+                    <p>맞춤형 알림으로 목표 달성을 위한 행동을 놓치지 않도록 도와드립니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>상세한 통계</h3>
+                    <p>일간, 주간, 월간 통계를 통해 목표 달성 패턴을 분석하고 개선점을 찾아보세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>성취 시스템</h3>
+                    <p>목표를 달성할 때마다 배지와 리워드를 받아 성취감을 느끼고 동기부여를 유지하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>소셜 기능</h3>
+                    <p>친구들과 목표를 공유하고 서로 격려하며 함께 성장할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">앱 현황</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">다운로드</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4.5</div>
+                    <div class="stat-label">평균 평점</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">활성 사용자</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">만족도</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container">
+            <h2>지금 다운로드하세요!</h2>
+            <p>Goal-Illa와 함께 목표 달성의 여정을 시작해보세요.</p>
+            <div class="download-buttons">
+                <a href="#" class="download-btn">
+                    <i class="fab fa-apple"></i>
+                    App Store
+                </a>
+                <a href="#" class="download-btn">
+                    <i class="fab fa-google-play"></i>
+                    Google Play
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎯 Goal-Illa Company</h3>
+                    <p>혁신적인 모바일 앱으로 사용자의 목표를 달성하세요.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>앱</h4>
+                    <ul>
+                        <li><a href="goal-illa.html">Goal-Illa</a></li>
+                        <li><a href="../index.html#apps">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="../support/faq.html">FAQ</a></li>
+                        <li><a href="../support/contact.html">문의하기</a></li>
+                        <li><a href="../support/announcements.html">공지사항</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 goalillaoffice@gmail.com</p>
+                    <p>🌐 www.goalilla.com</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" class="social-link facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.twitter.com" target="_blank" class="social-link twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Goal-Illa Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
+
