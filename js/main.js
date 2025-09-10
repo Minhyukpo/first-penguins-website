@@ -1,6 +1,17 @@
 // Main JavaScript functionality for Goal-Illa Company website
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Hide loading spinner
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if (loadingSpinner) {
+        setTimeout(() => {
+            loadingSpinner.style.opacity = '0';
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+            }, 500);
+        }, 1000);
+    }
+    
     // Check authentication status on page load
     checkAuthStatus();
     
@@ -130,22 +141,38 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const inputs = form.querySelectorAll('input[required], textarea[required]');
             let isValid = true;
+            let firstInvalidInput = null;
             
             inputs.forEach(input => {
                 if (!input.value.trim()) {
                     isValid = false;
                     input.style.borderColor = '#e74c3c';
+                    if (!firstInvalidInput) firstInvalidInput = input;
                 } else {
                     input.style.borderColor = '#ddd';
                 }
             });
             
             if (isValid) {
-                // Show success message
-                showNotification('메시지가 성공적으로 전송되었습니다!', 'success');
-                form.reset();
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = '전송 중...';
+                submitBtn.disabled = true;
+                
+                // Simulate form submission (replace with actual API call)
+                setTimeout(() => {
+                    showNotification('메시지가 성공적으로 전송되었습니다!', 'success');
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
             } else {
                 showNotification('모든 필수 필드를 입력해주세요.', 'error');
+                if (firstInvalidInput) {
+                    firstInvalidInput.focus();
+                    firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
         });
     });
@@ -551,9 +578,18 @@ function showSettings() {
 
 function logout() {
     if (confirm('정말 로그아웃하시겠습니까?')) {
+        // 모든 인증 관련 데이터 제거
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('refreshToken');
+        
         checkAuthStatus(); // 메인 페이지 버튼들도 업데이트
         showNotification('로그아웃되었습니다.', 'success');
+        
+        // 로그인 페이지로 리다이렉트
+        setTimeout(() => {
+            window.location.href = 'auth/login.html';
+        }, 1000);
     }
     document.getElementById('userMenu').style.display = 'none';
 }
