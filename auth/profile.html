@@ -252,17 +252,49 @@
                 
                 <div class="form-group">
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required readonly>
+                    <small class="form-help">이메일은 변경할 수 없습니다</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="birthDate">생년월일</label>
-                    <input type="date" id="birthDate" name="birthDate" required>
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender">
+                        <option value="">선택하세요</option>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                        <option value="other">기타</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
                     <label for="age">나이</label>
-                    <input type="number" id="age" name="age" min="1" max="120" required>
+                    <input type="number" id="age" name="age" min="1" max="120">
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">생년월일</label>
+                    <input type="date" id="birthDate" name="birthDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="education">학력</label>
+                    <select id="education" name="education">
+                        <option value="">선택하세요</option>
+                        <option value="고등학교">고등학교</option>
+                        <option value="대학교">대학교</option>
+                        <option value="대학원">대학원</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="organization">소속/직장</label>
+                    <input type="text" id="organization" name="organization" placeholder="예: 서울대학교, 삼성전자">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">전화번호</label>
+                    <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678">
                 </div>
                 
                 <button type="submit" class="auth-btn" id="updateBtn">
@@ -313,8 +345,12 @@
             // 폼에 현재 값 설정
             document.getElementById('name').value = currentUser.name || '';
             document.getElementById('email').value = currentUser.email || '';
-            document.getElementById('birthDate').value = currentUser.birth_date || '';
+            document.getElementById('gender').value = currentUser.gender || '';
             document.getElementById('age').value = currentUser.age || '';
+            document.getElementById('birthDate').value = currentUser.birth_date || '';
+            document.getElementById('education').value = currentUser.education || '';
+            document.getElementById('organization').value = currentUser.organization || '';
+            document.getElementById('phone').value = currentUser.phone || '';
             
             // 프로필 아바타에 이름 첫 글자 표시
             const avatar = document.getElementById('profileAvatar');
@@ -343,23 +379,36 @@
                 return;
             }
             
-            updateProfile(name, email, birthDate, age);
+            const userData = {
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
+                birthDate: document.getElementById('birthDate').value,
+                education: document.getElementById('education').value,
+                organization: document.getElementById('organization').value,
+                phone: document.getElementById('phone').value
+            };
+            
+            updateProfile(name, email, userData);
         });
         
-        async function updateProfile(name, email, birthDate, age) {
+        async function updateProfile(name, email, userData) {
             try {
-                const response = await fetch('https://first-penguins-backend-dhci14g1t-minhyuk-jeongs-projects.vercel.app/profile', {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${window.CONFIG.api.baseUrl}/api/users/profile`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${currentUser.token}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        id: currentUser.id,
                         name: name,
                         email: email,
-                        birthDate: birthDate,
-                        age: age
+                        gender: userData.gender,
+                        age: userData.age,
+                        birth_date: userData.birthDate,
+                        education: userData.education,
+                        organization: userData.organization,
+                        phone: userData.phone
                     })
                 });
                 

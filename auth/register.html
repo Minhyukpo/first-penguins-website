@@ -278,10 +278,45 @@
             <div class="success-message" id="successMessage"></div>
             
             <form id="registerForm">
-                <div class="form-group">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">성별</label>
+                            <select id="gender" name="gender">
+                                <option value="">선택하세요</option>
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">나이</label>
+                            <input type="number" id="age" name="age" min="1" max="120" placeholder="예: 25">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">생년월일</label>
+                            <input type="date" id="birthDate" name="birthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="education">학력</label>
+                            <select id="education" name="education">
+                                <option value="">선택하세요</option>
+                                <option value="고등학교">고등학교</option>
+                                <option value="대학교">대학교</option>
+                                <option value="대학원">대학원</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization">소속/직장</label>
+                            <input type="text" id="organization" name="organization" placeholder="예: 서울대학교, 삼성전자">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">전화번호</label>
+                            <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678">
+                        </div>
                 
                 <div class="form-group">
                     <label for="email">아이디 (이메일 주소)</label>
@@ -442,11 +477,22 @@
                 return;
             }
             
+            // 추가 사용자 정보 수집
+            const userData = {
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
+                birthDate: document.getElementById('birthDate').value,
+                education: document.getElementById('education').value,
+                organization: document.getElementById('organization').value,
+                phone: document.getElementById('phone').value,
+                guardianAgree: true // 기본값
+            };
+            
             // 회원가입 처리
-            registerUser(name, email, password);
+            registerUser(name, email, password, userData);
         });
         
-        async function registerUser(name, email, password) {
+        async function registerUser(name, email, password, userData = {}) {
             try {
                 // Goal-Illa API로 회원가입 시도
                 const response = await fetch(window.CONFIG.api.baseUrl + '/register', {
@@ -456,12 +502,16 @@
                     },
                     body: JSON.stringify({
                         id: email, // Goal-Illa는 id로 사용
-                        name: name, // 사용자 이름 추가
+                        name: name,
                         email: email,
                         password: password,
-                        birthDate: '1990-01-01', // 기본값 설정
-                        age: 25, // 기본값 설정
-                        guardianAgree: true // 기본값 설정
+                        gender: userData.gender || null,
+                        age: userData.age || null,
+                        birth_date: userData.birthDate || null,
+                        education: userData.education || null,
+                        organization: userData.organization || null,
+                        phone: userData.phone || null,
+                        guardian_agreement: userData.guardianAgree || null
                     })
                 });
                 
