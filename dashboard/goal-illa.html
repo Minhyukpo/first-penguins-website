@@ -491,11 +491,11 @@
             }
             
             goals.forEach(goal => {
-                // Goal-Illa API 데이터 구조에 맞게 수정
-                const goalName = goal.name || goal.item_name || '목표';
+                // Goal-Illa MySQL 데이터베이스 구조에 맞게 수정
+                const goalName = goal.title || goal.name || '목표';
                 const categoryName = goal.category_name || goal.category || '기본';
-                const targetAmount = goal.target_amount || goal.target || 100;
-                const currentAmount = goal.current_amount || goal.progress || 0;
+                const targetAmount = goal.total_quantity || goal.target_amount || 100;
+                const currentAmount = goal.quantity || goal.current_amount || 0;
                 const progressPercent = targetAmount > 0 ? Math.round((currentAmount / targetAmount) * 100) : 0;
                 
                 const goalItem = document.createElement('div');
@@ -505,7 +505,7 @@
                         <div class="goal-icon">${goalName.charAt(0)}</div>
                         <div class="goal-details">
                             <h4>${goalName}</h4>
-                            <p>${categoryName} • ${currentAmount}/${targetAmount}</p>
+                            <p>${categoryName} • ${currentAmount}/${targetAmount} ${goal.unit || ''}</p>
                         </div>
                     </div>
                     <div class="goal-progress">
@@ -531,8 +531,8 @@
             
             const totalGoals = goals.length;
             const completedGoals = goals.filter(g => {
-                const targetAmount = g.target_amount || g.target || 100;
-                const currentAmount = g.current_amount || g.progress || 0;
+                const targetAmount = g.total_quantity || g.target_amount || 100;
+                const currentAmount = g.quantity || g.current_amount || 0;
                 return currentAmount >= targetAmount;
             }).length;
             const activeGoals = totalGoals - completedGoals;
@@ -604,7 +604,12 @@
                         <div class="form-group">
                             <label for="goalCategory">카테고리</label>
                             <select id="goalCategory" required>
-                                <option value="be-illa">be-illa</option>
+                                <option value="1">기본</option>
+                                <option value="2">학습</option>
+                                <option value="3">운동</option>
+                                <option value="4">업무</option>
+                                <option value="5">개인</option>
+                                <option value="6">건강</option>
                             </select>
                         </div>
                         <div class="modal-actions">
@@ -623,7 +628,7 @@
                     name: document.getElementById('goalName').value,
                     target_amount: parseInt(document.getElementById('goalTarget').value),
                     unit: document.getElementById('goalUnit').value,
-                    category_id: '0' // 기본 카테고리
+                    category_id: parseInt(document.getElementById('goalCategory').value) // Goal-Illa 카테고리 ID
                 };
                 
                 try {
