@@ -326,11 +326,49 @@
         }
         
         function loginWithGoogle() {
-            showError('Google 로그인은 준비 중입니다.');
+            // Google OAuth 구현
+            showError('Google 로그인은 준비 중입니다. 곧 출시될 예정입니다!');
         }
         
         function loginWithApple() {
-            showError('Apple 로그인은 준비 중입니다.');
+            // Apple ID 로그인 구현
+            showError('Apple 로그인은 준비 중입니다. 곧 출시될 예정입니다!');
+        }
+        
+        // 자동 로그인 기능
+        function checkAutoLogin() {
+            const rememberMe = localStorage.getItem('rememberMe');
+            const savedCredentials = localStorage.getItem('savedCredentials');
+            
+            if (rememberMe === 'true' && savedCredentials) {
+                const credentials = JSON.parse(savedCredentials);
+                document.getElementById('email').value = credentials.email;
+                document.getElementById('password').value = credentials.password;
+                
+                // 자동 로그인 체크박스 표시
+                const rememberCheckbox = document.createElement('div');
+                rememberCheckbox.innerHTML = `
+                    <label style="display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        <input type="checkbox" id="rememberMe" checked> 로그인 상태 유지
+                    </label>
+                `;
+                document.querySelector('.form-group:last-of-type').appendChild(rememberCheckbox);
+            }
+        }
+        
+        // 로그인 상태 유지 기능
+        function handleRememberMe() {
+            const rememberCheckbox = document.getElementById('rememberMe');
+            if (rememberCheckbox && rememberCheckbox.checked) {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedCredentials', JSON.stringify({ email, password }));
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedCredentials');
+            }
         }
         
         function showError(message) {

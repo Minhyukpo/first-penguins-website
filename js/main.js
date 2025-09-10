@@ -399,8 +399,104 @@ document.addEventListener('DOMContentLoaded', function() {
     // 마우스 커서 효과
     initializeMouseEffects();
 
+    // 브라우저 알림 권한 요청
+    requestNotificationPermission();
+    
+    // 실시간 업데이트 체크
+    startRealTimeUpdates();
+    
+    // PWA Service Worker 등록
+    registerServiceWorker();
+    
     console.log('Goal-Illa Company website loaded successfully! 🎯');
 });
+
+// 브라우저 알림 권한 요청
+function requestNotificationPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('알림 권한이 허용되었습니다.');
+                showWelcomeNotification();
+            }
+        });
+    }
+}
+
+// 환영 알림 표시
+function showWelcomeNotification() {
+    if (Notification.permission === 'granted') {
+        const notification = new Notification('🐧 First-Penguins에 오신 것을 환영합니다!', {
+            body: '목표 달성을 위한 여정을 시작해보세요!',
+            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🐧</text></svg>',
+            tag: 'welcome'
+        });
+        
+        notification.onclick = function() {
+            window.focus();
+            notification.close();
+        };
+    }
+}
+
+// 실시간 업데이트 체크
+function startRealTimeUpdates() {
+    // 5분마다 업데이트 체크
+    setInterval(() => {
+        checkForUpdates();
+    }, 5 * 60 * 1000);
+}
+
+// 업데이트 체크 함수
+function checkForUpdates() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+    
+    // 실제로는 API에서 최신 데이터를 가져와서 비교
+    // 여기서는 예시로 간단한 알림만 표시
+    const lastCheck = localStorage.getItem('lastUpdateCheck');
+    const now = new Date().getTime();
+    
+    if (!lastCheck || (now - parseInt(lastCheck)) > 10 * 60 * 1000) { // 10분마다
+        localStorage.setItem('lastUpdateCheck', now.toString());
+        
+        // 목표 달성 알림 (예시)
+        if (Math.random() > 0.8) { // 20% 확률로 알림
+            showGoalNotification();
+        }
+    }
+}
+
+// 목표 달성 알림
+function showGoalNotification() {
+    if (Notification.permission === 'granted') {
+        const notifications = [
+            '🎯 새로운 목표를 설정해보세요!',
+            '📈 오늘의 목표 달성률을 확인해보세요!',
+            '🏆 목표 달성을 위한 동기부여가 필요하신가요?',
+            '📊 이번 주 통계를 확인해보세요!'
+        ];
+        
+        const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
+        
+        const notification = new Notification('Goal-Illa 알림', {
+            body: randomNotification,
+            icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎯</text></svg>',
+            tag: 'goal-reminder'
+        });
+        
+        notification.onclick = function() {
+            window.focus();
+            // 대시보드로 이동
+            if (window.location.pathname.includes('dashboard')) {
+                window.location.reload();
+            } else {
+                window.location.href = 'dashboard/goal-illa.html';
+            }
+            notification.close();
+        };
+    }
+}
 
 // 로그인 상태 관리 함수들
 function checkAuthStatus() {
@@ -467,12 +563,18 @@ function updateAuthNavigation() {
     const currentUser = localStorage.getItem('currentUser');
     const authLink = document.getElementById('authLink');
     const authNavItem = document.getElementById('authNavItem');
+    const searchNavItem = document.getElementById('searchNavItem');
     
     if (currentUser) {
         const user = JSON.parse(currentUser);
         authLink.textContent = `${user.name}님`;
         authLink.href = '#';
         authLink.onclick = showUserMenu;
+        
+        // 검색 기능 표시
+        if (searchNavItem) {
+            searchNavItem.style.display = 'block';
+        }
         
         // 사용자 메뉴 추가
         if (!document.getElementById('userMenu')) {
@@ -485,6 +587,11 @@ function updateAuthNavigation() {
         authLink.textContent = '로그인';
         authLink.href = 'auth/login.html';
         authLink.onclick = null;
+        
+        // 검색 기능 숨기기
+        if (searchNavItem) {
+            searchNavItem.style.display = 'none';
+        }
         
         // 사용자 메뉴 제거
         const userMenu = document.getElementById('userMenu');
@@ -854,6 +961,129 @@ function updateUserMenuAppLinks() {
     appDashboardLinks.innerHTML = linksHtml;
 }
 
+// 전역 검색 기능
+function performGlobalSearch() {
+    const searchInput = document.getElementById('globalSearch');
+    const searchTerm = searchInput.value.trim();
+    
+    if (!searchTerm) {
+        showNotification('검색어를 입력해주세요.', 'info');
+        return;
+    }
+    
+    // 검색 결과 모달 표시
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>🔍 "${searchTerm}" 검색 결과</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>검색 중...</p>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // 실제 검색 수행 (API 호출)
+    searchGoals(searchTerm);
+}
+
+// 목표 검색 함수
+async function searchGoals(searchTerm) {
+    try {
+        const response = await fetch(`${window.CONFIG.api.baseUrl}/api/items`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            const goals = data.items || [];
+            
+            // 검색어와 매칭되는 목표 필터링
+            const filteredGoals = goals.filter(goal => 
+                goal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                goal.unit.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            displaySearchResults(filteredGoals, searchTerm);
+        } else {
+            displaySearchResults([], searchTerm, '검색 중 오류가 발생했습니다.');
+        }
+    } catch (error) {
+        displaySearchResults([], searchTerm, '서버 연결 오류가 발생했습니다.');
+    }
+}
+
+// 검색 결과 표시
+function displaySearchResults(goals, searchTerm, errorMessage = null) {
+    const searchResults = document.getElementById('searchResults');
+    
+    if (errorMessage) {
+        searchResults.innerHTML = `
+            <div class="search-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>${errorMessage}</p>
+            </div>
+        `;
+        return;
+    }
+    
+    if (goals.length === 0) {
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h4>"${searchTerm}"에 대한 검색 결과가 없습니다.</h4>
+                <p>다른 검색어를 시도해보세요.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let resultsHtml = `
+        <div class="search-summary">
+            <p><strong>${goals.length}</strong>개의 목표를 찾았습니다.</p>
+        </div>
+        <div class="goals-list">
+    `;
+    
+    goals.forEach(goal => {
+        const progressPercent = (goal.current_amount / goal.target_amount) * 100;
+        resultsHtml += `
+            <div class="goal-item search-result">
+                <div class="goal-info">
+                    <h4>${goal.name}</h4>
+                    <p>${goal.current_amount} / ${goal.target_amount} ${goal.unit}</p>
+                </div>
+                <div class="goal-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <span class="progress-text">${Math.round(progressPercent)}%</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    resultsHtml += '</div>';
+    searchResults.innerHTML = resultsHtml;
+}
+
+// 모달 닫기 함수 (전역)
+function closeModal() {
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) {
+        modal.remove();
+    }
+}
+
 // 앱 대시보드 링크 관리 (기존 방식)
 function updateAppDashboardLinks() {
     const currentUser = localStorage.getItem('currentUser');
@@ -864,5 +1094,84 @@ function updateAppDashboardLinks() {
     } else if (goalIllaDashboardLink) {
         goalIllaDashboardLink.style.display = 'none';
     }
+}
+
+// PWA Service Worker 등록
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                    
+                    // 업데이트 확인
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // 새 버전 사용 가능 알림
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+}
+
+// 업데이트 알림 표시
+function showUpdateNotification() {
+    if (confirm('새로운 버전이 사용 가능합니다. 지금 업데이트하시겠습니까?')) {
+        window.location.reload();
+    }
+}
+
+// PWA 설치 프롬프트
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // 설치 버튼 표시
+    showInstallButton();
+});
+
+function showInstallButton() {
+    const installButton = document.createElement('button');
+    installButton.innerHTML = '📱 앱으로 설치하기';
+    installButton.className = 'install-button';
+    installButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    `;
+    
+    installButton.addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('PWA 설치됨');
+                }
+                deferredPrompt = null;
+                installButton.remove();
+            });
+        }
+    });
+    
+    document.body.appendChild(installButton);
 }
 

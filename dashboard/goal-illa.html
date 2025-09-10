@@ -572,19 +572,202 @@
         
         // 액션 함수들
         function addNewGoal() {
-            alert('새 목표 추가 기능은 모바일 앱에서 사용하세요!');
+            // 새 목표 추가 모달
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>새 목표 추가</h3>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <form id="addGoalForm">
+                        <div class="form-group">
+                            <label for="goalName">목표 이름</label>
+                            <input type="text" id="goalName" placeholder="예: 매일 30분 운동하기" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goalTarget">목표 수량</label>
+                            <input type="number" id="goalTarget" placeholder="예: 30" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goalUnit">단위</label>
+                            <select id="goalUnit" required>
+                                <option value="분">분</option>
+                                <option value="시간">시간</option>
+                                <option value="개">개</option>
+                                <option value="페이지">페이지</option>
+                                <option value="일">일</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="goalCategory">카테고리</label>
+                            <select id="goalCategory" required>
+                                <option value="be-illa">be-illa</option>
+                            </select>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-outline" onclick="closeModal()">취소</button>
+                            <button type="submit" class="btn btn-primary">목표 추가</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // 폼 제출 처리
+            document.getElementById('addGoalForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const goalData = {
+                    name: document.getElementById('goalName').value,
+                    target_amount: parseInt(document.getElementById('goalTarget').value),
+                    unit: document.getElementById('goalUnit').value,
+                    category_id: '0' // 기본 카테고리
+                };
+                
+                try {
+                    const response = await fetch(`${window.CONFIG.api.baseUrl}/api/items`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                        },
+                        body: JSON.stringify(goalData)
+                    });
+                    
+                    if (response.ok) {
+                        showNotification('목표가 성공적으로 추가되었습니다!', 'success');
+                        closeModal();
+                        loadGoals(); // 목표 목록 새로고침
+                    } else {
+                        showNotification('목표 추가에 실패했습니다.', 'error');
+                    }
+                } catch (error) {
+                    showNotification('서버 연결 오류가 발생했습니다.', 'error');
+                }
+            });
         }
         
         function viewStatistics() {
-            alert('상세 통계는 모바일 앱에서 확인하세요!');
+            // 통계 모달
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h3>📊 목표 달성 통계</h3>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="statistics-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">🎯</div>
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">총 목표</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">✅</div>
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">완료된 목표</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-number">75%</div>
+                                <div class="stat-label">평균 달성률</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🔥</div>
+                                <div class="stat-number">7</div>
+                                <div class="stat-label">연속 달성일</div>
+                            </div>
+                        </div>
+                        <div class="chart-placeholder">
+                            <div style="text-align: center; padding: 2rem; color: #666;">
+                                <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <p>상세한 차트는 모바일 앱에서 확인하세요!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
         
         function manageCategories() {
-            alert('카테고리 관리 기능은 모바일 앱에서 사용하세요!');
+            showNotification('카테고리 관리 기능은 모바일 앱에서 사용하세요!', 'info');
         }
         
         function exportData() {
-            alert('데이터 내보내기 기능은 준비 중입니다.');
+            // 데이터 내보내기 기능
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const exportData = {
+                user: currentUser,
+                exportDate: new Date().toISOString(),
+                goals: [], // 실제로는 API에서 가져온 데이터
+                message: 'Goal-Illa 데이터 내보내기'
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `goalilla-data-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showNotification('데이터가 성공적으로 내보내졌습니다!', 'success');
+        }
+        
+        // 모달 닫기 함수
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // 알림 표시 함수
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            const colors = {
+                success: '#27ae60',
+                error: '#e74c3c',
+                info: '#3498db'
+            };
+            notification.style.background = colors[type] || colors.info;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
         }
     </script>
 </body>

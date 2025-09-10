@@ -29,6 +29,13 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="First-Penguins">
+    
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -92,6 +99,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="support/announcements.html" class="nav-link">공지사항</a>
+                </li>
+                <li class="nav-item" id="searchNavItem" style="display: none;">
+                    <div class="search-container">
+                        <input type="text" id="globalSearch" placeholder="목표, 활동 검색..." class="search-input">
+                        <button class="search-btn" onclick="performGlobalSearch()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </li>
                 <li class="nav-item" id="authNavItem">
                     <a href="auth/login.html" class="nav-link" id="authLink">로그인</a>
