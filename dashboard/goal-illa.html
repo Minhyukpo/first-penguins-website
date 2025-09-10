@@ -432,7 +432,7 @@
             
             try {
                 // Goal-Illa API에서 사용자 목표 데이터 가져오기
-                const response = await fetch(`https://first-penguins-backend-dhci14g1t-minhyuk-jeongs-projects.vercel.app/api/items?userId=${user.id}`, {
+                const response = await fetch(`${window.CONFIG.api.baseUrl}/api/items`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -442,6 +442,7 @@
                 if (response.ok) {
                     const goals = await response.json();
                     console.log('Goal-Illa API에서 받은 데이터:', goals);
+                    // Goal-Illa API는 배열을 직접 반환
                     displayGoals(goals);
                     updateStats(goals);
                 } else if (response.status === 401) {
@@ -632,7 +633,12 @@
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
                         },
-                        body: JSON.stringify(goalData)
+                        body: JSON.stringify({
+                            title: goalData.name,
+                            total_quantity: goalData.target_amount,
+                            unit: goalData.unit,
+                            category_id: goalData.category_id || 1
+                        })
                     });
                     
                     if (response.ok) {

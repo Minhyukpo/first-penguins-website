@@ -9,9 +9,9 @@ const CONFIG = {
     api: {
         baseUrl: (() => {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                return 'http://localhost:3001'; // 개발 환경
+                return 'http://localhost:3000'; // 개발 환경 (Goal-Illa 백엔드)
             } else {
-                return 'https://first-penguins-backend-jiv14wwhr-minhyuk-jeongs-projects.vercel.app'; // 프로덕션 환경
+                return 'https://3.38.27.53:3000'; // Goal-Illa 백엔드 (프로덕션 환경)
             }
         })(),
         
