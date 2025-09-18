@@ -25,7 +25,7 @@ seo:
   name: "First-Penguins"
   description: "새로운 영역을 개척하는 혁신 기업"
   url: "https://minhyukpo.github.io/first-penguins-website"
-  logo: "/images/goalilla-profile.jpg"
+  logo: "/images/company-photos/firstpenguins-profile.jpg"
   sameAs:
     - "https://instagram.com/goal_illa.office"
 

@@ -9,6 +9,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
         .terms-hero {
             background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
             color: white;
@@ -103,7 +157,33 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="../index.html" style="text-decoration: none; color: inherit;">
-                    <h2>🐧 First-Penguins</h2>
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 100 100" class="penguin-icon">
+                            <!-- 펭귄 몸체 -->
+                            <ellipse cx="50" cy="65" rx="25" ry="30" fill="#2c3e50"/>
+                            <!-- 펭귄 배 -->
+                            <ellipse cx="50" cy="65" rx="15" ry="20" fill="#ecf0f1"/>
+                            <!-- 펭귄 머리 -->
+                            <circle cx="50" cy="35" r="20" fill="#2c3e50"/>
+                            <!-- 펭귄 눈 -->
+                            <circle cx="45" cy="30" r="3" fill="white"/>
+                            <circle cx="55" cy="30" r="3" fill="white"/>
+                            <circle cx="45" cy="30" r="1.5" fill="#2c3e50"/>
+                            <circle cx="55" cy="30" r="1.5" fill="#2c3e50"/>
+                            <!-- 펭귄 부리 -->
+                            <polygon points="50,35 47,40 53,40" fill="#f39c12"/>
+                            <!-- 펭귄 날개 -->
+                            <ellipse cx="35" cy="60" rx="8" ry="20" fill="#34495e" transform="rotate(-20 35 60)"/>
+                            <ellipse cx="65" cy="60" rx="8" ry="20" fill="#34495e" transform="rotate(20 65 60)"/>
+                            <!-- 펭귄 발 -->
+                            <ellipse cx="45" cy="90" rx="6" ry="4" fill="#f39c12"/>
+                            <ellipse cx="55" cy="90" rx="6" ry="4" fill="#f39c12"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
                 </a>
             </div>
             <ul class="nav-menu">
@@ -285,7 +365,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 First-Penguins. All rights reserved.</p>
+                <p>&copy; 2025 First-Penguins. All rights reserved.</p>
             </div>
         </div>
     </footer>

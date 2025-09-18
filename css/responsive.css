@@ -33,38 +33,73 @@
 
 /* Small screens (768px to 991px) */
 @media (max-width: 991px) {
+    .nav-container {
+        height: 70px;
+        padding: 0 1.5rem;
+    }
+    
+    .nav-logo {
+        gap: 0.8rem;
+    }
+    
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .penguin-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .logo-main {
+        font-size: 1.2rem;
+    }
+    
+    .logo-sub {
+        font-size: 0.7rem;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         padding: 2rem 0;
         z-index: 999;
+        gap: 0.5rem;
     }
     
     .nav-menu.active {
         left: 0;
     }
     
+    .nav-link {
+        padding: 1rem 2rem;
+        margin: 0.2rem 1rem;
+        border-radius: 12px;
+        justify-content: center;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .search-container {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
     .hamburger {
         display: flex;
-    }
-    
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
     }
     
     /* User Guide Tablet */
@@ -227,7 +262,30 @@
     }
 
     .nav-container {
-        padding: 0 15px;
+        padding: 0 1rem;
+        height: 65px;
+    }
+    
+    .nav-logo {
+        gap: 0.6rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .penguin-icon {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .logo-main {
+        font-size: 1.1rem;
+    }
+    
+    .logo-sub {
+        font-size: 0.65rem;
     }
 
     .hero {

@@ -10,18 +10,39 @@ const CONFIG = {
         baseUrl: (() => {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:3000'; // 개발 환경 (Goal-Illa 백엔드)
+            } else if (window.location.hostname.includes('firstpgs.com')) {
+                return 'https://api.firstpgs.com'; // AWS 통합 후 도메인 (예정)
+            } else if (window.location.hostname.includes('goalilla.com')) {
+                return 'https://api.goalilla.com'; // Goal-Illa 전용 도메인 (예정)
             } else {
-                return 'https://3.38.27.53:3000'; // Goal-Illa 백엔드 (프로덕션 환경)
+                return 'https://3.38.27.53:3000'; // Goal-Illa 백엔드 (현재 프로덕션 환경)
             }
         })(),
         
         endpoints: {
-            login: '/login',
-            register: '/register',
+            // 기존 Goal-Illa API
+            login: '/api/auth/login',
+            register: '/api/auth/register',
             items: '/api/items',
             checkId: '/check-id',
             devStatus: '/dev/status',
-            devReset: '/dev/reset'
+            devReset: '/dev/reset',
+            
+            // 새로 추가된 Company Website API
+            inquiries: '/api/website/inquiries',
+            announcements: '/api/website/announcements',
+            faqs: '/api/website/faqs',
+            newsletter: '/api/website/newsletter',
+            newsletterStats: '/api/website/newsletter/stats',
+            team: '/api/website/team',
+            blog: '/api/website/blog',
+            instagram: '/api/website/instagram',
+            instagramStats: '/api/website/instagram/stats',
+            visits: '/api/website/visits',
+            services: '/api/website/services',
+            userServices: '/api/website/user/services',
+            satisfaction: '/api/website/satisfaction',
+            jobs: '/api/website/jobs'
         }
     },
     

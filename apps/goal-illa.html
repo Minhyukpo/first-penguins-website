@@ -9,6 +9,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
         .app-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -107,6 +161,50 @@
             transform: translateY(-3px);
         }
         
+        .coming-soon-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .coming-soon-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .coming-soon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .coming-soon-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .coming-soon-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .coming-soon-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .newsletter-signup {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
         .stats-section {
             padding: 60px 0;
         }
@@ -144,7 +242,33 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="../index.html" style="text-decoration: none; color: inherit;">
-                    <h2>🎯 Goal-Illa</h2>
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 100 100" class="penguin-icon">
+                            <!-- 펭귄 몸체 -->
+                            <ellipse cx="50" cy="65" rx="25" ry="30" fill="#2c3e50"/>
+                            <!-- 펭귄 배 -->
+                            <ellipse cx="50" cy="65" rx="15" ry="20" fill="#ecf0f1"/>
+                            <!-- 펭귄 머리 -->
+                            <circle cx="50" cy="35" r="20" fill="#2c3e50"/>
+                            <!-- 펭귄 눈 -->
+                            <circle cx="45" cy="30" r="3" fill="white"/>
+                            <circle cx="55" cy="30" r="3" fill="white"/>
+                            <circle cx="45" cy="30" r="1.5" fill="#2c3e50"/>
+                            <circle cx="55" cy="30" r="1.5" fill="#2c3e50"/>
+                            <!-- 펭귄 부리 -->
+                            <polygon points="50,35 47,40 53,40" fill="#f39c12"/>
+                            <!-- 펭귄 날개 -->
+                            <ellipse cx="35" cy="60" rx="8" ry="20" fill="#34495e" transform="rotate(-20 35 60)"/>
+                            <ellipse cx="65" cy="60" rx="8" ry="20" fill="#34495e" transform="rotate(20 65 60)"/>
+                            <!-- 펭귄 발 -->
+                            <ellipse cx="45" cy="90" rx="6" ry="4" fill="#f39c12"/>
+                            <ellipse cx="55" cy="90" rx="6" ry="4" fill="#f39c12"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
                 </a>
             </div>
             <ul class="nav-menu">
@@ -258,41 +382,54 @@
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="container">
-            <h2 class="section-title">앱 현황</h2>
+            <h2 class="section-title">개발 현황</h2>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">다운로드</div>
+                    <div class="stat-number">개발 중</div>
+                    <div class="stat-label">앱 상태</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">4.5</div>
-                    <div class="stat-label">평균 평점</div>
+                    <div class="stat-number">3명</div>
+                    <div class="stat-label">개발팀</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">활성 사용자</div>
+                    <div class="stat-number">베타 예정</div>
+                    <div class="stat-label">출시 계획</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">만족도</div>
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label">목표 출시</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
+    <!-- Coming Soon Section -->
     <section class="download-section">
         <div class="container">
-            <h2>지금 다운로드하세요!</h2>
-            <p>Goal-Illa와 함께 목표 달성의 여정을 시작해보세요.</p>
-            <div class="download-buttons">
-                <a href="#" class="download-btn">
-                    <i class="fab fa-apple"></i>
-                    App Store
-                </a>
-                <a href="#" class="download-btn">
-                    <i class="fab fa-google-play"></i>
-                    Google Play
+            <h2>곧 출시됩니다!</h2>
+            <p>Goal-Illa와 함께 목표 달성의 여정을 시작할 준비를 하고 있습니다.</p>
+            <div class="coming-soon-info">
+                <div class="coming-soon-card">
+                    <i class="fas fa-code"></i>
+                    <h3>개발 진행 중</h3>
+                    <p>핵심 기능 개발 및 테스트를 진행하고 있습니다.</p>
+                </div>
+                <div class="coming-soon-card">
+                    <i class="fas fa-users"></i>
+                    <h3>베타 테스트 예정</h3>
+                    <p>2025년 중 베타 버전 출시를 목표로 하고 있습니다.</p>
+                </div>
+                <div class="coming-soon-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>출시 알림 신청</h3>
+                    <p>출시 시 알림을 받으려면 뉴스레터에 구독해주세요.</p>
+                </div>
+            </div>
+            <div class="newsletter-signup">
+                <a href="../index.html#newsletter" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i>
+                    출시 알림 신청하기
                 </a>
             </div>
         </div>
@@ -335,14 +472,11 @@
                         <a href="https://www.facebook.com" target="_blank" class="social-link facebook">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="https://www.twitter.com" target="_blank" class="social-link twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Goal-Illa Company. All rights reserved.</p>
+                <p>&copy; 2025 Goal-Illa Company. All rights reserved.</p>
             </div>
         </div>
     </footer>
