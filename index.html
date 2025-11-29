@@ -84,6 +84,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/innovation-system.css">
+    <link rel="stylesheet" href="css/cookie-consent.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -936,6 +937,9 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 First-Penguins. All rights reserved.</p>
+                <button id="cookie-consent-settings" class="cookie-consent-settings-btn" aria-label="쿠키 설정" title="쿠키 설정">
+                    🍪
+                </button>
             </div>
         </div>
     </footer>
@@ -958,6 +962,9 @@
             console.error('처리되지 않은 Promise 거부:', e.reason);
         });
     </script>
+    
+    <!-- 쿠키 동의 관리 -->
+    <script src="js/cookie-consent.js"></script>
     
     <!-- Analytics & Monitoring -->
     <script src="js/config.js"></script>

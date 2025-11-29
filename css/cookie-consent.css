@@ -1,0 +1,276 @@
+/* 쿠키 동의 배너 스타일 */
+
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-top: 2px solid #3498db;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    padding: 20px;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.cookie-consent-banner.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.cookie-consent-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cookie-consent-text h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.cookie-consent-text p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.cookie-consent-text a {
+    color: #3498db;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.cookie-consent-text a:hover {
+    color: #2980b9;
+}
+
+.cookie-consent-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.cookie-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.cookie-option:hover {
+    background: #f1f5f9;
+    border-color: #3498db;
+}
+
+.cookie-option input[type="checkbox"] {
+    margin-top: 2px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #3498db;
+}
+
+.cookie-option input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.cookie-option span {
+    font-weight: 500;
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+.cookie-option small {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-consent {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 120px;
+}
+
+.btn-accept-all {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.btn-accept-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-accept-selected {
+    background: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.btn-accept-selected:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+}
+
+.btn-reject {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+.btn-reject:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+/* 설정 버튼 (푸터에 추가 가능) */
+.cookie-consent-settings-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cookie-consent-settings-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .cookie-consent-banner {
+        padding: 15px;
+    }
+    
+    .cookie-consent-content {
+        gap: 15px;
+    }
+    
+    .cookie-consent-text h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cookie-consent-text p {
+        font-size: 0.9rem;
+    }
+    
+    .cookie-consent-options {
+        gap: 10px;
+    }
+    
+    .cookie-option {
+        padding: 10px;
+    }
+    
+    .cookie-consent-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-consent {
+        width: 100%;
+    }
+    
+    .cookie-consent-settings-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* 접근성 개선 */
+.cookie-consent-banner:focus-within {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+.btn-consent:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* 다크 모드 지원 (선택사항) */
+@media (prefers-color-scheme: dark) {
+    .cookie-consent-banner {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border-top-color: #3498db;
+    }
+    
+    .cookie-consent-text h3 {
+        color: #f1f5f9;
+    }
+    
+    .cookie-consent-text p {
+        color: #cbd5e1;
+    }
+    
+    .cookie-option {
+        background: #334155;
+    }
+    
+    .cookie-option:hover {
+        background: #475569;
+    }
+    
+    .cookie-option span {
+        color: #f1f5f9;
+    }
+    
+    .btn-accept-selected {
+        background: #1e293b;
+        color: #3498db;
+        border-color: #3498db;
+    }
+    
+    .btn-reject {
+        background: #334155;
+        color: #cbd5e1;
+        border-color: #475569;
+    }
+}
+

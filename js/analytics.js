@@ -195,19 +195,42 @@
         }
     };
     
-    // 초기화 실행
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            initGoogleAnalytics();
-            initGoogleAdSense();
-            initSentry();
-            initVercelAnalytics();
-        });
-    } else {
-        initGoogleAnalytics();
-        initGoogleAdSense();
+    // 쿠키 동의 확인 후 서비스 초기화
+    function initServicesWithConsent() {
+        // 쿠키 동의 상태 확인
+        const consent = window.getCookieConsent ? window.getCookieConsent() : null;
+        
+        // 동의가 없거나 Analytics/AdSense가 비활성화된 경우 초기화하지 않음
+        if (consent) {
+            if (consent.analytics) {
+                initGoogleAnalytics();
+            }
+            if (consent.marketing) {
+                initGoogleAdSense();
+            }
+        } else {
+            // 동의 대기 중 - 쿠키 동의 이벤트 리스너 등록
+            window.addEventListener('cookieConsentUpdated', function(e) {
+                const consent = e.detail;
+                if (consent.analytics) {
+                    initGoogleAnalytics();
+                }
+                if (consent.marketing) {
+                    initGoogleAdSense();
+                }
+            });
+        }
+        
+        // Sentry와 Vercel Analytics는 항상 초기화 (필수)
         initSentry();
         initVercelAnalytics();
+    }
+    
+    // 초기화 실행
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initServicesWithConsent);
+    } else {
+        initServicesWithConsent();
     }
     
     // 페이지 전환 시 페이지뷰 추적
