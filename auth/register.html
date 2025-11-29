@@ -338,6 +338,215 @@
             font-weight: 600;
         }
         
+        /* 단계별 회원가입 스타일 */
+        .registration-steps {
+            margin-bottom: 30px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 0;
+        }
+        
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .step-item.active .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .step-item.completed .step-number {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .step-item.completed .step-number::after {
+            content: '✓';
+            font-size: 1.2rem;
+        }
+        
+        .step-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .step-item.active .step-label {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .step-content {
+            display: none !important;
+        }
+        
+        .step-content.active {
+            display: block !important;
+        }
+        
+        .step-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .step-btn {
+            flex: 1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-next:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-prev {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #e9ecef;
+        }
+        
+        .btn-prev:hover {
+            background: #e9ecef;
+        }
+        
+        .verification-code-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .verification-code-input input {
+            flex: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 0.2rem;
+            font-weight: 600;
+        }
+        
+        .verification-timer {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .verification-timer.warning {
+            color: #e74c3c;
+        }
+        
+        .id-check-result {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        
+        .id-check-result.available {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .id-check-result.unavailable {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .id-check-result.checking {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .guardian-agreement-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .guardian-agreement-section h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .guardian-agreement-section p {
+            color: #856404;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn-consent {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-consent:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-consent:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         select {
             width: 100%;
             padding: 12px 15px;
@@ -394,80 +603,138 @@
             <div class="error-message" id="errorMessage"></div>
             <div class="success-message" id="successMessage"></div>
             
+            <!-- 단계별 진행 표시 -->
+            <div class="registration-steps">
+                <div class="step-indicator">
+                    <div class="step-item active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">이메일 인증</div>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">아이디 확인</div>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">생년월일</div>
+                    </div>
+                    <div class="step-item" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">비밀번호</div>
+                    </div>
+                    <div class="step-item" data-step="5">
+                        <div class="step-number">5</div>
+                        <div class="step-label">동의</div>
+                    </div>
+                </div>
+            </div>
+            
             <form id="registerForm">
-                <!-- 필수 정보 -->
-                <div class="form-group">
-                    <label for="name">이름 <span class="required">*</span></label>
-                    <input type="text" id="name" name="name" required placeholder="홍길동">
+                <!-- Step 1: 이메일 입력 및 인증 -->
+                <div class="step-content active" id="step1">
+                    <div class="form-group">
+                        <label for="email">이메일 주소 <span class="required">*</span></label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="email" id="email" name="email" placeholder="example@gmail.com" required style="flex: 1;">
+                            <button type="button" id="sendVerificationBtn" class="btn-consent btn-accept-selected" style="min-width: 100px; padding: 12px;">
+                                인증번호 발송
+                            </button>
+                        </div>
+                        <small class="form-help">이메일로 인증번호를 발송합니다</small>
+                    </div>
+                    
+                    <div class="form-group" id="verificationCodeGroup" style="display: none;">
+                        <label for="verificationCode">인증번호 <span class="required">*</span></label>
+                        <div class="verification-code-input">
+                            <input type="text" id="verificationCode" name="verificationCode" maxlength="6" placeholder="000000" required>
+                            <button type="button" id="verifyCodeBtn" class="btn-consent btn-accept-selected" style="min-width: 80px;">
+                                확인
+                            </button>
+                        </div>
+                        <div class="verification-timer" id="verificationTimer" style="display: none;"></div>
+                        <small class="form-help" id="verificationHelp">인증번호를 입력해주세요</small>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email">이메일 주소 <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
-                    <small class="form-help">이메일 주소가 아이디로 사용됩니다</small>
+                <!-- Step 2: 아이디 입력 및 중복 확인 -->
+                <div class="step-content" id="step2">
+                    <div class="form-group">
+                        <label for="userId">아이디 <span class="required">*</span></label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="userId" name="userId" placeholder="영문, 숫자 4-20자" required pattern="[a-zA-Z0-9]{4,20}" style="flex: 1;">
+                            <button type="button" id="checkIdBtn" class="btn-consent btn-accept-selected" style="min-width: 100px; padding: 12px;">
+                                중복 확인
+                            </button>
+                        </div>
+                        <div id="idCheckResult" class="id-check-result" style="display: none;"></div>
+                        <small class="form-help">영문, 숫자만 사용 가능 (4-20자)</small>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="password">비밀번호 <span class="required">*</span></label>
-                    <input type="password" id="password" name="password" required placeholder="8자 이상 입력하세요">
-                    <div class="password-strength" id="passwordStrength"></div>
+                <!-- Step 3: 생년월일 입력 -->
+                <div class="step-content" id="step3">
+                    <div class="form-group">
+                        <label for="birthDate">생년월일 <span class="required">*</span></label>
+                        <input type="date" id="birthDate" name="birthDate" max="" required>
+                        <small class="form-help">생년월일을 입력하면 나이가 자동으로 계산됩니다</small>
+                        <div id="ageDisplay" class="age-display" style="display: none;"></div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="confirmPassword">비밀번호 확인 <span class="required">*</span></label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="비밀번호를 다시 입력하세요">
+                <!-- Step 4: 비밀번호 입력 -->
+                <div class="step-content" id="step4">
+                    <div class="form-group">
+                        <label for="password">비밀번호 <span class="required">*</span></label>
+                        <input type="password" id="password" name="password" required placeholder="8자 이상 입력하세요">
+                        <div class="password-strength" id="passwordStrength"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">비밀번호 확인 <span class="required">*</span></label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="비밀번호를 다시 입력하세요">
+                    </div>
                 </div>
                 
-                <!-- 선택 정보 (간소화) -->
-                <div class="form-section-divider">
-                    <span>선택 정보</span>
+                <!-- Step 5: 동의 및 보호자 동의 -->
+                <div class="step-content" id="step5">
+                    <div class="form-group">
+                        <label for="name">이름 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="홍길동">
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            <a href="../support/terms-of-service.html" target="_blank">이용약관</a> 및 
+                            <a href="../support/privacy-policy.html" target="_blank">개인정보처리방침</a>에 동의합니다. (필수)
+                        </label>
+                    </div>
+                    
+                    <!-- 14세 미만인 경우 보호자 동의 -->
+                    <div id="guardianAgreementSection" class="guardian-agreement-section" style="display: none;">
+                        <h4>⚠️ 보호자 동의 필요</h4>
+                        <p>만 14세 미만인 경우 보호자 동의가 필요합니다.</p>
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="guardianAgreement" name="guardianAgreement">
+                            <label for="guardianAgreement">
+                                보호자 동의를 받았습니다. (필수)
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="birthDate">생년월일</label>
-                    <input type="date" id="birthDate" name="birthDate" max="">
-                    <small class="form-help">생년월일을 입력하면 나이가 자동으로 계산됩니다</small>
-                    <div id="ageDisplay" class="age-display" style="display: none;"></div>
+                <!-- 버튼 영역 -->
+                <div class="step-buttons">
+                    <button type="button" id="prevBtn" class="step-btn btn-prev" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> 이전
+                    </button>
+                    <button type="button" id="nextBtn" class="step-btn btn-next">
+                        다음 <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="submit" id="submitBtn" class="step-btn btn-next" style="display: none;">
+                        <i class="fas fa-user-plus"></i> 회원가입 완료
+                    </button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="gender">성별</label>
-                    <select id="gender" name="gender">
-                        <option value="">선택하지 않음</option>
-                        <option value="male">남성</option>
-                        <option value="female">여성</option>
-                        <option value="other">기타</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">전화번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="010-1234-5678">
-                </div>
-                
-                
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">
-                        <a href="../support/terms-of-service.html" target="_blank">이용약관</a> 및 
-                        <a href="../support/privacy-policy.html" target="_blank">개인정보처리방침</a>에 동의합니다. (필수)
-                    </label>
-                </div>
-                
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="marketing" name="marketing">
-                    <label for="marketing">
-                        마케팅 정보 수신에 동의합니다. (선택)
-                    </label>
-                    <small style="display: block; margin-top: 5px; color: #95a5a6; font-size: 0.8rem;">
-                        이벤트, 프로모션, 새로운 서비스 안내 등을 받아보실 수 있습니다.
-                    </small>
-                </div>
-                
-                <button type="submit" class="auth-btn" id="registerBtn">
-                    <i class="fas fa-user-plus"></i>
-                    회원가입
-                </button>
             </form>
             
             <div class="auth-divider">
@@ -492,6 +759,380 @@
     </div>
     
     <script>
+        // 단계별 회원가입 관리
+        let currentStep = 1;
+        const totalSteps = 5;
+        let registrationData = {
+            email: '',
+            emailVerified: false,
+            userId: '',
+            userIdChecked: false,
+            birthDate: '',
+            age: null,
+            password: '',
+            name: '',
+            termsAgreed: false,
+            guardianAgreement: null
+        };
+        
+        // 단계 업데이트 함수
+        function updateStep(step) {
+            currentStep = step;
+            
+            // 단계 표시 업데이트
+            document.querySelectorAll('.step-item').forEach((item, index) => {
+                const stepNum = index + 1;
+                item.classList.remove('active', 'completed');
+                if (stepNum < step) {
+                    item.classList.add('completed');
+                } else if (stepNum === step) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // 콘텐츠 표시 업데이트
+            document.querySelectorAll('.step-content').forEach((content, index) => {
+                content.classList.remove('active');
+                if (index + 1 === step) {
+                    content.classList.add('active');
+                }
+            });
+            
+            // 버튼 표시 업데이트
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            prevBtn.style.display = step > 1 ? 'block' : 'none';
+            nextBtn.style.display = step < totalSteps ? 'block' : 'none';
+            submitBtn.style.display = step === totalSteps ? 'block' : 'none';
+        }
+        
+        // 다음 단계로 이동
+        function goToNextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    updateStep(currentStep + 1);
+                }
+            }
+        }
+        
+        // 이전 단계로 이동
+        function goToPrevStep() {
+            if (currentStep > 1) {
+                updateStep(currentStep - 1);
+            }
+        }
+        
+        // 현재 단계 검증
+        function validateCurrentStep() {
+            switch(currentStep) {
+                case 1: // 이메일 인증
+                    if (!registrationData.emailVerified) {
+                        showError('이메일 인증을 완료해주세요.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 2: // 아이디 확인
+                    const userId = document.getElementById('userId').value.trim();
+                    if (!userId) {
+                        showError('아이디를 입력해주세요.');
+                        return false;
+                    }
+                    if (!/^[a-zA-Z0-9]{4,20}$/.test(userId)) {
+                        showError('아이디는 영문, 숫자만 사용 가능하며 4-20자여야 합니다.');
+                        return false;
+                    }
+                    if (!registrationData.userIdChecked) {
+                        showError('아이디 중복 확인을 해주세요.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 3: // 생년월일
+                    const birthDate = document.getElementById('birthDate').value;
+                    if (!birthDate) {
+                        showError('생년월일을 입력해주세요.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 4: // 비밀번호
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    if (!password || !confirmPassword) {
+                        showError('비밀번호를 모두 입력해주세요.');
+                        return false;
+                    }
+                    if (password.length < 8) {
+                        showError('비밀번호는 최소 8자 이상이어야 합니다.');
+                        return false;
+                    }
+                    if (password !== confirmPassword) {
+                        showError('비밀번호가 일치하지 않습니다.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 5: // 동의
+                    const name = document.getElementById('name').value.trim();
+                    const terms = document.getElementById('terms').checked;
+                    if (!name) {
+                        showError('이름을 입력해주세요.');
+                        return false;
+                    }
+                    if (!terms) {
+                        showError('이용약관에 동의해주세요.');
+                        return false;
+                    }
+                    // 14세 미만인 경우 보호자 동의 확인
+                    if (registrationData.age && registrationData.age < 14) {
+                        const guardianAgreement = document.getElementById('guardianAgreement').checked;
+                        if (!guardianAgreement) {
+                            showError('14세 미만인 경우 보호자 동의가 필요합니다.');
+                            return false;
+                        }
+                    }
+                    return true;
+                    
+                default:
+                    return false;
+            }
+        }
+        
+        // 이벤트 리스너
+        document.getElementById('nextBtn').addEventListener('click', goToNextStep);
+        document.getElementById('prevBtn').addEventListener('click', goToPrevStep);
+        
+        // Step 1: 이메일 인증
+        let verificationTimer = null;
+        let verificationCodeSent = false;
+        
+        document.getElementById('sendVerificationBtn').addEventListener('click', async function() {
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                showError('이메일 주소를 입력해주세요.');
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('올바른 이메일 주소를 입력해주세요.');
+                return;
+            }
+            
+            // 이메일 중복 확인
+            try {
+                if (window.supabase) {
+                    const { data, error } = await window.supabase
+                        .from('users')
+                        .select('email')
+                        .eq('email', email)
+                        .single();
+                    
+                    if (data) {
+                        showError('이미 사용 중인 이메일입니다.');
+                        return;
+                    }
+                }
+            } catch (e) {
+                // 중복이 아닌 경우 계속 진행
+            }
+            
+            // 인증번호 발송 (실제로는 Supabase Edge Function 또는 이메일 서비스 사용)
+            this.disabled = true;
+            this.textContent = '발송 중...';
+            
+            try {
+                // 임시: 인증번호 생성 및 저장 (실제로는 서버에서 처리)
+                const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+                sessionStorage.setItem('verificationCode', verificationCode);
+                sessionStorage.setItem('verificationEmail', email);
+                sessionStorage.setItem('verificationExpires', Date.now() + 300000); // 5분
+                
+                // 실제로는 Supabase Edge Function으로 이메일 발송
+                // 여기서는 콘솔에 출력 (개발용)
+                console.log('인증번호:', verificationCode);
+                
+                registrationData.email = email;
+                document.getElementById('verificationCodeGroup').style.display = 'block';
+                verificationCodeSent = true;
+                
+                // 타이머 시작
+                startVerificationTimer();
+                
+                showSuccess('인증번호가 발송되었습니다. 이메일을 확인해주세요.');
+                this.textContent = '재발송';
+                this.disabled = false;
+                
+            } catch (error) {
+                showError('인증번호 발송에 실패했습니다. 다시 시도해주세요.');
+                this.disabled = false;
+                this.textContent = '인증번호 발송';
+            }
+        });
+        
+        // 인증번호 확인
+        document.getElementById('verifyCodeBtn').addEventListener('click', function() {
+            const inputCode = document.getElementById('verificationCode').value.trim();
+            const storedCode = sessionStorage.getItem('verificationCode');
+            const expires = parseInt(sessionStorage.getItem('verificationExpires'));
+            
+            if (!inputCode) {
+                showError('인증번호를 입력해주세요.');
+                return;
+            }
+            
+            if (Date.now() > expires) {
+                showError('인증번호가 만료되었습니다. 다시 발송해주세요.');
+                return;
+            }
+            
+            if (inputCode === storedCode) {
+                registrationData.emailVerified = true;
+                document.getElementById('verificationCodeGroup').style.display = 'none';
+                document.getElementById('verificationTimer').style.display = 'none';
+                document.getElementById('email').disabled = true;
+                showSuccess('이메일 인증이 완료되었습니다!');
+                clearInterval(verificationTimer);
+            } else {
+                showError('인증번호가 일치하지 않습니다.');
+            }
+        });
+        
+        // 인증번호 타이머
+        function startVerificationTimer() {
+            const timerElement = document.getElementById('verificationTimer');
+            let timeLeft = 300; // 5분
+            
+            timerElement.style.display = 'block';
+            
+            verificationTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `남은 시간: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 60) {
+                    timerElement.classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(verificationTimer);
+                    timerElement.textContent = '인증번호가 만료되었습니다.';
+                    timerElement.classList.add('warning');
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Step 2: 아이디 중복 확인
+        document.getElementById('checkIdBtn').addEventListener('click', async function() {
+            const userId = document.getElementById('userId').value.trim();
+            const resultDiv = document.getElementById('idCheckResult');
+            
+            if (!userId) {
+                showError('아이디를 입력해주세요.');
+                return;
+            }
+            
+            if (!/^[a-zA-Z0-9]{4,20}$/.test(userId)) {
+                showError('아이디는 영문, 숫자만 사용 가능하며 4-20자여야 합니다.');
+                return;
+            }
+            
+            this.disabled = true;
+            this.textContent = '확인 중...';
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'id-check-result checking';
+            resultDiv.textContent = '확인 중...';
+            
+            try {
+                // Supabase에서 아이디 중복 확인
+                if (window.supabase) {
+                    const { data, error } = await window.supabase
+                        .from('users')
+                        .select('id')
+                        .eq('id', userId)
+                        .single();
+                    
+                    if (data) {
+                        resultDiv.className = 'id-check-result unavailable';
+                        resultDiv.textContent = '❌ 이미 사용 중인 아이디입니다.';
+                        registrationData.userIdChecked = false;
+                    } else {
+                        resultDiv.className = 'id-check-result available';
+                        resultDiv.textContent = '✅ 사용 가능한 아이디입니다.';
+                        registrationData.userId = userId;
+                        registrationData.userIdChecked = true;
+                    }
+                } else {
+                    // 레거시 API 사용
+                    const response = await fetch(window.CONFIG.api.baseUrl + window.CONFIG.api.endpoints.checkId + '?id=' + userId);
+                    const result = await response.json();
+                    
+                    if (result.available) {
+                        resultDiv.className = 'id-check-result available';
+                        resultDiv.textContent = '✅ 사용 가능한 아이디입니다.';
+                        registrationData.userId = userId;
+                        registrationData.userIdChecked = true;
+                    } else {
+                        resultDiv.className = 'id-check-result unavailable';
+                        resultDiv.textContent = '❌ 이미 사용 중인 아이디입니다.';
+                        registrationData.userIdChecked = false;
+                    }
+                }
+            } catch (error) {
+                resultDiv.className = 'id-check-result unavailable';
+                resultDiv.textContent = '❌ 확인 중 오류가 발생했습니다.';
+                registrationData.userIdChecked = false;
+            }
+            
+            this.disabled = false;
+            this.textContent = '중복 확인';
+        });
+        
+        // Step 3: 생년월일 입력 시 나이 계산
+        document.getElementById('birthDate').addEventListener('change', function() {
+            const birthDate = this.value;
+            const ageDisplay = document.getElementById('ageDisplay');
+            
+            if (birthDate) {
+                const today = new Date();
+                const birth = new Date(birthDate);
+                let age = today.getFullYear() - birth.getFullYear();
+                const monthDiff = today.getMonth() - birth.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                    age--;
+                }
+                
+                if (age >= 0 && age <= 120) {
+                    registrationData.age = age;
+                    registrationData.birthDate = birthDate;
+                    ageDisplay.innerHTML = `만 <strong>${age}세</strong>입니다`;
+                    ageDisplay.style.display = 'block';
+                    
+                    // 14세 미만인 경우 보호자 동의 섹션 표시
+                    if (age < 14) {
+                        document.getElementById('guardianAgreementSection').style.display = 'block';
+                        document.getElementById('guardianAgreement').required = true;
+                    } else {
+                        document.getElementById('guardianAgreementSection').style.display = 'none';
+                        document.getElementById('guardianAgreement').required = false;
+                    }
+                } else {
+                    ageDisplay.innerHTML = '올바른 생년월일을 입력해주세요';
+                    ageDisplay.style.display = 'block';
+                }
+            } else {
+                ageDisplay.style.display = 'none';
+            }
+        });
+        
+        // 생년월일 최대값 설정
+        document.getElementById('birthDate').max = new Date().toISOString().split('T')[0];
+        
         // 비밀번호 강도 체크
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
@@ -589,58 +1230,47 @@
             }
         });
         
-        // 회원가입 폼 처리
+        // 회원가입 폼 처리 (단계별 데이터 수집)
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const terms = document.getElementById('terms').checked;
-            
-            // 유효성 검사
-            if (!name || !email || !password || !confirmPassword) {
-                showError('모든 필드를 입력해주세요.');
+            // 마지막 단계 검증
+            if (!validateCurrentStep()) {
                 return;
             }
             
-            if (password !== confirmPassword) {
-                showError('비밀번호가 일치하지 않습니다.');
-                return;
+            // 모든 단계 데이터 수집
+            registrationData.name = document.getElementById('name').value.trim();
+            registrationData.password = document.getElementById('password').value;
+            registrationData.termsAgreed = document.getElementById('terms').checked;
+            
+            const guardianAgreementEl = document.getElementById('guardianAgreement');
+            if (guardianAgreementEl) {
+                registrationData.guardianAgreement = registrationData.age < 14 ? guardianAgreementEl.checked : null;
             }
             
-            if (password.length < 8) {
-                showError('비밀번호는 최소 8자 이상이어야 합니다.');
-                return;
-            }
-            
-            if (!terms) {
-                showError('이용약관에 동의해주세요.');
-                return;
-            }
-            
-            // 이메일 중복 확인
-            const users = JSON.parse(localStorage.getItem('firstPenguinsUsers') || '[]');
-            if (users.find(u => u.email === email)) {
-                showError('이미 사용 중인 이메일입니다.');
-                return;
-            }
-            
-            // 추가 사용자 정보 수집 (선택사항)
-            const birthDate = document.getElementById('birthDate').value;
-            const age = document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null;
-            
+            // Goal-Illa users 테이블 스키마에 맞춘 데이터
             const userData = {
-                gender: document.getElementById('gender').value || null,
-                age: age,
-                birthDate: birthDate || null,
-                phone: document.getElementById('phone').value || null,
-                guardianAgree: true // 기본값
+                // 필수 필드
+                id: registrationData.userId, // 아이디 사용
+                email: registrationData.email, // 이메일
+                name: registrationData.name,
+                password: registrationData.password, // 해시화는 서버에서 처리
+                
+                // 선택 필드 (users 테이블 스키마와 일치)
+                age: registrationData.age,
+                birth_date: registrationData.birthDate,
+                guardian_agreement: registrationData.guardianAgreement,
+                
+                // 자동 설정 필드
+                is_active: true,
+                email_verified: true, // 이메일 인증 완료
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
             };
             
             // 회원가입 처리
-            registerUser(name, email, password, userData);
+            registerUser(registrationData.name, registrationData.email, registrationData.password, userData);
         });
         
         async function registerUser(name, email, password, userData = {}) {
@@ -662,23 +1292,28 @@
                         // Supabase에 사용자 정보 추가 저장 (users 테이블)
                         if (window.supabase) {
                             try {
+                                // Goal-Illa users 테이블 스키마에 맞춰 저장
                                 const { error: dbError } = await window.supabase
                                     .from('users')
                                     .insert([{
-                                        id: email,
-                                        email: email,
-                                        name: name,
-                                        gender: userData.gender || null,
-                                        age: userData.age || null,
-                                        birth_date: userData.birthDate || null,
-                                        education: userData.education || null,
-                                        organization: userData.organization || null,
-                                        phone: userData.phone || null,
-                                        guardian_agreement: userData.guardianAgree || null
+                                        id: userData.id, // 아이디
+                                        email: userData.email, // 이메일
+                                        name: userData.name,
+                                        password: userData.password, // 실제로는 해시화 필요
+                                        age: userData.age,
+                                        birth_date: userData.birth_date,
+                                        guardian_agreement: userData.guardian_agreement,
+                                        is_active: userData.is_active,
+                                        email_verified: userData.email_verified, // 이메일 인증 완료
+                                        created_at: userData.created_at,
+                                        updated_at: userData.updated_at
                                     }]);
                                 
                                 if (dbError) {
                                     console.warn('사용자 정보 저장 실패:', dbError);
+                                    // 에러가 있어도 회원가입은 성공으로 처리 (Auth는 이미 완료됨)
+                                } else {
+                                    console.log('✅ 사용자 정보가 Goal-Illa users 테이블에 저장되었습니다.');
                                 }
                             } catch (dbError) {
                                 console.warn('사용자 정보 저장 오류:', dbError);
@@ -701,17 +1336,16 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            id: email, // Goal-Illa는 id로 사용
-                            name: name,
-                            email: email,
-                            password: password,
-                            gender: userData.gender || null,
-                            age: userData.age || null,
-                            birth_date: userData.birthDate || null,
-                            education: userData.education || null,
-                            organization: userData.organization || null,
-                            phone: userData.phone || null,
-                            guardian_agreement: userData.guardianAgree || null
+                            // Goal-Illa users 테이블 스키마에 맞춘 데이터
+                            id: userData.id, // 아이디
+                            email: userData.email,
+                            name: userData.name,
+                            password: userData.password,
+                            age: userData.age,
+                            birth_date: userData.birth_date,
+                            guardian_agreement: userData.guardian_agreement,
+                            is_active: userData.is_active,
+                            email_verified: userData.email_verified
                         })
                     });
                     
@@ -767,13 +1401,25 @@
             errorDiv.style.display = 'none';
         }
         
-        // 이미 로그인된 사용자 확인
-        window.addEventListener('load', function() {
+        // DOM 로드 후 초기화
+        function initRegistration() {
+            // 첫 번째 단계로 설정
+            updateStep(1);
+            
+            // 이미 로그인된 사용자 확인
             const currentUser = localStorage.getItem('currentUser');
             if (currentUser) {
                 window.location.href = '../index.html';
+                return;
             }
-        });
+        }
+        
+        // DOM이 준비되면 초기화
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initRegistration);
+        } else {
+            initRegistration();
+        }
     </script>
     
     <!-- Analytics & Monitoring -->

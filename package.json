@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'Static site - no build needed'",
-    "start": "echo 'Static site - no start needed'"
+    "start": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000 || npx http-server -p 8000 -o",
+    "dev": "./start-dev.sh",
+    "preview": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000 || npx http-server -p 8000 -o"
   },
   "keywords": [
     "first-penguins",
