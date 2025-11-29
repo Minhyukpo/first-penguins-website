@@ -1,0 +1,4 @@
+# ads.txt file for firstpgs.com
+# Google AdSense
+google.com, ca-pub-7060906189338370, DIRECT, f08c47fec0942fa0
+
