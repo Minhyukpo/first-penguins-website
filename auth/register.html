@@ -14,20 +14,18 @@
     <style>
         /* 로고 스타일 */
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
+            background: #e0f2fe;
+            border-radius: 10px;
+            transition: all 0.2s ease;
         }
 
         .logo-icon:hover {
-            transform: rotate(5deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: #bae6fd;
         }
 
         .penguin-icon {
@@ -46,50 +44,56 @@
         }
 
         .logo-main {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
             line-height: 1.2;
         }
-
+        
         .logo-sub {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            font-weight: 500;
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 400;
         }
 
         .auth-container {
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
+            background: #f8f9fa;
+            padding: 40px 20px;
         }
         
         .auth-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 12px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             width: 100%;
-            max-width: 450px;
-            text-align: center;
+            max-width: 600px;
+            text-align: left;
+            border: 1px solid #e9ecef;
         }
         
         .auth-logo {
             margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .auth-logo h2 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 10px;
+            color: #1e293b;
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 600;
         }
         
         .auth-logo p {
-            color: #7f8c8d;
-            font-size: 0.9rem;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 8px 0 0 0;
         }
         
         .form-group {
@@ -100,31 +104,38 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #2c3e50;
+            color: #1e293b;
             font-weight: 500;
+            font-size: 0.95rem;
         }
         
         .form-help {
             display: block;
-            margin-top: 4px;
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            font-style: italic;
+            margin-top: 6px;
+            font-size: 0.875rem;
+            color: #64748b;
         }
         
-        .form-group input {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
             box-sizing: border-box;
+            background: #ffffff;
+            color: #1e293b;
         }
         
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
         .form-group input.error {
@@ -144,28 +155,42 @@
         .strength-medium { color: #f39c12; }
         .strength-strong { color: #27ae60; }
         
-        .auth-btn {
+        .auth-btn,
+        .step-btn.btn-next,
+        .step-btn.btn-prev {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 12px 24px;
+            background: #1e293b;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.2s ease;
             margin-bottom: 20px;
         }
         
-        .auth-btn:hover {
-            transform: translateY(-2px);
+        .auth-btn:hover,
+        .step-btn.btn-next:hover {
+            background: #334155;
         }
         
-        .auth-btn:disabled {
-            background: #bdc3c7;
+        .step-btn.btn-prev {
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .step-btn.btn-prev:hover {
+            background: #f8f9fa;
+            border-color: #cbd5e1;
+        }
+        
+        .auth-btn:disabled,
+        .step-btn.btn-next:disabled {
+            background: #cbd5e1;
             cursor: not-allowed;
-            transform: none;
         }
         
         .auth-divider {
@@ -237,37 +262,39 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            color: white;
+            color: #64748b;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: opacity 0.3s ease;
+            transition: color 0.2s ease;
         }
         
         .back-home:hover {
-            opacity: 0.8;
+            color: #1e293b;
         }
         
         .error-message {
-            background: #fee;
-            color: #c33;
-            padding: 10px;
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 12px 16px;
             border-radius: 8px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             display: none;
+            border: 1px solid #fecaca;
         }
         
         .success-message {
-            background: #efe;
-            color: #3c3;
-            padding: 10px;
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 12px 16px;
             border-radius: 8px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             display: none;
+            border: 1px solid #bbf7d0;
         }
         
         .terms-checkbox {
@@ -284,13 +311,13 @@
         }
         
         .terms-checkbox label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            line-height: 1.4;
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
         }
         
         .terms-checkbox a {
-            color: #667eea;
+            color: #3b82f6;
             text-decoration: none;
         }
         
@@ -386,12 +413,12 @@
         }
         
         .step-item.active .step-number {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #3b82f6;
             color: white;
         }
         
         .step-item.completed .step-number {
-            background: #27ae60;
+            background: #10b981;
             color: white;
         }
         
@@ -401,14 +428,14 @@
         }
         
         .step-label {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            font-weight: 500;
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 400;
         }
         
         .step-item.active .step-label {
-            color: #667eea;
-            font-weight: 600;
+            color: #1e293b;
+            font-weight: 500;
         }
         
         .step-content {
@@ -528,26 +555,25 @@
         }
         
         .btn-consent {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #1e293b;
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .btn-consent:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            background: #334155;
         }
         
         .btn-consent:disabled {
-            background: #bdc3c7;
+            background: #cbd5e1;
             cursor: not-allowed;
-            transform: none;
         }
         
         select {
@@ -569,7 +595,8 @@
         
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
         @media (max-width: 480px) {
@@ -594,13 +621,18 @@
         <div class="auth-card">
             <div class="auth-logo">
                 <div class="logo-icon">
-                    <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                    <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo" style="width: 32px; height: 32px; object-fit: contain;">
                 </div>
-                <div class="logo-text">
-                    <span class="logo-main">First-Penguins</span>
-                    <span class="logo-sub">혁신적인 모바일 앱</span>
+                <div style="flex: 1;">
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                    </div>
                 </div>
-                <p>새로운 계정을 만들어보세요</p>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <h1 style="font-size: 1.75rem; font-weight: 600; color: #1e293b; margin: 0 0 8px 0;">회원가입</h1>
+                <p style="font-size: 0.95rem; color: #64748b; margin: 0;">새로운 계정을 만들어보세요</p>
             </div>
             
             <div class="error-message" id="errorMessage"></div>
