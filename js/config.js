@@ -76,9 +76,16 @@ const CONFIG = {
     // 외부 서비스
     external: {
         googleAnalytics: {
-            enabled: false, // 필요시 true로 변경
-            measurementId: 'GA_MEASUREMENT_ID' // 실제 ID로 교체
+            enabled: false, // Google Analytics 활성화하려면 true로 변경하고 measurementId 설정
+            measurementId: 'GA_MEASUREMENT_ID' // 실제 GA4 Measurement ID로 교체 (예: G-XXXXXXXXXX)
         },
+        sentry: {
+            enabled: false, // Sentry 에러 로깅 활성화하려면 true로 변경하고 dsn 설정
+            dsn: 'SENTRY_DSN' // 실제 Sentry DSN으로 교체 (예: https://xxx@xxx.ingest.sentry.io/xxx)
+        },
+        vercelAnalytics: {
+            enabled: true // Vercel Analytics 활성화 (프로덕션 환경에서만 작동)
+        }
     }
 };
 
