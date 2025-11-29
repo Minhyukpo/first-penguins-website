@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .auth-logo {
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .auth-logo p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-help {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .auth-divider {
+            margin: 30px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+        
+        .auth-divider span {
+            background: white;
+            padding: 0 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        
+        .social-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .auth-links {
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin: 0 10px;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-home:hover {
+            opacity: 0.8;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i>
+        홈으로 돌아가기
+    </a>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">First-Penguins</span>
+                    <span class="logo-sub">혁신적인 모바일 앱</span>
+                </div>
+                <p>로그인하여 더 많은 기능을 이용하세요</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">아이디 또는 이메일</label>
+                    <input type="text" id="email" name="email" placeholder="아이디 또는 이메일을 입력하세요" required>
+                    <small class="form-help">회원가입 시 사용한 이메일 주소를 입력하세요</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    로그인
+                </button>
+            </form>
+            
+            <div class="auth-divider">
+                <span>또는</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn" onclick="loginWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button class="social-btn" onclick="loginWithApple()">
+                    <i class="fab fa-apple"></i>
+                    Apple
+                </button>
+            </div>
+            
+            <div class="auth-links">
+                <a href="register.html">회원가입</a>
+                <a href="forgot-password.html">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 로그인 폼 처리
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // 간단한 유효성 검사
+            if (!email || !password) {
+                showError('아이디(또는 이메일)와 비밀번호를 입력해주세요.');
+                return;
+            }
+            
+            // 로그인 시도 (실제 구현에서는 서버로 전송)
+            attemptLogin(email, password);
+        });
+        
+        async function attemptLogin(email, password) {
+            try {
+                // 데이터베이스에서 관리자 계정 체크
+                if (window.db) {
+                    const adminInfo = window.db.authenticateAdmin(email, password);
+                    if (adminInfo) {
+                        // 관리자 로그인 성공
+                        localStorage.setItem('authToken', 'admin_token_' + Date.now());
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            id: adminInfo.id,
+                            email: adminInfo.email,
+                            name: adminInfo.name,
+                            role: adminInfo.role,
+                            profileImageUrl: null
+                        }));
+                        
+                        showSuccess('관리자 로그인 성공! 홈페이지로 이동합니다.');
+                        
+                        setTimeout(() => {
+                            window.location.href = '../index.html';
+                        }, 1500);
+                        return;
+                    }
+                } else {
+                    // 데이터베이스가 없는 경우 기존 방식 사용
+                    if (email === 'goalilla' && password === 'goalilla23') {
+                        localStorage.setItem('authToken', 'admin_token_' + Date.now());
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            id: 'goalilla',
+                            email: 'goalilla',
+                            name: '관리자',
+                            role: 'admin',
+                            profileImageUrl: null
+                        }));
+                        
+                        showSuccess('관리자 로그인 성공! 홈페이지로 이동합니다.');
+                        
+                        setTimeout(() => {
+                            window.location.href = '../index.html';
+                        }, 1500);
+                        return;
+                    }
+                }
+                
+                // Supabase 또는 Goal-Illa API로 로그인 시도
+                if (window.CompanyWebsiteAPI && window.CONFIG?.supabase?.enabled !== false) {
+                    // Supabase Auth 사용
+                    const data = await window.CompanyWebsiteAPI.login(email, password);
+                    
+                    if (data.success) {
+                        showSuccess('로그인 성공! 홈페이지로 이동합니다.');
+                        
+                        setTimeout(() => {
+                            window.location.href = '../index.html';
+                        }, 1500);
+                    } else {
+                        showError(data.message || '로그인에 실패했습니다.');
+                    }
+                } else {
+                    // 레거시 API 사용
+                    const response = await fetch(window.CONFIG.api.baseUrl + '/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id: email, // Goal-Illa는 id로 로그인
+                            password: password
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // 로그인 성공
+                        localStorage.setItem('authToken', data.token);
+                        localStorage.setItem('refreshToken', data.refreshToken);
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            id: data.user.id,
+                            email: data.user.email,
+                            name: data.user.id, // Goal-Illa는 id를 이름으로 사용
+                            profileImageUrl: data.user.profileImageUrl
+                        }));
+                        
+                        showSuccess('로그인 성공! 홈페이지로 이동합니다.');
+                        
+                        setTimeout(() => {
+                            window.location.href = '../index.html';
+                        }, 1500);
+                    } else {
+                        showError(data.message || '로그인에 실패했습니다.');
+                    }
+                }
+            } catch (error) {
+                console.error('로그인 오류:', error);
+                showError('서버 연결 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+        
+        function loginWithGoogle() {
+            // Google OAuth 구현
+            showError('Google 로그인은 준비 중입니다. 곧 출시될 예정입니다!');
+        }
+        
+        function loginWithApple() {
+            // Apple ID 로그인 구현
+            showError('Apple 로그인은 준비 중입니다. 곧 출시될 예정입니다!');
+        }
+        
+        // 자동 로그인 기능
+        function checkAutoLogin() {
+            const rememberMe = localStorage.getItem('rememberMe');
+            const savedCredentials = localStorage.getItem('savedCredentials');
+            
+            if (rememberMe === 'true' && savedCredentials) {
+                const credentials = JSON.parse(savedCredentials);
+                document.getElementById('email').value = credentials.email;
+                document.getElementById('password').value = credentials.password;
+                
+                // 자동 로그인 체크박스 표시
+                const rememberCheckbox = document.createElement('div');
+                rememberCheckbox.innerHTML = `
+                    <label style="display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        <input type="checkbox" id="rememberMe" checked> 로그인 상태 유지
+                    </label>
+                `;
+                document.querySelector('.form-group:last-of-type').appendChild(rememberCheckbox);
+            }
+        }
+        
+        // 로그인 상태 유지 기능
+        function handleRememberMe() {
+            const rememberCheckbox = document.getElementById('rememberMe');
+            if (rememberCheckbox && rememberCheckbox.checked) {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedCredentials', JSON.stringify({ email, password }));
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedCredentials');
+            }
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+        }
+        
+        // 이미 로그인된 사용자 확인
+        window.addEventListener('load', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                window.location.href = '../index.html';
+            }
+        });
+    </script>
+    
+    <!-- Supabase 및 API 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/company-website-api.js"></script>
+</body>
+</html>
+

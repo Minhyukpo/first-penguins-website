@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용약관 | First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .terms-hero {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .terms-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .terms-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .terms-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .terms-content h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .terms-content h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 30px 0 15px 0;
+        }
+        
+        .terms-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .terms-content ul {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .terms-content li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .important-notice {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .important-notice h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .important-notice p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <div class="logo-icon">
+                        <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#business" class="nav-link">사업 영역</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#philosophy" class="nav-link">기업 철학</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="announcements.html" class="nav-link">공지사항</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Terms of Service Hero Section -->
+    <section class="terms-hero">
+        <div class="container">
+            <h1>이용약관</h1>
+            <p>First-Penguins 서비스 이용약관을 확인해주세요.</p>
+        </div>
+    </section>
+
+    <!-- Terms of Service Content -->
+    <section class="terms-section">
+        <div class="terms-content">
+            <div class="highlight-box">
+                <p><strong>시행일자:</strong> 2024년 9월 8일</p>
+                <p><strong>최종 수정일:</strong> 2024년 9월 8일</p>
+            </div>
+
+            <h2>제1조 (목적)</h2>
+            <p>이 약관은 First-Penguins(이하 "회사"라 합니다)가 운영하는 웹사이트 및 Goal-Illa 애플리케이션, 기타 플랫폼(이하 "서비스"라 합니다)을 이용함에 있어 회사와 이용자 간의 권리ㆍ의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+
+            <h2>제2조 (정의)</h2>
+            <p>이 약관에서 사용하는 용어의 정의는 다음과 같습니다:</p>
+            <ul>
+                <li><strong>"서비스"</strong>란 회사가 제공하는 웹사이트, Goal-Illa 애플리케이션 및 기타 관련 플랫폼을 통하여 구현되는 목표 관리, 학습 추적, 데이터 분석 및 공유 기능 등 First-Penguins 고유의 기능을 포함한 제반 서비스를 의미합니다.</li>
+                <li><strong>"이용자"</strong>란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 자를 말하며, 회원과 비회원을 포함합니다.</li>
+                <li><strong>"회원"</strong>이란 회사에 개인정보를 제공하고 본 약관에 동의하여 회원 등록을 한 자로서, 회사가 제공하는 서비스를 지속적으로 이용할 수 있는 자를 말합니다.</li>
+                <li><strong>"콘텐츠"</strong>란 이용자가 서비스 이용 중 업로드하거나 생성한 목표, 계획, 자료, 실천 이력, 커뮤니티 게시물 등 일체의 정보 및 데이터를 말합니다.</li>
+                <li><strong>"계정"</strong>이란 회원이 서비스 이용을 위하여 설정한 이메일 주소 및 비밀번호 등의 조합을 말합니다.</li>
+            </ul>
+
+            <h2>제3조 (약관 등의 명시와 설명 및 개정)</h2>
+            <p>회사는 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지 주소, 전화번호, 모사전송번호, 전자우편주소, 사업자등록번호, 통신판매업 신고번호, 개인정보보호책임자 등을 이용자가 쉽게 알 수 있도록 서비스 초기 화면에 게시합니다.</p>
+
+            <h2>제4조 (서비스의 제공 및 변경)</h2>
+            <p>회사는 다음과 같은 업무를 수행합니다:</p>
+            <ul>
+                <li>웹사이트 운영 및 관리</li>
+                <li>Goal-Illa 애플리케이션 서비스 제공</li>
+                <li>사용자 계정 관리 및 인증</li>
+                <li>목표 관리 및 추적 서비스</li>
+                <li>데이터 분석 및 통계 제공</li>
+                <li>고객 지원 및 문의 응답</li>
+            </ul>
+
+            <h2>제5조 (서비스의 중단)</h2>
+            <p>회사는 컴퓨터 등 정보통신설비의 보수점검ㆍ교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.</p>
+
+            <h2>제6조 (회원가입)</h2>
+            <p>회원가입은 이용자가 약관의 내용에 대하여 동의를 하고 회원가입신청을 한 후 회사가 이러한 신청에 대하여 승낙함으로써 체결됩니다.</p>
+
+            <h2>제7조 (회원 탈퇴 및 자격 상실 등)</h2>
+            <p>회원은 회사에 언제든지 탈퇴를 요청할 수 있으며 회사는 즉시 회원탈퇴를 처리합니다. 회원이 다음 각호의 사유에 해당하는 경우, 회사는 회원자격을 제한 및 정지시킬 수 있습니다:</p>
+            <ul>
+                <li>가입 신청 시에 허위 내용을 등록한 경우</li>
+                <li>서비스를 이용하여 구매한 재화 등의 대금, 기타 서비스 이용에 관련하여 회원이 부담하는 채무를 기일에 지급하지 않는 경우</li>
+                <li>다른 사람의 서비스 이용을 방해하거나 그 정보를 도용하는 등 전자상거래 질서를 위협하는 경우</li>
+                <li>서비스를 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는 행위를 하는 경우</li>
+            </ul>
+
+            <h2>제8조 (회원에 대한 통지)</h2>
+            <p>회사가 회원에 대한 통지를 하는 경우, 회원이 회사와 미리 약정하여 지정한 전자우편 주소로 할 수 있습니다.</p>
+
+            <h2>제9조 (개인정보보호)</h2>
+            <p>회사는 이용자의 개인정보 수집시 서비스제공을 위하여 필요한 범위에서 최소한의 개인정보를 수집합니다. 회사는 개인정보처리방침을 별도로 제정하여 이를 공지하고 준수합니다.</p>
+
+            <h2>제10조 (회사의 의무)</h2>
+            <p>회사는 법령과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에 따라 지속적이고, 안정적으로 서비스를 제공하는데 최선을 다하여야 합니다.</p>
+
+            <h2>제11조 (회원의 ID 및 비밀번호에 대한 의무)</h2>
+            <p>회원은 자신의 ID 및 비밀번호를 제3자에게 이용하게 해서는 안됩니다. 회원이 자신의 ID 및 비밀번호를 도난당하거나 제3자가 사용하고 있음을 인지한 경우에는 바로 회사에 통보하고 회사의 안내가 있는 경우에는 그에 따라야 합니다.</p>
+
+            <h2>제12조 (이용자의 의무)</h2>
+            <p>이용자는 다음 행위를 하여서는 안됩니다:</p>
+            <ul>
+                <li>신청 또는 변경시 허위 내용의 등록</li>
+                <li>타인의 정보 도용</li>
+                <li>회사가 게시한 정보의 변경</li>
+                <li>회사가 정한 정보 이외의 정보(컴퓨터 프로그램 등) 등의 송신 또는 게시</li>
+                <li>회사 기타 제3자의 저작권 등 지적재산권에 대한 침해</li>
+                <li>회사 기타 제3자의 명예를 손상시키거나 업무를 방해하는 행위</li>
+                <li>외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 서비스에 공개 또는 게시하는 행위</li>
+            </ul>
+
+            <h2>제13조 (저작권의 귀속 및 이용제한)</h2>
+            <p>회사가 작성한 저작물에 대한 저작권 기타 지적재산권은 회사에 귀속합니다. 이용자는 서비스를 이용함으로써 얻은 정보 중 회사에게 지적재산권이 귀속된 정보를 회사의 사전 승낙 없이 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리목적으로 이용하거나 제3자에게 이용하게 하여서는 안됩니다.</p>
+
+            <h2>제14조 (분쟁해결)</h2>
+            <p>회사는 이용자가 제기하는 정당한 의견이나 불만을 반영하고 그 피해를 보상처리하기 위하여 피해보상처리기구를 설치ㆍ운영합니다.</p>
+
+            <h2>제15조 (재판권 및 준거법)</h2>
+            <p>서비스 이용으로 발생한 분쟁에 대해 소송이 제기되는 경우 회사의 본사 소재지를 관할하는 법원을 전속 관할 법원으로 합니다.</p>
+
+            <div class="important-notice">
+                <h3>⚠️ 중요 안내</h3>
+                <p>이 약관은 2024년 9월 8일부터 시행됩니다.</p>
+                <p>약관의 변경이 있을 경우 웹사이트를 통해 공지하며, 중요한 변경사항은 이메일로 별도 안내드립니다.</p>
+                <p>서비스 이용 중 궁금한 사항이 있으시면 언제든지 문의해주세요.</p>
+            </div>
+
+            <h2>연락처</h2>
+            <div class="highlight-box">
+                <p><strong>회사명:</strong> First-Penguins</p>
+                <p><strong>이메일:</strong> goalillaoffice@gmail.com</p>
+                <p><strong>웹사이트:</strong> First-Penguins</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐧 First-Penguins</h3>
+                    <p>새로운 영역을 개척하는 혁신 기업</p>
+                </div>
+                <div class="footer-section">
+                    <h4>사업 영역</h4>
+                    <ul>
+                        <li><a href="../index.html#business">교육 기술</a></li>
+                        <li><a href="../index.html#business">혁신 기술</a></li>
+                        <li><a href="../index.html#business">사회적 가치</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="announcements.html">공지사항</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>법적 고지</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+                        <li><a href="terms-of-service.html">이용약관</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 goalillaoffice@gmail.com</p>
+                    <p>🌐 First-Penguins</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 First-Penguins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://firstpgs.com/sitemap.xml
+
+# Disallow private areas
+Disallow: /auth/
+Disallow: /dashboard/
+
+# Allow main pages
+Allow: /
+Allow: /apps/
+Allow: /support/
+Allow: /careers.html
+Allow: /support/announcements.html
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+

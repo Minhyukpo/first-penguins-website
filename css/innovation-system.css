@@ -1,0 +1,579 @@
+/* First-Penguins 혁신 시스템 스타일 */
+
+/* 배지 시스템 */
+.badge-system {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    color: white;
+}
+
+.badge-collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.badge-item.earned {
+    background: rgba(46, 204, 113, 0.2);
+    border: 2px solid #2ecc71;
+}
+
+.badge-item.locked {
+    background: rgba(149, 165, 166, 0.2);
+    border: 2px solid #95a5a6;
+    opacity: 0.7;
+}
+
+.badge-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.badge-icon {
+    font-size: 3rem;
+    margin-right: 1.5rem;
+    min-width: 60px;
+}
+
+.badge-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.badge-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* 월간 챔피언 */
+.monthly-champion {
+    margin: 2rem 0;
+}
+
+.champion-card {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+}
+
+.champion-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.champion-avatar {
+    font-size: 4rem;
+    margin-right: 2rem;
+}
+
+.champion-details h4 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.champion-details p {
+    margin: 0.25rem 0;
+    opacity: 0.9;
+}
+
+.champion-rewards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.reward-item {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    font-size: 0.9rem;
+}
+
+/* 로열티 시스템 */
+.royalty-system {
+    margin: 2rem 0;
+}
+
+.royalty-dashboard {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+}
+
+.royalty-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.royalty-stats .stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.royalty-history {
+    margin-top: 2rem;
+}
+
+.royalty-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.royalty-amount {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+
+/* 월간 챌린지 */
+.monthly-challenges {
+    margin: 2rem 0;
+}
+
+.challenge-card {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);
+}
+
+.challenge-reward {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+}
+
+.reward-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+/* 스토리텔링 */
+.storytelling-system {
+    margin: 2rem 0;
+}
+
+.storytelling-dashboard {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.story-contests {
+    margin: 2rem 0;
+}
+
+.contest-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.contest-prize {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: white;
+    border-radius: 20px;
+}
+
+.prize-amount {
+    font-weight: 700;
+}
+
+/* 크라우드소싱 */
+.crowdsourcing-system {
+    margin: 2rem 0;
+}
+
+.crowdsourcing-dashboard {
+    background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.crowdsourcing-problems {
+    margin: 2rem 0;
+}
+
+.problem-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.problem-meta {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.problem-reward {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.problem-solver-count {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* 창의적 보상 */
+.creative-rewards {
+    margin: 2rem 0;
+}
+
+.creative-rewards-dashboard {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+}
+
+.honorary-positions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.position-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.position-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.position-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.position-benefits li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.position-benefits li:last-child {
+    border-bottom: none;
+}
+
+/* Discord 통합 */
+.discord-integration {
+    margin: 2rem 0;
+}
+
+.discord-dashboard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+}
+
+.discord-channels {
+    margin: 2rem 0;
+}
+
+.channel-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.btn-discord {
+    background: #5865f2;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-discord:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+}
+
+/* 프랜차이즈 시스템 */
+.franchise-system {
+    margin: 2rem 0;
+}
+
+.franchise-dashboard {
+    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.franchise-programs {
+    margin: 2rem 0;
+}
+
+.program-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.program-card ul {
+    margin: 1.5rem 0;
+}
+
+.program-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.program-card li:last-child {
+    border-bottom: none;
+}
+
+/* 인큐베이터 */
+.incubator-system {
+    margin: 2rem 0;
+}
+
+.incubator-dashboard {
+    background: linear-gradient(135deg, #a8caba 0%, #5d4e75 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+}
+
+.incubator-projects {
+    margin: 2rem 0;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.project-meta {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.project-stage {
+    color: #f39c12;
+    font-weight: 600;
+}
+
+.project-funding {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+/* 앱 스토어 */
+.app-store {
+    margin: 2rem 0;
+}
+
+.app-store-dashboard {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.solution-apps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.app-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.app-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.app-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.app-price {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.app-rating {
+    color: #f39c12;
+    font-weight: 600;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .badge-collection {
+        grid-template-columns: 1fr;
+    }
+    
+    .champion-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .champion-avatar {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .champion-rewards {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .royalty-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .honorary-positions,
+    .solution-apps {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 애니메이션 */
+@keyframes badgeGlow {
+    0% { box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
+}
+
+.badge-item.earned {
+    animation: badgeGlow 2s ease-in-out infinite;
+}
+
+@keyframes championPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.champion-card {
+    animation: championPulse 3s ease-in-out infinite;
+}
+
+
+/* 호버 효과 */
+.badge-item:hover,
+.champion-card:hover,
+.contest-card:hover,
+.problem-card:hover,
+.position-card:hover,
+.channel-card:hover,
+.program-card:hover,
+.project-card:hover,
+.app-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* 스크롤 애니메이션 */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

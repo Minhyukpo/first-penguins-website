@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 편집 - First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .auth-logo {
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .auth-logo p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+        
+        .form-group input.success {
+            border-color: #27ae60;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .auth-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-home:hover {
+            opacity: 0.8;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .profile-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .profile-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .info-value {
+            color: #7f8c8d;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i>
+        홈으로 돌아가기
+    </a>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-main">First-Penguins</span>
+                    <span class="logo-sub">혁신적인 모바일 앱</span>
+                </div>
+                <p>프로필 편집</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <div class="profile-avatar" id="profileAvatar">
+                <i class="fas fa-user"></i>
+            </div>
+            
+            <div class="profile-info" id="profileInfo">
+                <h3>현재 프로필 정보</h3>
+                <div class="info-item">
+                    <span class="info-label">이름:</span>
+                    <span class="info-value" id="currentName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">이메일:</span>
+                    <span class="info-value" id="currentEmail">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">생년월일:</span>
+                    <span class="info-value" id="currentBirthDate">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">나이:</span>
+                    <span class="info-value" id="currentAge">-</span>
+                </div>
+            </div>
+            
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" required readonly>
+                    <small class="form-help">이메일은 변경할 수 없습니다</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender">
+                        <option value="">선택하세요</option>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">나이</label>
+                    <input type="number" id="age" name="age" min="1" max="120">
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">생년월일</label>
+                    <input type="date" id="birthDate" name="birthDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="education">학력</label>
+                    <select id="education" name="education">
+                        <option value="">선택하세요</option>
+                        <option value="고등학교">고등학교</option>
+                        <option value="대학교">대학교</option>
+                        <option value="대학원">대학원</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="organization">소속/직장</label>
+                    <input type="text" id="organization" name="organization" placeholder="예: 서울대학교, 삼성전자">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">전화번호</label>
+                    <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678">
+                </div>
+                
+                <button type="submit" class="auth-btn" id="updateBtn">
+                    <i class="fas fa-save"></i>
+                    프로필 업데이트
+                </button>
+            </form>
+            
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="../dashboard/goal-illa.html" class="btn btn-secondary" style="flex: 1; text-align: center; padding: 12px; text-decoration: none; border-radius: 10px;">
+                    <i class="fas fa-tachometer-alt"></i>
+                    대시보드
+                </a>
+                <button class="btn btn-secondary" onclick="logout()" style="flex: 1; padding: 12px; border-radius: 10px; border: none; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    로그아웃
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentUser = null;
+        
+        // 페이지 로드 시 사용자 정보 로드
+        window.addEventListener('load', function() {
+            loadUserProfile();
+        });
+        
+        function loadUserProfile() {
+            const userData = localStorage.getItem('currentUser');
+            if (!userData) {
+                showError('로그인이 필요합니다.');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return;
+            }
+            
+            currentUser = JSON.parse(userData);
+            
+            // 현재 정보 표시
+            document.getElementById('currentName').textContent = currentUser.name || '-';
+            document.getElementById('currentEmail').textContent = currentUser.email || '-';
+            document.getElementById('currentBirthDate').textContent = currentUser.birth_date || '-';
+            document.getElementById('currentAge').textContent = currentUser.age || '-';
+            
+            // 폼에 현재 값 설정
+            document.getElementById('name').value = currentUser.name || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('gender').value = currentUser.gender || '';
+            document.getElementById('age').value = currentUser.age || '';
+            document.getElementById('birthDate').value = currentUser.birth_date || '';
+            document.getElementById('education').value = currentUser.education || '';
+            document.getElementById('organization').value = currentUser.organization || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+            
+            // 프로필 아바타에 이름 첫 글자 표시
+            const avatar = document.getElementById('profileAvatar');
+            if (currentUser.name) {
+                avatar.textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+        }
+        
+        // 프로필 업데이트 폼 처리
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const age = parseInt(document.getElementById('age').value);
+            
+            // 유효성 검사
+            if (!name || !email || !birthDate || !age) {
+                showError('모든 필드를 입력해주세요.');
+                return;
+            }
+            
+            if (age < 1 || age > 120) {
+                showError('나이는 1세부터 120세까지 입력 가능합니다.');
+                return;
+            }
+            
+            const userData = {
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
+                birthDate: document.getElementById('birthDate').value,
+                education: document.getElementById('education').value,
+                organization: document.getElementById('organization').value,
+                phone: document.getElementById('phone').value
+            };
+            
+            updateProfile(name, email, userData);
+        });
+        
+        async function updateProfile(name, email, userData) {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${window.CONFIG.api.baseUrl}/api/users/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        gender: userData.gender,
+                        age: userData.age,
+                        birth_date: userData.birthDate,
+                        education: userData.education,
+                        organization: userData.organization,
+                        phone: userData.phone
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 로컬 스토리지 업데이트
+                    const updatedUser = {
+                        ...currentUser,
+                        name: data.user.name,
+                        email: data.user.email
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                    
+                    showSuccess('프로필이 성공적으로 업데이트되었습니다!');
+                    
+                    // 현재 정보 다시 로드
+                    setTimeout(() => {
+                        loadUserProfile();
+                    }, 1000);
+                } else {
+                    showError(data.message || '프로필 업데이트에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('프로필 업데이트 오류:', error);
+                showError('서버 연결 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('currentUser');
+            showSuccess('로그아웃되었습니다.');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

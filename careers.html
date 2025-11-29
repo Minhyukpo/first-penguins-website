@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채용 정보 - First-Penguins</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .careers-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .careers-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .careers-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .careers-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .job-openings {
+            padding: 80px 0;
+        }
+        
+        .job-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-type {
+            background: #e8f4fd;
+            color: #3498db;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .job-location {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .job-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-requirements {
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-requirements h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .job-requirements li {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+        
+        .job-requirements li:before {
+            content: "•";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+        }
+        
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .job-salary {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .apply-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .company-culture {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .culture-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .culture-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .culture-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .culture-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .culture-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .benefits-section {
+            padding: 80px 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .benefit-text {
+            flex: 1;
+        }
+        
+        .benefit-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+        
+        .benefit-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .application-process {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .careers-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <div class="logo-icon">
+                        <img src="images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#business" class="nav-link">사업 영역</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#philosophy" class="nav-link">기업 철학</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#team" class="nav-link">팀 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#blog" class="nav-link">블로그</a>
+                </li>
+                <li class="nav-item">
+                    <a href="support/contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="support/announcements.html" class="nav-link">공지사항</a>
+                </li>
+                <li class="nav-item">
+                    <a href="careers.html" class="nav-link active">채용 정보</a>
+                </li>
+                <li class="nav-item" id="authNavItem">
+                    <a href="auth/login.html" class="nav-link" id="authLink">로그인</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Careers Hero Section -->
+    <section class="careers-hero">
+        <div class="container">
+            <h1>🚀 함께 성장해요!</h1>
+            <p>First-Penguins와 함께 새로운 영역을 개척하고 혁신을 만들어가는 여정에 참여하세요</p>
+            
+            <div class="careers-stats" id="careersStats">
+                <div class="stat-card">
+                    <div class="stat-number" id="teamCount">로딩 중...</div>
+                    <div class="stat-label">팀원</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="openPositions">로딩 중...</div>
+                    <div class="stat-label">채용 공고</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">원격근무</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="employeeSatisfaction">로딩 중...</div>
+                    <div class="stat-label">직원 만족도</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Openings Section -->
+    <section class="job-openings">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💼 채용 공고</h2>
+                <p class="section-description">새로운 도전을 함께할 동료를 찾고 있습니다</p>
+            </div>
+            
+            <div class="job-filters">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="development">개발</button>
+                <button class="filter-btn" data-filter="design">디자인</button>
+                <button class="filter-btn" data-filter="marketing">마케팅</button>
+                <button class="filter-btn" data-filter="business">사업</button>
+            </div>
+            
+            <div class="jobs-grid" id="jobsGrid">
+                <!-- React Native 개발자 -->
+                <div class="job-card" data-category="development">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">React Native 개발자</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        Goal-Illa 앱의 핵심 기능을 개발하고 사용자 경험을 최적화하는 React Native 개발자를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>React Native 3년 이상 개발 경험</li>
+                            <li>JavaScript/TypeScript 숙련도</li>
+                            <li>상태 관리 라이브러리 경험 (Redux, Zustand 등)</li>
+                            <li>API 연동 및 비동기 처리 경험</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('react-native-developer')">지원하기</button>
+                    </div>
+                </div>
+                
+                <!-- UI/UX 디자이너 -->
+                <div class="job-card" data-category="design">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">UI/UX 디자이너</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        사용자 중심의 직관적인 디자인을 통해 Goal-Illa의 사용성을 극대화하는 디자이너를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>모바일 앱 UI/UX 디자인 경험 2년 이상</li>
+                            <li>Figma, Sketch 등 디자인 툴 숙련도</li>
+                            <li>사용자 리서치 및 프로토타이핑 경험</li>
+                            <li>디자인 시스템 구축 경험</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('ui-ux-designer')">지원하기</button>
+                    </div>
+                </div>
+                
+                <!-- 마케팅 매니저 -->
+                <div class="job-card" data-category="marketing">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">마케팅 매니저</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        First-Penguins의 브랜드 가치를 전달하고 사용자와의 소통을 담당하는 마케팅 매니저를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>디지털 마케팅 경험 3년 이상</li>
+                            <li>SNS 마케팅 및 콘텐츠 기획 경험</li>
+                            <li>데이터 분석 및 성과 측정 경험</li>
+                            <li>크리에이티브 기획 및 실행 능력</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('marketing-manager')">지원하기</button>
+                    </div>
+                </div>
+                
+                <!-- 백엔드 개발자 -->
+                <div class="job-card" data-category="development">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">백엔드 개발자</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        Goal-Illa의 안정적이고 확장 가능한 백엔드 시스템을 구축하는 개발자를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>Node.js 또는 Python 개발 경험 3년 이상</li>
+                            <li>데이터베이스 설계 및 최적화 경험</li>
+                            <li>RESTful API 설계 및 개발 경험</li>
+                            <li>클라우드 서비스 경험 (AWS, GCP 등)</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('backend-developer')">지원하기</button>
+                    </div>
+                </div>
+                
+                <!-- 사업 개발 매니저 -->
+                <div class="job-card" data-category="business">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">사업 개발 매니저</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        새로운 사업 기회를 발굴하고 파트너십을 구축하는 사업 개발 매니저를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>사업 개발 또는 영업 경험 3년 이상</li>
+                            <li>B2B 파트너십 구축 경험</li>
+                            <li>시장 분석 및 사업 기획 능력</li>
+                            <li>커뮤니케이션 및 프레젠테이션 스킬</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('business-development')">지원하기</button>
+                    </div>
+                </div>
+                
+                <!-- 데이터 분석가 -->
+                <div class="job-card" data-category="development">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">데이터 분석가</h3>
+                            <div class="job-location">📍 서울 / 원격근무</div>
+                        </div>
+                        <span class="job-type">정규직</span>
+                    </div>
+                    <div class="job-description">
+                        사용자 데이터를 분석하여 Goal-Illa의 성장과 개선을 이끌어가는 데이터 분석가를 찾습니다.
+                    </div>
+                    <div class="job-requirements">
+                        <h4>필수 요구사항</h4>
+                        <ul>
+                            <li>데이터 분석 경험 2년 이상</li>
+                            <li>SQL, Python, R 등 분석 도구 숙련도</li>
+                            <li>통계 분석 및 머신러닝 경험</li>
+                            <li>데이터 시각화 및 대시보드 구축 경험</li>
+                        </ul>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">💰 협의</span>
+                        <button class="apply-btn" onclick="applyJob('data-analyst')">지원하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Culture Section -->
+    <section class="company-culture">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🏢 회사 문화</h2>
+                <p class="section-description">First-Penguins만의 특별한 문화를 경험해보세요</p>
+            </div>
+            
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon">🚀</div>
+                    <h3>혁신 추구</h3>
+                    <p>새로운 아이디어를 환영하고 실험을 통해 혁신을 만들어갑니다. 실패를 두려워하지 않는 문화를 지향합니다.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">🤝</div>
+                    <h3>협업 중심</h3>
+                    <p>팀워크와 소통을 중시하며, 모든 구성원의 의견을 존중합니다. 함께 성장하는 문화를 만들어갑니다.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">⚖️</div>
+                    <h3>워라밸</h3>
+                    <p>업무와 삶의 균형을 중요하게 생각합니다. 유연한 근무 환경과 충분한 휴식을 제공합니다.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon">📚</div>
+                    <h3>지속적 학습</h3>
+                    <p>개인의 성장을 지원하며, 새로운 기술과 지식을 습득할 수 있는 환경을 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎁 복리후생</h2>
+                <p class="section-description">First-Penguins가 제공하는 다양한 혜택들</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏠</div>
+                    <div class="benefit-text">
+                        <h4>원격근무</h4>
+                        <p>100% 원격근무 지원</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-text">
+                        <h4>경쟁력 있는 연봉</h4>
+                        <p>업계 수준의 보상</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏥</div>
+                    <div class="benefit-text">
+                        <h4>건강보험</h4>
+                        <p>4대 보험 및 건강검진</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <div class="benefit-text">
+                        <h4>장비 지원</h4>
+                        <p>업무용 장비 및 소프트웨어</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎓</div>
+                    <div class="benefit-text">
+                        <h4>교육비 지원</h4>
+                        <p>컨퍼런스 및 교육비 지원</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🍕</div>
+                    <div class="benefit-text">
+                        <h4>식대 지원</h4>
+                        <p>점심 식대 및 간식 지원</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏖️</div>
+                    <div class="benefit-text">
+                        <h4>유연한 휴가</h4>
+                        <p>자율 휴가 및 리프레시 휴가</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-text">
+                        <h4>성과급</h4>
+                        <p>성과에 따른 인센티브</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process Section -->
+    <section class="application-process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📋 지원 절차</h2>
+                <p class="section-description">간단하고 투명한 채용 프로세스</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">지원서 제출</h3>
+                    <p class="step-description">온라인 지원서 작성 및 이력서 제출</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">서류 심사</h3>
+                    <p class="step-description">지원서 검토 및 1차 선별</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">1차 면접</h3>
+                    <p class="step-description">온라인 화상 면접 (30-40분)</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">2차 면접</h3>
+                    <p class="step-description">기술 면접 및 팀 적합성 평가</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">최종 합격</h3>
+                    <p class="step-description">합격 통보 및 입사 일정 협의</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐧 First-Penguins</h3>
+                    <p>혁신적인 모바일 앱으로 사용자의 목표를 달성하세요.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>앱</h4>
+                    <ul>
+                        <li><a href="apps/goal-illa.html">Goal-Illa</a></li>
+                        <li><a href="index.html#apps">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="support/faq.html">FAQ</a></li>
+                        <li><a href="support/contact.html">문의하기</a></li>
+                        <li><a href="support/announcements.html">공지사항</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>회사</h4>
+                    <ul>
+                        <li><a href="index.html#team">팀 소개</a></li>
+                        <li><a href="careers.html">채용 정보</a></li>
+                        <li><a href="index.html#blog">블로그</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 goalillaoffice@gmail.com</p>
+                    <p>🌐 개발 중 (Coming Soon)</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 First-Penguins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 채용 정보 통계 로드
+        async function loadCareersStats() {
+            try {
+                // 팀원 수 로드
+                const teamResponse = await fetch(`${window.CONFIG.api.baseUrl}${window.CONFIG.api.endpoints.team}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+                
+                if (teamResponse.ok) {
+                    const teamData = await teamResponse.json();
+                    document.getElementById('teamCount').textContent = teamData.length || 3;
+                } else {
+                    document.getElementById('teamCount').textContent = '3';
+                }
+                
+                // 채용 공고 수 로드
+                const jobsResponse = await fetch(`${window.CONFIG.api.baseUrl}${window.CONFIG.api.endpoints.jobs}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+                
+                if (jobsResponse.ok) {
+                    const jobsData = await jobsResponse.json();
+                    document.getElementById('openPositions').textContent = jobsData.length || 6;
+                } else {
+                    document.getElementById('openPositions').textContent = '6';
+                }
+                
+                // 직원 만족도 로드
+                const satisfactionResponse = await fetch(`${window.CONFIG.api.baseUrl}${window.CONFIG.api.endpoints.satisfaction}/employee`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+                
+                if (satisfactionResponse.ok) {
+                    const satisfactionData = await satisfactionResponse.json();
+                    const satisfactionPercentage = Math.round((satisfactionData.averageRating / 5) * 100);
+                    document.getElementById('employeeSatisfaction').textContent = satisfactionPercentage + '%';
+                } else {
+                    document.getElementById('employeeSatisfaction').textContent = '조사 중';
+                }
+                
+            } catch (error) {
+                console.error('채용 정보 통계 로드 실패:', error);
+                // 오류 시 기본값 표시
+                document.getElementById('teamCount').textContent = '3';
+                document.getElementById('openPositions').textContent = '6';
+                document.getElementById('employeeSatisfaction').textContent = '조사 중';
+            }
+        }
+        
+        // 페이지 로드 시 통계 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCareersStats();
+        });
+        // 채용 공고 필터링
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 활성 버튼 변경
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const jobCards = document.querySelectorAll('.job-card');
+                
+                jobCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // 채용 지원 함수
+        function applyJob(jobId) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>📝 채용 지원</h3>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <form id="applicationForm">
+                        <div class="form-group">
+                            <label for="applicantName">이름 *</label>
+                            <input type="text" id="applicantName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicantEmail">이메일 *</label>
+                            <input type="email" id="applicantEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicantPhone">연락처 *</label>
+                            <input type="tel" id="applicantPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicantExperience">경력 사항</label>
+                            <textarea id="applicantExperience" rows="4" placeholder="관련 경력 및 프로젝트 경험을 자유롭게 작성해주세요."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicantMotivation">지원 동기</label>
+                            <textarea id="applicantMotivation" rows="4" placeholder="First-Penguins에 지원하는 이유를 작성해주세요."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="resumeFile">이력서 첨부</label>
+                            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx">
+                        </div>
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="privacyAgree" required>
+                            <label for="privacyAgree">
+                                <a href="support/privacy-policy.html" target="_blank">개인정보처리방침</a>에 동의합니다.
+                            </label>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-outline" onclick="closeModal()">취소</button>
+                            <button type="submit" class="btn btn-primary">지원서 제출</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // 폼 제출 처리
+            document.getElementById('applicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    jobId: jobId,
+                    name: document.getElementById('applicantName').value,
+                    email: document.getElementById('applicantEmail').value,
+                    phone: document.getElementById('applicantPhone').value,
+                    experience: document.getElementById('applicantExperience').value,
+                    motivation: document.getElementById('applicantMotivation').value,
+                    resume: document.getElementById('resumeFile').files[0]?.name || '없음'
+                };
+                
+                // 실제로는 서버로 전송
+                console.log('지원서 제출:', formData);
+                
+                showNotification('지원서가 성공적으로 제출되었습니다! 검토 후 연락드리겠습니다.', 'success');
+                closeModal();
+            });
+        }
+        
+        // 모달 닫기 함수
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // 알림 표시 함수
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            const colors = {
+                success: '#27ae60',
+                error: '#e74c3c',
+                info: '#3498db'
+            };
+            notification.style.background = colors[type] || colors.info;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보처리방침 | First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .privacy-hero {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .privacy-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .privacy-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .privacy-content h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .privacy-content h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 30px 0 15px 0;
+        }
+        
+        .privacy-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .privacy-content ul {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .privacy-content li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <div class="logo-icon">
+                        <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#business" class="nav-link">사업 영역</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#philosophy" class="nav-link">기업 철학</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="announcements.html" class="nav-link">공지사항</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy Hero Section -->
+    <section class="privacy-hero">
+        <div class="container">
+            <h1>개인정보처리방침</h1>
+            <p>First-Penguins는 사용자의 개인정보를 보호하기 위해 최선을 다합니다.</p>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Content -->
+    <section class="privacy-section">
+        <div class="privacy-content">
+            <div class="highlight-box">
+                <p><strong>시행일자:</strong> 2024년 9월 8일</p>
+                <p><strong>최종 수정일:</strong> 2024년 9월 8일</p>
+            </div>
+
+            <h2>1. 개인정보의 처리 목적</h2>
+            <p>First-Penguins는 새로운 영역을 개척하는 혁신 기업으로서, 사용자에게 최고의 서비스를 제공하기 위해 다음과 같은 목적으로 개인정보를 처리합니다:</p>
+            <ul>
+                <li>서비스 제공 및 운영</li>
+                <li>사용자 인증 및 계정 관리</li>
+                <li>Goal-Illa 앱 연동 및 계정 통합</li>
+                <li>서비스 개선 및 개발</li>
+                <li>고객 지원 및 문의 응답</li>
+                <li>마케팅 및 프로모션 (선택적)</li>
+            </ul>
+
+            <h2>2. 수집하는 개인정보 항목</h2>
+            
+            <h3>필수 항목</h3>
+            <ul>
+                <li>이메일 주소 (회원가입 시)</li>
+                <li>비밀번호 (회원가입 시, 암호화 저장)</li>
+                <li>사용자 ID (자동 생성 또는 사용자 입력)</li>
+                <li>이름 (회원가입 시)</li>
+            </ul>
+
+            <h3>선택 항목</h3>
+            <ul>
+                <li>프로필 이미지</li>
+                <li>생년월일 (Goal-Illa 앱 연동 시)</li>
+                <li>사용자 설정 정보</li>
+                <li>목표 및 일정 데이터 (Goal-Illa 연동 시)</li>
+            </ul>
+
+            <h3>자동 수집 항목</h3>
+            <ul>
+                <li>IP 주소, 접속 로그</li>
+                <li>서비스 이용 기록</li>
+                <li>쿠키 및 세션 정보</li>
+            </ul>
+
+            <h2>3. 개인정보의 보유 및 이용기간</h2>
+            <p>회원 탈퇴 시까지 또는 법정 보유기간 동안 보유합니다. 단, 다음의 경우는 예외로 합니다:</p>
+            <ul>
+                <li>관련 법령에 의해 보존이 의무화된 경우</li>
+                <li>분쟁 해결을 위해 필요한 경우</li>
+                <li>서비스 개선을 위한 통계 데이터 (개인 식별 불가)</li>
+            </ul>
+
+            <h2>4. 개인정보의 제3자 제공</h2>
+            <p>First-Penguins는 사용자의 개인정보를 제3자에게 제공하지 않습니다. 단, 다음의 경우는 예외로 합니다:</p>
+            <ul>
+                <li>법령에 근거한 경우</li>
+                <li>사용자의 사전 동의가 있는 경우</li>
+                <li>Goal-Illa 앱과의 계정 연동 시 (동일한 사용자임을 확인)</li>
+            </ul>
+
+            <h2>5. 개인정보의 파기</h2>
+            <p>회원 탈퇴 시 즉시 파기하며, 전자적 파일 형태로 저장된 개인정보는 복구 불가능한 방법으로 영구 삭제됩니다.</p>
+
+            <h2>6. 이용자 및 법정대리인의 권리</h2>
+            <p>사용자는 개인정보에 대해 다음과 같은 권리를 가집니다:</p>
+            <ul>
+                <li>개인정보 열람 요구</li>
+                <li>오류 정정 요구</li>
+                <li>삭제 요구</li>
+                <li>처리정지 요구</li>
+            </ul>
+
+            <h2>7. 개인정보 보호를 위한 기술적/관리적 대책</h2>
+            <ul>
+                <li>개인정보 암호화 저장</li>
+                <li>SSL/TLS 보안 통신</li>
+                <li>정기적인 보안 점검</li>
+                <li>접근 권한 관리</li>
+                <li>백업 및 복구 시스템</li>
+            </ul>
+
+            <h2>8. 개인정보 보호책임자</h2>
+            <div class="contact-info">
+                <h3>개인정보 보호책임자</h3>
+                <p><strong>이름:</strong> Minhyuk Jeong</p>
+                <p><strong>이메일:</strong> goalillaoffice@gmail.com</p>
+                <p><strong>회사명:</strong> First-Penguins</p>
+            </div>
+
+            <h2>9. 개인정보처리방침 변경</h2>
+            <p>이 개인정보처리방침은 2024년 9월 8일부터 적용되며, 법령이나 서비스의 변경에 따라 수정될 수 있습니다. 중요한 변경사항이 있을 경우 웹사이트를 통해 공지합니다.</p>
+
+            <h2>10. 연락처</h2>
+            <div class="contact-info">
+                <h3>개인정보 처리에 관한 문의</h3>
+                <p><strong>이메일:</strong> goalillaoffice@gmail.com</p>
+                <p><strong>웹사이트:</strong> First-Penguins</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐧 First-Penguins</h3>
+                    <p>새로운 영역을 개척하는 혁신 기업</p>
+                </div>
+                <div class="footer-section">
+                    <h4>사업 영역</h4>
+                    <ul>
+                        <li><a href="../index.html#business">교육 기술</a></li>
+                        <li><a href="../index.html#business">혁신 기술</a></li>
+                        <li><a href="../index.html#business">사회적 가치</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="announcements.html">공지사항</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>법적 고지</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+                        <li><a href="terms-of-service.html">이용약관</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 goalillaoffice@gmail.com</p>
+                    <p>🌐 First-Penguins</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 First-Penguins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

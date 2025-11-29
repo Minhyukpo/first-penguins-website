@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 - First-Penguins</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 로고 스타일 */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .penguin-icon {
+            width: 35px;
+            height: 35px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .nav-logo a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .announcements-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .announcements-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .announcements-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .announcements-content {
+            padding: 80px 0;
+        }
+        
+        .announcements-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+        
+        .no-announcements {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+        
+        .no-announcements-icon {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+        }
+        
+        .no-announcements h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .no-announcements p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        /* 관리자 섹션 스타일 */
+        .admin-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .admin-header h3 {
+            color: #495057;
+            margin: 0;
+        }
+        
+        .admin-form {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .action-button {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .action-button input,
+        .action-button select {
+            margin-bottom: 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        /* 공지사항 카드 스타일 (동적 생성용) */
+        .announcement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+        
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .announcement-card.important {
+            border-left-color: #e74c3c;
+        }
+        
+        .announcement-card.update {
+            border-left-color: #f39c12;
+        }
+        
+        .announcement-card.new {
+            border-left-color: #27ae60;
+        }
+        
+        .announcement-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .badge-important {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .badge-update {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .badge-new {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .badge-maintenance {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .announcement-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .announcement-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .announcement-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .announcement-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .announcements-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .announcements-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .action-button {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <div class="logo-icon">
+                        <img src="../images/company-photos/firstpenguins-profile.jpg" alt="First-Penguins Logo" class="penguin-logo">
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">First-Penguins</span>
+                        <span class="logo-sub">혁신적인 모바일 앱</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#business" class="nav-link">사업 영역</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#philosophy" class="nav-link">기업 철학</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#team" class="nav-link">팀 소개</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#blog" class="nav-link">블로그</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">문의하기</a>
+                </li>
+                <li class="nav-item">
+                    <a href="announcements.html" class="nav-link active">공지사항</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../careers.html" class="nav-link">채용 정보</a>
+                </li>
+                <li class="nav-item" id="authNavItem">
+                    <a href="../auth/login.html" class="nav-link" id="authLink">로그인</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Announcements Hero Section -->
+    <section class="announcements-hero">
+        <div class="container">
+            <h1>📢 공지사항</h1>
+            <p>First-Penguins의 최신 소식과 중요한 업데이트를 확인하세요</p>
+        </div>
+    </section>
+
+    <!-- Announcements Content -->
+    <section class="announcements-content">
+        <div class="container">
+            <div class="announcements-filters">
+                    <button class="filter-btn active" data-filter="all">전체</button>
+                    <button class="filter-btn" data-filter="important">중요</button>
+                    <button class="filter-btn" data-filter="update">업데이트</button>
+                    <button class="filter-btn" data-filter="new">새소식</button>
+                <button class="filter-btn" data-filter="maintenance">점검</button>
+            </div>
+            
+            <div id="announcementsList">
+                <div class="no-announcements">
+                    <div class="no-announcements-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>아직 공지사항이 없습니다</h3>
+                    <p>First-Penguins의 최신 소식과 업데이트를 기다려주세요.</p>
+                    <p>중요한 소식이 있을 때마다 여기에 공지드리겠습니다.</p>
+                    </div>
+                    </div>
+            
+            <!-- 개발자용 공지사항 작성 섹션 (관리자만 보임) -->
+            <div id="adminSection" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h3>📝 공지사항 작성 (관리자 전용)</h3>
+                    <button id="toggleAdminForm" class="btn btn-outline">공지사항 작성</button>
+                </div>
+                
+                <div id="adminForm" class="admin-form" style="display: none;">
+                    <form id="announcementForm">
+                        <div class="form-group">
+                            <label for="announcementTitle">제목 *</label>
+                            <input type="text" id="announcementTitle" required>
+                    </div>
+                        
+                        <div class="form-group">
+                            <label for="announcementCategory">카테고리 *</label>
+                            <select id="announcementCategory" required>
+                                <option value="important">중요</option>
+                                <option value="update">업데이트</option>
+                                <option value="new">새소식</option>
+                                <option value="maintenance">점검</option>
+                            </select>
+                    </div>
+                        
+                        <div class="form-group">
+                            <label for="announcementContent">내용 *</label>
+                            <textarea id="announcementContent" rows="8" required></textarea>
+                </div>
+                
+                        <div class="form-group">
+                            <label for="announcementActions">액션 버튼 (선택사항)</label>
+                            <div class="action-buttons">
+                                <div class="action-button">
+                                    <input type="text" placeholder="버튼 텍스트" class="action-text">
+                                    <input type="url" placeholder="링크 URL" class="action-url">
+                                    <select class="action-type">
+                                        <option value="primary">Primary</option>
+                                        <option value="outline">Outline</option>
+                                    </select>
+                                </div>
+                    </div>
+                            <button type="button" id="addActionButton" class="btn btn-small btn-outline">액션 버튼 추가</button>
+                    </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="previewAnnouncement" class="btn btn-outline">미리보기</button>
+                            <button type="submit" class="btn btn-primary">공지사항 발행</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐧 First-Penguins</h3>
+                    <p>혁신적인 모바일 앱으로 사용자의 목표를 달성하세요.</p>
+                    </div>
+                <div class="footer-section">
+                    <h4>앱</h4>
+                    <ul>
+                        <li><a href="../apps/goal-illa.html">Goal-Illa</a></li>
+                        <li><a href="../index.html#apps">Coming Soon</a></li>
+                        </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="announcements.html">공지사항</a></li>
+                        </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>회사</h4>
+                    <ul>
+                        <li><a href="../index.html#team">팀 소개</a></li>
+                        <li><a href="../careers.html">채용 정보</a></li>
+                        <li><a href="../index.html#blog">블로그</a></li>
+                        </ul>
+                    </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <p>📧 goalillaoffice@gmail.com</p>
+                    <p>🌐 개발 중 (Coming Soon)</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/goal_illa.office" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:goalillaoffice@gmail.com" class="social-link email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Goal-Illa Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // 관리자 권한 확인
+        function checkAdminAccess() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const isAdmin = currentUser.role === 'admin' || 
+                          currentUser.email === 'minhyuk@firstpgs.com' || 
+                          currentUser.id === 'goalilla' ||
+                          currentUser.email === 'goalilla';
+            
+            if (isAdmin) {
+                document.getElementById('adminSection').style.display = 'block';
+            }
+        }
+        
+        // 공지사항 필터링
+        function initializeFilters() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const announcements = document.querySelectorAll('.announcement-card');
+                
+                    announcements.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // 관리자 폼 토글
+        function initializeAdminForm() {
+            const toggleBtn = document.getElementById('toggleAdminForm');
+            const adminForm = document.getElementById('adminForm');
+            
+            toggleBtn.addEventListener('click', function() {
+                if (adminForm.style.display === 'none') {
+                    adminForm.style.display = 'block';
+                    toggleBtn.textContent = '폼 닫기';
+                    } else {
+                    adminForm.style.display = 'none';
+                    toggleBtn.textContent = '공지사항 작성';
+                }
+            });
+            
+            // 액션 버튼 추가
+            document.getElementById('addActionButton').addEventListener('click', function() {
+                const actionButtons = document.querySelector('.action-buttons');
+                const newActionButton = document.createElement('div');
+                newActionButton.className = 'action-button';
+                newActionButton.innerHTML = `
+                    <input type="text" placeholder="버튼 텍스트" class="action-text">
+                    <input type="url" placeholder="링크 URL" class="action-url">
+                    <select class="action-type">
+                        <option value="primary">Primary</option>
+                        <option value="outline">Outline</option>
+                    </select>
+                    <button type="button" class="btn btn-small btn-danger remove-action">삭제</button>
+                `;
+                actionButtons.appendChild(newActionButton);
+                
+                // 삭제 버튼 이벤트
+                newActionButton.querySelector('.remove-action').addEventListener('click', function() {
+                    newActionButton.remove();
+                });
+            });
+        }
+        
+        // 공지사항 발행
+        function initializeAnnouncementForm() {
+            document.getElementById('announcementForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('announcementTitle').value;
+                const category = document.getElementById('announcementCategory').value;
+                const content = document.getElementById('announcementContent').value;
+                
+                // 액션 버튼 수집
+                const actions = [];
+                document.querySelectorAll('.action-button').forEach(action => {
+                    const text = action.querySelector('.action-text').value;
+                    const url = action.querySelector('.action-url').value;
+                    const type = action.querySelector('.action-type').value;
+                    
+                    if (text && url) {
+                        actions.push({ text, url, type });
+                    }
+                });
+                
+                const announcementData = {
+                    title,
+                    category,
+                    content,
+                    actions,
+                    date: new Date().toISOString(),
+                    author: JSON.parse(localStorage.getItem('currentUser') || '{}').name || '관리자'
+                };
+                
+                try {
+                    // 데이터베이스에 저장
+                    const response = await fetch(`${window.CONFIG.api.baseUrl}${window.CONFIG.api.endpoints.announcements}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                        },
+                        body: JSON.stringify(announcementData)
+                    });
+                    
+                    if (response.ok) {
+                        alert('공지사항이 성공적으로 발행되었습니다!');
+                        location.reload();
+                    } else {
+                        alert('공지사항 발행에 실패했습니다.');
+                    }
+                } catch (error) {
+                    console.error('공지사항 발행 오류:', error);
+                    alert('공지사항 발행 중 오류가 발생했습니다.');
+                }
+            });
+        }
+        
+        // 공지사항 로드
+        async function loadAnnouncements() {
+            try {
+                const response = await fetch(`${window.CONFIG.api.baseUrl}${window.CONFIG.api.endpoints.announcements}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const announcements = await response.json();
+                    displayAnnouncements(announcements);
+                } else {
+                    // API 실패 시 빈 상태 유지
+                    console.log('공지사항 로드 실패, 빈 상태 유지');
+                }
+            } catch (error) {
+                console.error('공지사항 로드 오류:', error);
+            }
+        }
+        
+        // 공지사항 표시
+        function displayAnnouncements(announcements) {
+            const container = document.getElementById('announcementsList');
+            
+            if (announcements.length === 0) {
+                container.innerHTML = `
+                    <div class="no-announcements">
+                        <div class="no-announcements-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>아직 공지사항이 없습니다</h3>
+                        <p>First-Penguins의 최신 소식과 업데이트를 기다려주세요.</p>
+                        <p>중요한 소식이 있을 때마다 여기에 공지드리겠습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            announcements.forEach(announcement => {
+                const date = new Date(announcement.date).toLocaleDateString('ko-KR');
+                const badgeClass = `badge-${announcement.category}`;
+                const cardClass = announcement.category;
+                
+                let actionsHtml = '';
+                if (announcement.actions && announcement.actions.length > 0) {
+                    actionsHtml = '<div class="announcement-actions">';
+                    announcement.actions.forEach(action => {
+                        actionsHtml += `<a href="${action.url}" class="btn-small btn-${action.type}">${action.text}</a>`;
+                    });
+                    actionsHtml += '</div>';
+                }
+                
+                html += `
+                    <div class="announcement-card ${cardClass}" data-category="${announcement.category}">
+                        <div class="announcement-badge ${badgeClass}">${announcement.category}</div>
+                        <div class="announcement-header">
+                            <h3 class="announcement-title">${announcement.title}</h3>
+                            <span class="announcement-date">${date}</span>
+                        </div>
+                        <div class="announcement-content">
+                            ${announcement.content.replace(/\n/g, '<br>')}
+                        </div>
+                        ${actionsHtml}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAdminAccess();
+            initializeFilters();
+            initializeAdminForm();
+            initializeAnnouncementForm();
+            loadAnnouncements();
+        });
+    </script>
+</body>
+</html>
