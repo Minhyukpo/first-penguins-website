@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 
+# Google AdSense 봇 허용
+User-agent: Mediapartners-Google
+Allow: /
+
 # Sitemap
 Sitemap: https://firstpgs.com/sitemap.xml
 
