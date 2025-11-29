@@ -1,5 +1,5 @@
 // Analytics 및 모니터링 초기화
-// Google Analytics, Sentry, Vercel Analytics 통합
+// Google Analytics, Google AdSense, Sentry, Vercel Analytics 통합
 
 (function() {
     'use strict';
@@ -75,6 +75,76 @@
         document.head.appendChild(script);
     }
     
+    // Google AdSense 초기화
+    function initGoogleAdSense() {
+        if (!CONFIG.external?.googleAdSense?.enabled) {
+            console.log('💰 Google AdSense가 비활성화되어 있습니다.');
+            return;
+        }
+        
+        const publisherId = CONFIG.external.googleAdSense.publisherId;
+        if (!publisherId || publisherId === 'ca-pub-XXXXXXXXXX') {
+            console.warn('⚠️ Google AdSense Publisher ID가 설정되지 않았습니다.');
+            return;
+        }
+        
+        // AdSense 스크립트 로드
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`;
+        script.crossOrigin = 'anonymous';
+        script.onload = function() {
+            console.log('✅ Google AdSense 초기화 완료:', publisherId);
+        };
+        script.onerror = function() {
+            console.warn('⚠️ Google AdSense 스크립트를 로드할 수 없습니다.');
+        };
+        document.head.appendChild(script);
+    }
+    
+    // AdSense 광고 단위 생성 헬퍼 함수
+    window.createAdSenseUnit = function(adSlotId, adFormat, adStyle) {
+        if (!CONFIG.external?.googleAdSense?.enabled) {
+            console.warn('⚠️ Google AdSense가 활성화되지 않았습니다.');
+            return null;
+        }
+        
+        const publisherId = CONFIG.external.googleAdSense.publisherId;
+        if (!publisherId || publisherId === 'ca-pub-XXXXXXXXXX') {
+            console.warn('⚠️ Google AdSense Publisher ID가 설정되지 않았습니다.');
+            return null;
+        }
+        
+        // 광고 컨테이너 생성
+        const adContainer = document.createElement('ins');
+        adContainer.className = 'adsbygoogle';
+        adContainer.style.display = 'block';
+        
+        // 광고 스타일 설정
+        if (adStyle) {
+            Object.assign(adContainer.style, adStyle);
+        }
+        
+        // 광고 속성 설정
+        adContainer.setAttribute('data-ad-client', publisherId);
+        adContainer.setAttribute('data-ad-slot', adSlotId);
+        
+        if (adFormat) {
+            adContainer.setAttribute('data-ad-format', adFormat);
+        }
+        
+        // 광고 초기화
+        if (window.adsbygoogle) {
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.error('AdSense 광고 초기화 오류:', e);
+            }
+        }
+        
+        return adContainer;
+    };
+    
     // Vercel Analytics 초기화
     function initVercelAnalytics() {
         if (!CONFIG.external?.vercelAnalytics?.enabled) {
@@ -129,11 +199,13 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             initGoogleAnalytics();
+            initGoogleAdSense();
             initSentry();
             initVercelAnalytics();
         });
     } else {
         initGoogleAnalytics();
+        initGoogleAdSense();
         initSentry();
         initVercelAnalytics();
     }

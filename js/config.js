@@ -79,6 +79,10 @@ const CONFIG = {
             enabled: false, // Google Analytics 활성화하려면 true로 변경하고 measurementId 설정
             measurementId: 'GA_MEASUREMENT_ID' // 실제 GA4 Measurement ID로 교체 (예: G-XXXXXXXXXX)
         },
+        googleAdSense: {
+            enabled: false, // Google AdSense 활성화하려면 true로 변경하고 publisherId 설정
+            publisherId: 'ca-pub-XXXXXXXXXX' // 실제 AdSense Publisher ID로 교체 (예: ca-pub-1234567890123456)
+        },
         sentry: {
             enabled: false, // Sentry 에러 로깅 활성화하려면 true로 변경하고 dsn 설정
             dsn: 'SENTRY_DSN' // 실제 Sentry DSN으로 교체 (예: https://xxx@xxx.ingest.sentry.io/xxx)
