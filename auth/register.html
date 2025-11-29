@@ -295,6 +295,71 @@
             text-decoration: underline;
         }
         
+        .required {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .form-section-divider {
+            margin: 30px 0 20px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .form-section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+        
+        .form-section-divider span {
+            background: white;
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .age-display {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        
+        .age-display strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
         @media (max-width: 480px) {
             .auth-card {
                 padding: 30px 20px;
@@ -330,62 +395,56 @@
             <div class="success-message" id="successMessage"></div>
             
             <form id="registerForm">
-                        <div class="form-group">
-                            <label for="name">이름</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="gender">성별</label>
-                            <select id="gender" name="gender">
-                                <option value="">선택하세요</option>
-                                <option value="male">남성</option>
-                                <option value="female">여성</option>
-                                <option value="other">기타</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="age">나이</label>
-                            <input type="number" id="age" name="age" min="1" max="120" placeholder="예: 25">
-                        </div>
-                        <div class="form-group">
-                            <label for="birthDate">생년월일</label>
-                            <input type="date" id="birthDate" name="birthDate">
-                        </div>
-                        <div class="form-group">
-                            <label for="education">학력</label>
-                            <select id="education" name="education">
-                                <option value="">선택하세요</option>
-                                <option value="고등학교">고등학교</option>
-                                <option value="대학교">대학교</option>
-                                <option value="대학원">대학원</option>
-                                <option value="기타">기타</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="organization">소속/직장</label>
-                            <input type="text" id="organization" name="organization" placeholder="예: 서울대학교, 삼성전자">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">전화번호</label>
-                            <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678">
-                        </div>
+                <!-- 필수 정보 -->
+                <div class="form-group">
+                    <label for="name">이름 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="홍길동">
+                </div>
                 
                 <div class="form-group">
-                    <label for="email">아이디 (이메일 주소)</label>
+                    <label for="email">이메일 주소 <span class="required">*</span></label>
                     <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
                     <small class="form-help">이메일 주소가 아이디로 사용됩니다</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">비밀번호 <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" required placeholder="8자 이상 입력하세요">
                     <div class="password-strength" id="passwordStrength"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="confirmPassword">비밀번호 확인</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <label for="confirmPassword">비밀번호 확인 <span class="required">*</span></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="비밀번호를 다시 입력하세요">
                 </div>
+                
+                <!-- 선택 정보 (간소화) -->
+                <div class="form-section-divider">
+                    <span>선택 정보</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">생년월일</label>
+                    <input type="date" id="birthDate" name="birthDate" max="">
+                    <small class="form-help">생년월일을 입력하면 나이가 자동으로 계산됩니다</small>
+                    <div id="ageDisplay" class="age-display" style="display: none;"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender">
+                        <option value="">선택하지 않음</option>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">전화번호</label>
+                    <input type="tel" id="phone" name="phone" placeholder="010-1234-5678">
+                </div>
+                
                 
                 <div class="terms-checkbox">
                     <input type="checkbox" id="terms" name="terms" required>
@@ -472,6 +531,45 @@
             strengthDiv.textContent = `비밀번호 강도: ${strengthText}`;
         });
         
+        // 생년월일에서 나이 자동 계산
+        document.getElementById('birthDate').addEventListener('change', function() {
+            const birthDate = this.value;
+            const ageDisplay = document.getElementById('ageDisplay');
+            
+            if (birthDate) {
+                const today = new Date();
+                const birth = new Date(birthDate);
+                let age = today.getFullYear() - birth.getFullYear();
+                const monthDiff = today.getMonth() - birth.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                    age--;
+                }
+                
+                if (age >= 0 && age <= 120) {
+                    ageDisplay.innerHTML = `만 <strong>${age}세</strong>입니다`;
+                    ageDisplay.style.display = 'block';
+                    // 숨겨진 age 필드에 값 저장 (필요시)
+                    document.getElementById('age').value = age;
+                } else {
+                    ageDisplay.innerHTML = '올바른 생년월일을 입력해주세요';
+                    ageDisplay.style.display = 'block';
+                }
+            } else {
+                ageDisplay.style.display = 'none';
+            }
+        });
+        
+        // 생년월일 최대값 설정 (오늘 날짜)
+        document.getElementById('birthDate').max = new Date().toISOString().split('T')[0];
+        
+        // 숨겨진 age 필드 추가 (기존 코드 호환성)
+        const ageInput = document.createElement('input');
+        ageInput.type = 'hidden';
+        ageInput.id = 'age';
+        ageInput.name = 'age';
+        document.getElementById('registerForm').appendChild(ageInput);
+        
         // 비밀번호 확인 체크
         document.getElementById('confirmPassword').addEventListener('input', function() {
             const password = document.getElementById('password').value;
@@ -529,14 +627,15 @@
                 return;
             }
             
-            // 추가 사용자 정보 수집
+            // 추가 사용자 정보 수집 (선택사항)
+            const birthDate = document.getElementById('birthDate').value;
+            const age = document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null;
+            
             const userData = {
-                gender: document.getElementById('gender').value,
-                age: document.getElementById('age').value ? parseInt(document.getElementById('age').value) : null,
-                birthDate: document.getElementById('birthDate').value,
-                education: document.getElementById('education').value,
-                organization: document.getElementById('organization').value,
-                phone: document.getElementById('phone').value,
+                gender: document.getElementById('gender').value || null,
+                age: age,
+                birthDate: birthDate || null,
+                phone: document.getElementById('phone').value || null,
                 guardianAgree: true // 기본값
             };
             
