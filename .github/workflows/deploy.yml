@@ -1,14 +1,17 @@
 name: Deploy to Vercel
 
+# Vercel이 Git과 직접 연결되어 있으므로 이 워크플로우는 비활성화됨
+# Vercel 대시보드에서 Git 연동을 통해 자동 배포가 이루어집니다
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+  workflow_dispatch:  # 수동 실행만 가능
+  # push:
+  #   branches:
+  #     - main
+  #     - master
+  # pull_request:
+  #   branches:
+  #     - main
+  #     - master
 
 jobs:
   deploy:
