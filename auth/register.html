@@ -1075,6 +1075,12 @@
             }
         });
         
+        // 재발송 버튼 클릭 이벤트
+        document.getElementById('resendCodeBtn').addEventListener('click', function() {
+            // 인증번호 발송 버튼 클릭과 동일한 동작
+            document.getElementById('sendVerificationBtn').click();
+        });
+        
         // 인증번호 확인
         document.getElementById('verifyCodeBtn').addEventListener('click', function() {
             const inputCode = document.getElementById('verificationCode').value.trim();
@@ -1095,6 +1101,7 @@
                 registrationData.emailVerified = true;
                 document.getElementById('verificationCodeGroup').style.display = 'none';
                 document.getElementById('verificationTimer').style.display = 'none';
+                document.getElementById('resendCodeBtn').style.display = 'none';
                 document.getElementById('email').disabled = true;
                 showSuccess('이메일 인증이 완료되었습니다!');
                 clearInterval(verificationTimer);
