@@ -974,34 +974,85 @@
                 // 중복이 아닌 경우 계속 진행
             }
             
-            // 인증번호 발송 (실제로는 Supabase Edge Function 또는 이메일 서비스 사용)
+            // 인증번호 발송
             this.disabled = true;
             this.textContent = '발송 중...';
             
             try {
-                // 임시: 인증번호 생성 및 저장 (실제로는 서버에서 처리)
+                // 인증번호 생성
                 const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-                sessionStorage.setItem('verificationCode', verificationCode);
-                sessionStorage.setItem('verificationEmail', email);
-                sessionStorage.setItem('verificationExpires', Date.now() + 300000); // 5분
                 
-                // 실제로는 Supabase Edge Function으로 이메일 발송
-                // 여기서는 콘솔에 출력 (개발용)
-                console.log('인증번호:', verificationCode);
-                
-                registrationData.email = email;
-                document.getElementById('verificationCodeGroup').style.display = 'block';
-                verificationCodeSent = true;
-                
-                // 타이머 시작
-                startVerificationTimer();
-                
-                showSuccess('인증번호가 발송되었습니다. 이메일을 확인해주세요.');
-                this.textContent = '재발송';
-                this.disabled = false;
+                // Supabase Edge Function 호출하여 이메일 발송
+                if (window.supabase && window.CONFIG?.supabase?.url) {
+                    const supabaseUrl = window.CONFIG.supabase.url;
+                    const functionUrl = `${supabaseUrl}/functions/v1/send-verification-email`;
+                    
+                    // Supabase Auth 토큰 가져오기
+                    const { data: { session } } = await window.supabase.auth.getSession();
+                    const token = session?.access_token || '';
+                    
+                    const response = await fetch(functionUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                            'apikey': window.CONFIG.supabase.anonKey || ''
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            code: verificationCode
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(result.error || '인증번호 발송 실패');
+                    }
+                    
+                    // 개발 환경에서는 인증번호를 화면에 표시
+                    if (result.code) {
+                        console.log('🔐 인증번호 (개발용):', result.code);
+                        document.getElementById('verificationHelp').textContent = `개발 환경: 인증번호는 ${result.code} 입니다`;
+                    }
+                    
+                    // 세션 스토리지에 저장 (백업용)
+                    sessionStorage.setItem('verificationCode', verificationCode);
+                    sessionStorage.setItem('verificationEmail', email);
+                    sessionStorage.setItem('verificationExpires', Date.now() + 300000); // 5분
+                    
+                    registrationData.email = email;
+                    document.getElementById('verificationCodeGroup').style.display = 'block';
+                    verificationCodeSent = true;
+                    
+                    // 타이머 시작
+                    startVerificationTimer();
+                    
+                    showSuccess('인증번호가 발송되었습니다. 이메일을 확인해주세요.');
+                    this.textContent = '재발송';
+                    this.disabled = false;
+                } else {
+                    // Supabase가 없으면 로컬 개발 모드
+                    console.log('🔐 인증번호 (로컬 개발):', verificationCode);
+                    sessionStorage.setItem('verificationCode', verificationCode);
+                    sessionStorage.setItem('verificationEmail', email);
+                    sessionStorage.setItem('verificationExpires', Date.now() + 300000);
+                    
+                    registrationData.email = email;
+                    document.getElementById('verificationCodeGroup').style.display = 'block';
+                    document.getElementById('verificationHelp').textContent = `로컬 개발: 인증번호는 ${verificationCode} 입니다`;
+                    verificationCodeSent = true;
+                    
+                    startVerificationTimer();
+                    
+                    showSuccess('인증번호가 생성되었습니다. (로컬 개발 모드)');
+                    this.textContent = '재발송';
+                    this.disabled = false;
+                }
                 
             } catch (error) {
-                showError('인증번호 발송에 실패했습니다. 다시 시도해주세요.');
+                console.error('인증번호 발송 오류:', error);
+                showError('인증번호 발송에 실패했습니다: ' + error.message);
                 this.disabled = false;
                 this.textContent = '인증번호 발송';
             }
