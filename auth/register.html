@@ -688,6 +688,11 @@
                         </div>
                         <div class="verification-timer" id="verificationTimer" style="display: none;"></div>
                         <small class="form-help" id="verificationHelp">인증번호를 입력해주세요</small>
+                        <div style="margin-top: 10px; text-align: center;">
+                            <button type="button" id="resendCodeBtn" class="btn-consent" style="background: transparent; color: #3b82f6; border: 1px solid #3b82f6; padding: 8px 16px; font-size: 0.875rem; display: none;">
+                                인증번호 재발송
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -1031,6 +1036,12 @@
                     showSuccess('인증번호가 발송되었습니다. 이메일을 확인해주세요.');
                     this.textContent = '재발송';
                     this.disabled = false;
+                    
+                    // 재발송 버튼 표시
+                    const resendBtn = document.getElementById('resendCodeBtn');
+                    if (resendBtn) {
+                        resendBtn.style.display = 'inline-block';
+                    }
                 } else {
                     // Supabase가 없으면 로컬 개발 모드
                     console.log('🔐 인증번호 (로컬 개발):', verificationCode);
@@ -1048,6 +1059,12 @@
                     showSuccess('인증번호가 생성되었습니다. (로컬 개발 모드)');
                     this.textContent = '재발송';
                     this.disabled = false;
+                    
+                    // 재발송 버튼 표시
+                    const resendBtn = document.getElementById('resendCodeBtn');
+                    if (resendBtn) {
+                        resendBtn.style.display = 'inline-block';
+                    }
                 }
                 
             } catch (error) {
