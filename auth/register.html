@@ -1000,8 +1000,8 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                            'apikey': window.CONFIG.supabase.anonKey || ''
+                            'apikey': window.CONFIG.supabase.anonKey || '',
+                            'Authorization': `Bearer ${window.CONFIG.supabase.anonKey || ''}`
                         },
                         body: JSON.stringify({
                             email: email,
