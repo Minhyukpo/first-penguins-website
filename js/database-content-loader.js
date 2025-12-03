@@ -444,7 +444,7 @@ class DatabaseContentLoader {
                 });
             } else if (this.db) {
                 // 레거시: 로컬 스토리지 사용
-                this.db.addCommunityFeedItem(feedData);
+            this.db.addCommunityFeedItem(feedData);
             }
             
             // 피드 새로고침
@@ -467,7 +467,7 @@ class DatabaseContentLoader {
                 });
             } else if (this.db) {
                 // 레거시: 로컬 스토리지 사용
-                this.db.addIdea(ideaData);
+            this.db.addIdea(ideaData);
             }
             
             // 아이디어 목록 새로고침
@@ -550,7 +550,7 @@ window.readBlogPost = async (postId) => {
             }
         } else if (window.db) {
             // 레거시: 로컬 스토리지 사용
-            const blogPosts = window.db.getBlogPosts();
+        const blogPosts = window.db.getBlogPosts();
             post = blogPosts.find(p => p.id === postId);
         }
         

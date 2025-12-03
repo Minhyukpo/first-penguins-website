@@ -18,7 +18,7 @@ const CONFIG = {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:3000'; // 개발 환경 (Goal-Illa 백엔드)
             } else if (window.location.hostname.includes('firstpgs.com')) {
-                return 'https://api.firstpgs.com'; // AWS 통합 후 도메인 (예정)
+                return 'https://api.firstpgs.com'; // 프로덕션 API 도메인
             } else if (window.location.hostname.includes('goalilla.com')) {
                 return 'https://api.goalilla.com'; // Goal-Illa 전용 도메인 (예정)
             } else {
